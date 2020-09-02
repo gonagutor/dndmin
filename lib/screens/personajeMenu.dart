@@ -1,5 +1,6 @@
 import 'package:dndmin/backend/userData.dart';
 import 'package:dndmin/config/palette.dart';
+import 'package:dndmin/fonts/rpgAwesomeIcons.dart';
 import 'package:dndmin/ui/personajeMenu/all.dart';
 import 'package:dndmin/ui/animatedWidgets/animatedBottomBar.dart';
 import 'package:dndmin/ui/mainMenu/all.dart';
@@ -111,8 +112,8 @@ class _MyPersonajeMenuState extends State<MyPersonajeMenu> {
                     ]),
                   ),
                   SwipableCard(
-                      child: Center(
-                        child: Text('Panel Central'),
+                      child: SingleChildScrollView(
+                        child: SecondPage(),
                       ),
                       offView: (selected == 1) ? 0 : (selected == 2) ? -1 : 1),
                   SwipableCard(
