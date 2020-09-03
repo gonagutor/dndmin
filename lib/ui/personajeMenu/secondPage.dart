@@ -3,6 +3,7 @@ import 'package:dndmin/config/palette.dart';
 import 'package:dndmin/ui/personajeMenu/SecondPageWidgets/all.dart';
 import 'package:dndmin/ui/personajeMenu/all.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class SecondPage extends StatelessWidget {
@@ -131,6 +132,27 @@ class SecondPage extends StatelessWidget {
                 ),
                 CoinIndicator(playerStats: playerStats),
                 XPTracker(playerStats: playerStats),
+                Padding(
+                  padding: const EdgeInsets.only(top: 10),
+                  child: Text(
+                    'Inventario',
+                    style: TextStyle(
+                      color: Palette.fontColor,
+                      fontSize: 30,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
+                SlotsRow(),
+                SlotsRow(),
+                SlotsRow(),
+                SlotsRow(),
+                SlotsRow(),
+                SlotsRow(),
+                SlotsRow(),
+                SlotsRow(),
+                SlotsRow(),
+                SlotsRow(),
                 Align(
                   alignment: Alignment.bottomCenter,
                   child: Padding(
@@ -140,6 +162,97 @@ class SecondPage extends StatelessWidget {
                 ),
               ],
             ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class SlotsRow extends StatelessWidget {
+  const SlotsRow({
+    Key key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.only(top: 10.0),
+      child: Row(
+        children: [
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Padding(
+                padding: const EdgeInsets.only(left: 20.0, bottom: 5.0),
+                child: Text(
+                  'Slot 1: ',
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 18,
+                    color: Palette.fontColor,
+                  ),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(left: 10.0, right: 10),
+                child: Container(
+                  height: 50,
+                  width: (MediaQuery.of(context).size.width - 75) / 2 - 10,
+                  decoration: BoxDecoration(
+                    color: Palette.secondaryColor,
+                    borderRadius: BorderRadius.all(Radius.circular(20)),
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.all(10),
+                    child: SingleChildScrollView(
+                      scrollDirection: Axis.horizontal,
+                      child: Center(
+                        child: Text(
+                            'This is a field scrolling test to see if this works'),
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          ),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Padding(
+                padding: const EdgeInsets.only(left: 20.0, bottom: 5.0),
+                child: Text(
+                  'Slot 2: ',
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 18,
+                    color: Palette.fontColor,
+                  ),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(left: 10.0, right: 10),
+                child: Container(
+                  height: 50,
+                  width: (MediaQuery.of(context).size.width - 75) / 2 - 10,
+                  decoration: BoxDecoration(
+                    color: Palette.secondaryColor,
+                    borderRadius: BorderRadius.all(Radius.circular(20)),
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.all(10),
+                    child: SingleChildScrollView(
+                      scrollDirection: Axis.horizontal,
+                      child: Center(
+                        child: Text(
+                            'This is a field scrolling test to see if this works'),
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            ],
           ),
         ],
       ),
