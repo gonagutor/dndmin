@@ -127,8 +127,7 @@ class _MyPersonajeMenuState extends State<MyPersonajeMenu> {
                                 playerStats: playerStats,
                               );
                             } else {
-                              if (lastThrow.tipoDado == '1d20' &&
-                                  lastThrow.tiradaDado == '30') {
+                              if (playerStats.id == '0') {
                                 return Stack(
                                   children: <Widget>[
                                     Center(
