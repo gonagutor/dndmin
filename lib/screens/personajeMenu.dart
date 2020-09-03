@@ -1,11 +1,13 @@
+import 'package:dndmin/backend/stats.dart';
 import 'package:dndmin/backend/userData.dart';
 import 'package:dndmin/config/palette.dart';
-import 'package:dndmin/fonts/rpgAwesomeIcons.dart';
 import 'package:dndmin/ui/personajeMenu/all.dart';
 import 'package:dndmin/ui/animatedWidgets/animatedBottomBar.dart';
 import 'package:dndmin/ui/mainMenu/all.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+
+PlayerStats playerStats = PlayerStats(id: '0');
 
 class PersonajeMenu extends StatelessWidget {
   final UserData userData;
@@ -113,7 +115,47 @@ class _MyPersonajeMenuState extends State<MyPersonajeMenu> {
                   ),
                   SwipableCard(
                       child: SingleChildScrollView(
-                        child: SecondPage(),
+                        child: FutureBuilder(
+                          future: Stats.getStats(userData.authToken, 1),
+                          builder: (BuildContext context,
+                              AsyncSnapshot<Stats> snapshot) {
+                            if (snapshot.connectionState ==
+                                ConnectionState.done) {
+                              if (snapshot.hasError) return Icon(Icons.error);
+                              playerStats = snapshot.data.stats[0];
+                              return SecondPage(
+                                playerStats: playerStats,
+                              );
+                            } else {
+                              if (lastThrow.tipoDado == '1d20' &&
+                                  lastThrow.tiradaDado == '30') {
+                                return Stack(
+                                  children: <Widget>[
+                                    Center(
+                                      child: Container(
+                                        height: 100,
+                                        width: 100,
+                                        child: CircularProgressIndicator(),
+                                      ),
+                                    ),
+                                    Center(
+                                      child: Text(
+                                        'Cargando...',
+                                        style: TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 16,
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                );
+                              }
+                              return SecondPage(
+                                playerStats: playerStats,
+                              );
+                            }
+                          },
+                        ),
                       ),
                       offView: (selected == 1) ? 0 : (selected == 2) ? -1 : 1),
                   SwipableCard(

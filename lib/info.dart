@@ -8,11 +8,14 @@
         - dice.dart                             //  - Getter for the dice last state data
         - login.dart                            //  - Token Getter and login hadler
         - notifications.dart                    //  - Getter for all the notifications shown in MainMenu
+        - stats.dart                            //  - Getter for all the player main Stats
         - userData.dart                         //  - This is an object to keep track of the user data in a single variable, this does NOT save user paswords, user passwords are only used once through out the whole project
       - /config                                 // This folder holds misc. config data for easy reference
-        - palette.dart                          //  - Palette object holds the colors of the whole project
+        - palette.dart                          //  - Palette object holds the colors & misc. of the whole project
       -/extensions                              // This folder holds extensions to flutter default Framework
         - capitalise.dart                       //  - String extension for word capitalization (Used on TopBar for username)
+      -/fonts                                   // This folder contains all the font setups
+        - rpgAwesomeIcons.dart                  //  - Contains the icon offset in the font RPG Awesome Icons (https://github.com/nagoshiashumari/Rpg-Awesome)
       -/screens                                 // This folder contains all the individual pages of the app
         - charSelector.dart                     //  - Contains the character selection view. Can go to MainMenu or to LoginScreen
         - loginScreen.dart                      //  - Does login logistics and handles the results, if the pwd & username is correct it redirects you to the character selection
@@ -37,7 +40,15 @@
           - eventList.dart                      //    - Event list populator an item display. Asks Notifications() for data
           - topBar.dart                         //    - Username display and sesion ender button
         -/personajeMenu                         //  - Contains all the PersonajeMenu widgets
+          -/secondPageWidgets                   //    -Contains all the widgets from secondPage.dart
+            - all.dart                          //      - Same as other all.dart
+            - coinIndicator.dart                //      - Gold, copper, and silver coin count indicator
+            - lifeIndicator.dart                //      - Animated circle life indicator widget
+            - roundedSquareCard.dart            //      - Card that shows the label on top and the number on the center
+            - xpTracker.dart                    //      - Card that shows current player XP
           - all.dart                            //    - Same as previous all.dart
+          - editButton.dart                     //    - (Not Implemented Yet) Button to let users edit their data
+          - secondPage.dart                     //    - Contains the second (or center) page in the swipable card menu
           - swipableCard.dart                   //    - Responsive, swipeable & animated container. This is more like a custom TabBar and TabViews
           - swipableCardSelector.dart           //    - TopBar of the container, similar to TabBar
       - info.dart                               // This file

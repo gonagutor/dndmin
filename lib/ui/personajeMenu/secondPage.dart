@@ -1,16 +1,17 @@
+import 'package:dndmin/backend/stats.dart';
 import 'package:dndmin/config/palette.dart';
+import 'package:dndmin/ui/personajeMenu/SecondPageWidgets/all.dart';
+import 'package:dndmin/ui/personajeMenu/all.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class SecondPage extends StatelessWidget {
   SecondPage({
-    @required this.currentLife,
-    @required this.maxLife,
+    @required this.playerStats,
     this.onMinus,
     this.onPlus,
   });
-  final int maxLife;
-  final int currentLife;
+  final PlayerStats playerStats;
   final Function onPlus;
   final Function onMinus;
   @override
@@ -22,6 +23,19 @@ class SecondPage extends StatelessWidget {
             padding: const EdgeInsets.all(10),
             child: Column(
               children: <Widget>[
+                Padding(
+                  padding: const EdgeInsets.only(bottom: 10.0),
+                  child: Text(
+                    playerStats.nombre + ', ' + playerStats.subNombre,
+                    overflow: TextOverflow.ellipsis,
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      color: Palette.fontColor,
+                      fontSize: 25,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: <Widget>[
@@ -35,13 +49,38 @@ class SecondPage extends StatelessWidget {
                       ),
                     ),
                     LifeIndicator(
-                      maxLife: 10,
-                      currentLife: 8,
-                      playerIndicator: Text(
-                        'hola',
-                        style: TextStyle(
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold,
+                      maxLife: int.parse(playerStats.pv),
+                      currentLife: int.parse(playerStats.pvActuales),
+                      playerIndicator: RichText(
+                        textAlign: TextAlign.center,
+                        text: TextSpan(
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold,
+                            shadows: Palette.standartShadow,
+                          ),
+                          text: playerStats.nombre + '\n',
+                          children: [
+                            TextSpan(
+                              text: playerStats.pv,
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 17,
+                                fontWeight: FontWeight.bold,
+                                shadows: Palette.standartShadow,
+                              ),
+                            ),
+                            TextSpan(
+                              text: '/' + playerStats.pvActuales,
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 12,
+                                fontWeight: FontWeight.bold,
+                                shadows: Palette.standartShadow,
+                              ),
+                            ),
+                          ],
                         ),
                       ),
                     ),
@@ -64,112 +103,39 @@ class SecondPage extends StatelessWidget {
                       Column(
                         children: [
                           RoundedSquareCard(
-                            child: Center(
-                              child: Stack(
-                                children: [
-                                  Center(
-                                    child: Text(
-                                      '0',
-                                      style: TextStyle(
-                                        color: Palette.fontColor,
-                                        fontSize: 30,
-                                        fontWeight: FontWeight.bold,
-                                      ),
-                                    ),
-                                  ),
-                                  Padding(
-                                    padding: const EdgeInsets.only(top: 8.0),
-                                    child: Align(
-                                      alignment: Alignment.topCenter,
-                                      child: Text(
-                                        'Iniciativa',
-                                        style: TextStyle(
-                                          color: Palette.fontColor,
-                                          fontSize: 20,
-                                          fontWeight: FontWeight.bold,
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
+                            topText: 'Iniciativa',
+                            centerText: (int.parse(playerStats.iniciativa) > 0)
+                                ? '+' + playerStats.iniciativa
+                                : playerStats.iniciativa,
                           )
                         ],
                       ),
                       Column(
                         children: [
                           RoundedSquareCard(
-                            child: Center(
-                              child: Stack(
-                                children: [
-                                  Center(
-                                    child: Text(
-                                      '25',
-                                      style: TextStyle(
-                                        color: Palette.fontColor,
-                                        fontSize: 30,
-                                        fontWeight: FontWeight.bold,
-                                      ),
-                                    ),
-                                  ),
-                                  Padding(
-                                    padding: const EdgeInsets.only(top: 8.0),
-                                    child: Align(
-                                      alignment: Alignment.topCenter,
-                                      child: Text(
-                                        'Velocidad',
-                                        style: TextStyle(
-                                          color: Palette.fontColor,
-                                          fontSize: 20,
-                                          fontWeight: FontWeight.bold,
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
+                            topText: 'Velocidad',
+                            centerText: playerStats.velocidad,
                           )
                         ],
                       ),
                       Column(
                         children: [
                           RoundedSquareCard(
-                            child: Center(
-                              child: Stack(
-                                children: [
-                                  Center(
-                                    child: Text(
-                                      '17',
-                                      style: TextStyle(
-                                        color: Palette.fontColor,
-                                        fontSize: 30,
-                                        fontWeight: FontWeight.bold,
-                                      ),
-                                    ),
-                                  ),
-                                  Padding(
-                                    padding: const EdgeInsets.only(top: 8.0),
-                                    child: Align(
-                                      alignment: Alignment.topCenter,
-                                      child: Text(
-                                        'CA',
-                                        style: TextStyle(
-                                          color: Palette.fontColor,
-                                          fontSize: 20,
-                                          fontWeight: FontWeight.bold,
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          )
+                            topText: 'CA',
+                            centerText: playerStats.ca,
+                          ),
                         ],
                       ),
                     ],
+                  ),
+                ),
+                CoinIndicator(playerStats: playerStats),
+                XPTracker(playerStats: playerStats),
+                Align(
+                  alignment: Alignment.bottomCenter,
+                  child: Padding(
+                    padding: const EdgeInsets.only(top: 8.0),
+                    child: EditButton(),
                   ),
                 ),
               ],
@@ -177,66 +143,6 @@ class SecondPage extends StatelessWidget {
           ),
         ],
       ),
-    );
-  }
-}
-
-class LifeIndicator extends StatelessWidget {
-  LifeIndicator(
-      {@required this.currentLife,
-      @required this.maxLife,
-      @required this.playerIndicator});
-  final Widget playerIndicator;
-  final int maxLife;
-  final int currentLife;
-  @override
-  Widget build(BuildContext context) {
-    Color colorIndicator = Colors.greenAccent;
-    if (maxLife / 3 >= currentLife)
-      colorIndicator = Colors.redAccent;
-    else if (maxLife / 2 >= currentLife) colorIndicator = Colors.orangeAccent;
-    return Stack(
-      alignment: Alignment.center,
-      children: <Widget>[
-        Container(
-          width: (MediaQuery.of(context).size.width / 3),
-          height: (MediaQuery.of(context).size.width / 3),
-          decoration: BoxDecoration(
-            color: Palette.secondaryColor,
-            borderRadius: BorderRadius.all(Radius.circular(90)),
-            boxShadow: Palette.standartShadow,
-          ),
-        ),
-        AnimatedContainer(
-          duration: Duration(milliseconds: 400),
-          width:
-              (MediaQuery.of(context).size.width / 3) * (currentLife / maxLife),
-          height:
-              (MediaQuery.of(context).size.width / 3) * (currentLife / maxLife),
-          decoration: BoxDecoration(
-            color: colorIndicator,
-            borderRadius: BorderRadius.all(Radius.circular(90)),
-          ),
-        ),
-        playerIndicator,
-      ],
-    );
-  }
-}
-
-class RoundedSquareCard extends StatelessWidget {
-  RoundedSquareCard({this.child});
-  final Widget child;
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      width: (MediaQuery.of(context).size.width - 100) / 3,
-      height: (MediaQuery.of(context).size.width - 100) / 3,
-      decoration: BoxDecoration(
-        color: Palette.secondaryColor,
-        borderRadius: BorderRadius.all(Radius.circular(20)),
-      ),
-      child: child,
     );
   }
 }

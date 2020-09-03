@@ -1,5 +1,4 @@
 import 'package:dndmin/backend/userData.dart';
-import 'package:dndmin/screens/swipeUpMenu.dart';
 import 'package:dndmin/ui/animatedWidgets/animatedBottomBar.dart';
 import 'package:dndmin/ui/mainMenu/all.dart';
 import 'package:flutter/material.dart';

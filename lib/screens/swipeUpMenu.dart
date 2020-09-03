@@ -1,9 +1,6 @@
 import 'package:dndmin/backend/userData.dart';
-import 'package:dndmin/ui/mainMenu/all.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'personajeMenu.dart';
 
 class SwipeUpMenu extends StatelessWidget {
   final UserData userData;
