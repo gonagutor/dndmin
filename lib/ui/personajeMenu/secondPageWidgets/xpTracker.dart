@@ -32,7 +32,7 @@ class XPTracker extends StatelessWidget {
             ),
             Center(
               child: Padding(
-                padding: const EdgeInsets.only(top: 28.0),
+                padding: const EdgeInsets.only(top: 20.0),
                 child: Text(
                   playerStats.pxActuales + ' / ' + playerStats.px,
                   style: TextStyle(
@@ -44,7 +44,7 @@ class XPTracker extends StatelessWidget {
               ),
             ),
             Padding(
-              padding: const EdgeInsets.only(top: 8.0),
+              padding: const EdgeInsets.only(top: 4.0),
               child: Align(
                 alignment: Alignment.topCenter,
                 child: Text(

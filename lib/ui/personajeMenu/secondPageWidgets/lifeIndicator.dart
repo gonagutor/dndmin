@@ -39,6 +39,10 @@ class LifeIndicator extends StatelessWidget {
             color: colorIndicator,
             borderRadius: BorderRadius.all(Radius.circular(90)),
           ),
+        ),
+        Container(
+          width: (MediaQuery.of(context).size.width / 3),
+          height: (MediaQuery.of(context).size.width / 3),
           child: Center(child: playerIndicator),
         ),
       ],

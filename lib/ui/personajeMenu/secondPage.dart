@@ -1,7 +1,7 @@
 import 'package:dndmin/backend/inventory.dart';
 import 'package:dndmin/backend/stats.dart';
 import 'package:dndmin/config/palette.dart';
-import 'package:dndmin/ui/personajeMenu/SecondPageWidgets/all.dart';
+import 'package:dndmin/ui/personajeMenu/secondPageWidgets/all.dart';
 import 'package:dndmin/ui/personajeMenu/all.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
@@ -146,66 +146,7 @@ class SecondPage extends StatelessWidget {
                     ),
                   ),
                 ),
-                SlotsRow(
-                  slotOne: 1,
-                  slotTwo: 2,
-                  slotTextOne: playerInventory.slot1,
-                  slotTextTwo: playerInventory.slot2,
-                ),
-                SlotsRow(
-                  slotOne: 3,
-                  slotTwo: 4,
-                  slotTextOne: playerInventory.slot3,
-                  slotTextTwo: playerInventory.slot4,
-                ),
-                SlotsRow(
-                  slotOne: 5,
-                  slotTwo: 6,
-                  slotTextOne: playerInventory.slot5,
-                  slotTextTwo: playerInventory.slot6,
-                ),
-                SlotsRow(
-                  slotOne: 7,
-                  slotTwo: 8,
-                  slotTextOne: playerInventory.slot7,
-                  slotTextTwo: playerInventory.slot8,
-                ),
-                SlotsRow(
-                  slotOne: 9,
-                  slotTwo: 10,
-                  slotTextOne: playerInventory.slot9,
-                  slotTextTwo: playerInventory.slot10,
-                ),
-                SlotsRow(
-                  slotOne: 11,
-                  slotTwo: 12,
-                  slotTextOne: playerInventory.slot11,
-                  slotTextTwo: playerInventory.slot12,
-                ),
-                SlotsRow(
-                  slotOne: 13,
-                  slotTwo: 14,
-                  slotTextOne: playerInventory.slot13,
-                  slotTextTwo: playerInventory.slot14,
-                ),
-                SlotsRow(
-                  slotOne: 16,
-                  slotTwo: 16,
-                  slotTextOne: playerInventory.slot15,
-                  slotTextTwo: playerInventory.slot16,
-                ),
-                SlotsRow(
-                  slotOne: 17,
-                  slotTwo: 18,
-                  slotTextOne: playerInventory.slot17,
-                  slotTextTwo: playerInventory.slot18,
-                ),
-                SlotsRow(
-                  slotOne: 19,
-                  slotTwo: 20,
-                  slotTextOne: playerInventory.slot19,
-                  slotTextTwo: playerInventory.slot20,
-                ),
+                InventorySlots(playerInventory: playerInventory),
                 Padding(
                   padding: const EdgeInsets.only(top: 10),
                   child: Text(
@@ -236,100 +177,6 @@ class SecondPage extends StatelessWidget {
                 ),
               ],
             ),
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-class SlotsRow extends StatelessWidget {
-  SlotsRow(
-      {@required this.slotOne,
-      @required this.slotTwo,
-      this.slotTextOne,
-      this.slotTextTwo});
-  final int slotOne;
-  final int slotTwo;
-  final String slotTextOne;
-  final String slotTextTwo;
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(top: 10.0),
-      child: Row(
-        children: [
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Padding(
-                padding: const EdgeInsets.only(left: 20.0, bottom: 5.0),
-                child: Text(
-                  'Slot ' + slotOne.toString() + ': ',
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 18,
-                    color: Palette.fontColor,
-                  ),
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(left: 10.0, right: 10),
-                child: Container(
-                  height: 50,
-                  width: (MediaQuery.of(context).size.width - 75) / 2 - 10,
-                  decoration: BoxDecoration(
-                    color: Palette.secondaryColor,
-                    borderRadius: BorderRadius.all(Radius.circular(20)),
-                  ),
-                  child: Padding(
-                    padding: const EdgeInsets.all(10),
-                    child: SingleChildScrollView(
-                      scrollDirection: Axis.horizontal,
-                      child: Center(
-                        child: Text(slotTextOne),
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-            ],
-          ),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Padding(
-                padding: const EdgeInsets.only(left: 20.0, bottom: 5.0),
-                child: Text(
-                  'Slot ' + slotTwo.toString() + ': ',
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 18,
-                    color: Palette.fontColor,
-                  ),
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(left: 10.0, right: 10),
-                child: Container(
-                  height: 50,
-                  width: (MediaQuery.of(context).size.width - 75) / 2 - 10,
-                  decoration: BoxDecoration(
-                    color: Palette.secondaryColor,
-                    borderRadius: BorderRadius.all(Radius.circular(20)),
-                  ),
-                  child: Padding(
-                    padding: const EdgeInsets.all(10),
-                    child: SingleChildScrollView(
-                      scrollDirection: Axis.horizontal,
-                      child: Center(
-                        child: Text(slotTextTwo),
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-            ],
           ),
         ],
       ),

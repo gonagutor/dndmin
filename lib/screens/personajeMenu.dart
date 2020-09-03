@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'package:dndmin/backend/inventory.dart';
 import 'package:dndmin/backend/stats.dart';
 import 'package:dndmin/backend/userData.dart';
@@ -50,6 +51,9 @@ class _MyPersonajeMenuState extends State<MyPersonajeMenu> {
       DeviceOrientation.portraitUp,
       DeviceOrientation.portraitDown,
     ]);
+    Timer(Duration(seconds: 2), () {
+      if (this.mounted) setState(() {});
+    });
     Future<Stats> pStats = Stats.getStats(userData.authToken, 1);
     Future<Inventory> pInventory =
         Inventory.getInventory(userData.authToken, 1);
