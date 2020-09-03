@@ -19,6 +19,17 @@ class XPTracker extends StatelessWidget {
       child: Center(
         child: Stack(
           children: [
+            AnimatedContainer(
+              duration: Duration(milliseconds: 200),
+              width: (MediaQuery.of(context).size.width - 33.3 * 2 - 10) *
+                  int.parse(playerStats.pxActuales) /
+                  int.parse(playerStats.px),
+              height: (MediaQuery.of(context).size.width - 100) / 3 / 1.5,
+              decoration: BoxDecoration(
+                color: Colors.greenAccent,
+                borderRadius: BorderRadius.all(Radius.circular(20)),
+              ),
+            ),
             Center(
               child: Padding(
                 padding: const EdgeInsets.only(top: 28.0),

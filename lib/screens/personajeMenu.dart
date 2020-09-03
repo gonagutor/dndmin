@@ -1,3 +1,4 @@
+import 'package:dndmin/backend/inventory.dart';
 import 'package:dndmin/backend/stats.dart';
 import 'package:dndmin/backend/userData.dart';
 import 'package:dndmin/config/palette.dart';
@@ -8,6 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 PlayerStats playerStats = PlayerStats(id: '0');
+Inventario playerInventory = Inventario(id: '0');
 
 class PersonajeMenu extends StatelessWidget {
   final UserData userData;
@@ -48,6 +50,9 @@ class _MyPersonajeMenuState extends State<MyPersonajeMenu> {
       DeviceOrientation.portraitUp,
       DeviceOrientation.portraitDown,
     ]);
+    Future<Stats> pStats = Stats.getStats(userData.authToken, 1);
+    Future<Inventory> pInventory =
+        Inventory.getInventory(userData.authToken, 1);
     return Scaffold(
       resizeToAvoidBottomInset: false,
       body: Container(
@@ -116,41 +121,49 @@ class _MyPersonajeMenuState extends State<MyPersonajeMenu> {
                   SwipableCard(
                       child: SingleChildScrollView(
                         child: FutureBuilder(
-                          future: Stats.getStats(userData.authToken, 1),
+                          future: Future.wait([pInventory, pStats]),
                           builder: (BuildContext context,
-                              AsyncSnapshot<Stats> snapshot) {
+                              AsyncSnapshot<List<dynamic>> snapshot) {
                             if (snapshot.connectionState ==
                                 ConnectionState.done) {
                               if (snapshot.hasError) return Icon(Icons.error);
-                              playerStats = snapshot.data.stats[0];
+                              playerStats = snapshot.data[1].stats[0];
+                              playerInventory = snapshot.data[0].inventario[0];
                               return SecondPage(
                                 playerStats: playerStats,
+                                playerInventory: playerInventory,
                               );
                             } else {
                               if (playerStats.id == '0') {
-                                return Stack(
-                                  children: <Widget>[
-                                    Center(
-                                      child: Container(
-                                        height: 100,
-                                        width: 100,
-                                        child: CircularProgressIndicator(),
-                                      ),
-                                    ),
-                                    Center(
-                                      child: Text(
-                                        'Cargando...',
-                                        style: TextStyle(
-                                          fontWeight: FontWeight.bold,
-                                          fontSize: 16,
+                                return Container(
+                                  width: MediaQuery.of(context).size.width,
+                                  height:
+                                      MediaQuery.of(context).size.height - 300,
+                                  child: Stack(
+                                    children: <Widget>[
+                                      Center(
+                                        child: Container(
+                                          height: 100,
+                                          width: 100,
+                                          child: CircularProgressIndicator(),
                                         ),
                                       ),
-                                    ),
-                                  ],
+                                      Center(
+                                        child: Text(
+                                          'Cargando...',
+                                          style: TextStyle(
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: 16,
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
                                 );
                               }
                               return SecondPage(
                                 playerStats: playerStats,
+                                playerInventory: playerInventory,
                               );
                             }
                           },

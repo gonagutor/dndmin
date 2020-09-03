@@ -1,10 +1,10 @@
-import 'package:dndmin/backend/stats.dart';
+import 'package:dndmin/backend/inventory.dart';
 import 'package:dndmin/fonts/rpgAwesomeIcons.dart';
 import 'package:flutter/material.dart';
 
 class CoinIndicator extends StatelessWidget {
-  const CoinIndicator({@required this.playerStats});
-  final PlayerStats playerStats;
+  const CoinIndicator({@required this.playerInventory});
+  final Inventario playerInventory;
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +26,7 @@ class CoinIndicator extends StatelessWidget {
                     color: Colors.yellow[800],
                   ),
                 ),
-                Text('MO: ' + '10'),
+                Text('MO: ' + playerInventory.oro),
               ],
             ),
           ),
@@ -43,7 +43,7 @@ class CoinIndicator extends StatelessWidget {
                     color: Colors.grey,
                   ),
                 ),
-                Text('MP: ' + '10'),
+                Text('MP: ' + playerInventory.plata),
               ],
             ),
           ),
@@ -60,7 +60,7 @@ class CoinIndicator extends StatelessWidget {
                     color: Color(0xFFb87333),
                   ),
                 ),
-                Text('MC: ' + '10'),
+                Text('MC: ' + playerInventory.cobre),
               ],
             ),
           ),

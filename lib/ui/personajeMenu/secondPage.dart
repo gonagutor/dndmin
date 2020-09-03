@@ -1,3 +1,4 @@
+import 'package:dndmin/backend/inventory.dart';
 import 'package:dndmin/backend/stats.dart';
 import 'package:dndmin/config/palette.dart';
 import 'package:dndmin/ui/personajeMenu/SecondPageWidgets/all.dart';
@@ -9,10 +10,12 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 class SecondPage extends StatelessWidget {
   SecondPage({
     @required this.playerStats,
+    @required this.playerInventory,
     this.onMinus,
     this.onPlus,
   });
   final PlayerStats playerStats;
+  final Inventario playerInventory;
   final Function onPlus;
   final Function onMinus;
   @override
@@ -130,7 +133,7 @@ class SecondPage extends StatelessWidget {
                     ],
                   ),
                 ),
-                CoinIndicator(playerStats: playerStats),
+                CoinIndicator(playerInventory: playerInventory),
                 XPTracker(playerStats: playerStats),
                 Padding(
                   padding: const EdgeInsets.only(top: 10),
@@ -143,16 +146,87 @@ class SecondPage extends StatelessWidget {
                     ),
                   ),
                 ),
-                SlotsRow(),
-                SlotsRow(),
-                SlotsRow(),
-                SlotsRow(),
-                SlotsRow(),
-                SlotsRow(),
-                SlotsRow(),
-                SlotsRow(),
-                SlotsRow(),
-                SlotsRow(),
+                SlotsRow(
+                  slotOne: 1,
+                  slotTwo: 2,
+                  slotTextOne: playerInventory.slot1,
+                  slotTextTwo: playerInventory.slot2,
+                ),
+                SlotsRow(
+                  slotOne: 3,
+                  slotTwo: 4,
+                  slotTextOne: playerInventory.slot3,
+                  slotTextTwo: playerInventory.slot4,
+                ),
+                SlotsRow(
+                  slotOne: 5,
+                  slotTwo: 6,
+                  slotTextOne: playerInventory.slot5,
+                  slotTextTwo: playerInventory.slot6,
+                ),
+                SlotsRow(
+                  slotOne: 7,
+                  slotTwo: 8,
+                  slotTextOne: playerInventory.slot7,
+                  slotTextTwo: playerInventory.slot8,
+                ),
+                SlotsRow(
+                  slotOne: 9,
+                  slotTwo: 10,
+                  slotTextOne: playerInventory.slot9,
+                  slotTextTwo: playerInventory.slot10,
+                ),
+                SlotsRow(
+                  slotOne: 11,
+                  slotTwo: 12,
+                  slotTextOne: playerInventory.slot11,
+                  slotTextTwo: playerInventory.slot12,
+                ),
+                SlotsRow(
+                  slotOne: 13,
+                  slotTwo: 14,
+                  slotTextOne: playerInventory.slot13,
+                  slotTextTwo: playerInventory.slot14,
+                ),
+                SlotsRow(
+                  slotOne: 16,
+                  slotTwo: 16,
+                  slotTextOne: playerInventory.slot15,
+                  slotTextTwo: playerInventory.slot16,
+                ),
+                SlotsRow(
+                  slotOne: 17,
+                  slotTwo: 18,
+                  slotTextOne: playerInventory.slot17,
+                  slotTextTwo: playerInventory.slot18,
+                ),
+                SlotsRow(
+                  slotOne: 19,
+                  slotTwo: 20,
+                  slotTextOne: playerInventory.slot19,
+                  slotTextTwo: playerInventory.slot20,
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(top: 10),
+                  child: Text(
+                    'Proficiencias',
+                    style: TextStyle(
+                      color: Palette.fontColor,
+                      fontSize: 30,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
+                Container(
+                  width: (MediaQuery.of(context).size.width - 33.3 * 2 - 10),
+                  child: Text(
+                    (playerInventory.proficiencias == '')
+                        ? 'No has establecido tus proficiencias todavía'
+                        : playerInventory.proficiencias,
+                    textAlign: TextAlign.center,
+                    style: TextStyle(color: Palette.fontColor),
+                  ),
+                ),
                 Align(
                   alignment: Alignment.bottomCenter,
                   child: Padding(
@@ -170,10 +244,15 @@ class SecondPage extends StatelessWidget {
 }
 
 class SlotsRow extends StatelessWidget {
-  const SlotsRow({
-    Key key,
-  }) : super(key: key);
-
+  SlotsRow(
+      {@required this.slotOne,
+      @required this.slotTwo,
+      this.slotTextOne,
+      this.slotTextTwo});
+  final int slotOne;
+  final int slotTwo;
+  final String slotTextOne;
+  final String slotTextTwo;
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -186,7 +265,7 @@ class SlotsRow extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.only(left: 20.0, bottom: 5.0),
                 child: Text(
-                  'Slot 1: ',
+                  'Slot ' + slotOne.toString() + ': ',
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 18,
@@ -208,8 +287,7 @@ class SlotsRow extends StatelessWidget {
                     child: SingleChildScrollView(
                       scrollDirection: Axis.horizontal,
                       child: Center(
-                        child: Text(
-                            'This is a field scrolling test to see if this works'),
+                        child: Text(slotTextOne),
                       ),
                     ),
                   ),
@@ -223,7 +301,7 @@ class SlotsRow extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.only(left: 20.0, bottom: 5.0),
                 child: Text(
-                  'Slot 2: ',
+                  'Slot ' + slotTwo.toString() + ': ',
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 18,
@@ -245,8 +323,7 @@ class SlotsRow extends StatelessWidget {
                     child: SingleChildScrollView(
                       scrollDirection: Axis.horizontal,
                       child: Center(
-                        child: Text(
-                            'This is a field scrolling test to see if this works'),
+                        child: Text(slotTextTwo),
                       ),
                     ),
                   ),
