@@ -67,7 +67,7 @@ class SecondPage extends StatelessWidget {
                           text: playerStats.nombre + '\n',
                           children: [
                             TextSpan(
-                              text: playerStats.pv,
+                              text: playerStats.pvActuales,
                               style: TextStyle(
                                 color: Colors.white,
                                 fontSize: 17,
@@ -76,7 +76,7 @@ class SecondPage extends StatelessWidget {
                               ),
                             ),
                             TextSpan(
-                              text: '/' + playerStats.pvActuales,
+                              text: '/' + playerStats.pv,
                               style: TextStyle(
                                 color: Colors.white,
                                 fontSize: 12,
