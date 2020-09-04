@@ -6,6 +6,7 @@ import 'package:dndmin/config/palette.dart';
 import 'package:dndmin/ui/personajeMenu/all.dart';
 import 'package:dndmin/ui/animatedWidgets/animatedBottomBar.dart';
 import 'package:dndmin/ui/mainMenu/all.dart';
+import 'package:dndmin/ui/personajeMenu/firstPage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -138,7 +139,8 @@ class _MyPersonajeMenuState extends State<MyPersonajeMenu> {
                                 playerInventory: playerInventory,
                               );
                             } else {
-                              if (playerStats.id == '0') {
+                              if (playerStats.id == '0' &&
+                                  playerInventory.id == '0') {
                                 return Container(
                                   width: MediaQuery.of(context).size.width,
                                   height:
@@ -181,7 +183,58 @@ class _MyPersonajeMenuState extends State<MyPersonajeMenu> {
                       offView: (selected == 2) ? 0 : 1),
                   SwipableCard(
                       child: Center(
-                        child: Text('Panel Izquierda'),
+                        child: SingleChildScrollView(
+                          child: FutureBuilder(
+                            future: Future.wait([pInventory, pStats]),
+                            builder: (BuildContext context,
+                                AsyncSnapshot<List<dynamic>> snapshot) {
+                              if (snapshot.connectionState ==
+                                  ConnectionState.done) {
+                                if (snapshot.hasError) return Icon(Icons.error);
+                                playerStats = snapshot.data[1].stats[0];
+                                playerInventory =
+                                    snapshot.data[0].inventario[0];
+                                return FirstPage(
+                                  playerStats: playerStats,
+                                  playerInventory: playerInventory,
+                                );
+                              } else {
+                                if (playerStats.id == '0' &&
+                                    playerInventory.id == '0') {
+                                  return Container(
+                                    width: MediaQuery.of(context).size.width,
+                                    height: MediaQuery.of(context).size.height -
+                                        300,
+                                    child: Stack(
+                                      children: <Widget>[
+                                        Center(
+                                          child: Container(
+                                            height: 100,
+                                            width: 100,
+                                            child: CircularProgressIndicator(),
+                                          ),
+                                        ),
+                                        Center(
+                                          child: Text(
+                                            'Cargando...',
+                                            style: TextStyle(
+                                              fontWeight: FontWeight.bold,
+                                              fontSize: 16,
+                                            ),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  );
+                                }
+                                return FirstPage(
+                                  playerStats: playerStats,
+                                  playerInventory: playerInventory,
+                                );
+                              }
+                            },
+                          ),
+                        ),
                       ),
                       offView: (selected == 0) ? 0 : -1),
                 ],

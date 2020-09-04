@@ -11,7 +11,7 @@ other tedious things automated.
 I also really wanted to start learning app development and as I have a fully-fledged API and
 admin panel on the web part of the other project it was relatively easier to implement the networking part.  
 
-**Please do have in mind that this is more of a summer holiday project and all of this was made in about two
+** Please do have in mind that this is more of a summer holiday project and all of this was made in about two
 weeks with no previous knowledge of Flutter or Dart. **
 I also know that the login process is not the most secure thing because even thought the plain password
 never exit the device, the access token and the hashed password is sent in plain. 

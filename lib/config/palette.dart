@@ -13,4 +13,17 @@ class Palette {
       blurRadius: 6,
     ),
   ];
+  static LinearGradient standardGradient = LinearGradient(
+    begin: Alignment.topCenter,
+    end: Alignment.bottomCenter,
+    colors: [
+      Palette.topGradient,
+      Palette.bottomGradient,
+    ],
+    stops: [
+      0.0,
+      1.0,
+    ],
+  );
+  static Radius standardRadius = Radius.circular(20);
 }

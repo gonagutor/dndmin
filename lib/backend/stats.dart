@@ -62,6 +62,7 @@ class PlayerStats {
   String inteligencia;
   String sabiduria;
   String carisma;
+  int profBonus;
 
   PlayerStats(
       {this.id,
@@ -83,7 +84,8 @@ class PlayerStats {
       this.constitucion,
       this.inteligencia,
       this.sabiduria,
-      this.carisma});
+      this.carisma,
+      this.profBonus});
 
   PlayerStats.fromJson(Map<String, dynamic> json) {
     id = json['ID'];
@@ -106,6 +108,7 @@ class PlayerStats {
     inteligencia = json['Inteligencia'];
     sabiduria = json['Sabiduria'];
     carisma = json['Carisma'];
+    profBonus = ((int.parse(json['Nivel']) / 4) + 1).ceil();
   }
 
   Map<String, dynamic> toJson() {

@@ -7,7 +7,8 @@ class SwipableCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AnimatedPositioned(
-      duration: Duration(milliseconds: 300),
+      duration: Duration(milliseconds: 200),
+      curve: Curves.easeInOut,
       top: 190,
       bottom: 100,
       left: (offView == 0)

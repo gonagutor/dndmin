@@ -38,7 +38,7 @@ class RoundedSquareCard extends StatelessWidget {
                   topText,
                   style: TextStyle(
                     color: Palette.fontColor,
-                    fontSize: 20,
+                    fontSize: MediaQuery.of(context).size.width / 25,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
