@@ -113,6 +113,7 @@ class _MyCharSelectorState extends State<MyCharSelector> {
                                   Login.deleteName();
                                   Login.deleteChar();
                                   Login.deleteToken();
+                                  Login.deleteCharId();
                                   runApp(LoginScreen());
                                 } else {
                                   runApp(MainMenu(

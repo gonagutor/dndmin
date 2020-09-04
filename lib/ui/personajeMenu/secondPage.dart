@@ -1,6 +1,7 @@
 import 'package:dndmin/backend/inventory.dart';
 import 'package:dndmin/backend/stats.dart';
 import 'package:dndmin/config/palette.dart';
+import 'package:dndmin/extensions/all.dart';
 import 'package:dndmin/ui/personajeMenu/secondPageWidgets/all.dart';
 import 'package:dndmin/ui/personajeMenu/all.dart';
 import 'package:flutter/material.dart';
@@ -166,6 +167,22 @@ class SecondPage extends StatelessWidget {
                         : playerInventory.proficiencias,
                     textAlign: TextAlign.center,
                     style: TextStyle(color: Palette.fontColor),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(top: 20, left: 10, right: 10),
+                  child: Container(
+                    width: (MediaQuery.of(context).size.width - 33.3 * 2 - 10),
+                    child: Text(
+                      'Tu bonificador de proficiencia es: \n' +
+                          playerStats.profBonus.modToString(),
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        color: Palette.fontColor,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 22,
+                      ),
+                    ),
                   ),
                 ),
                 Align(

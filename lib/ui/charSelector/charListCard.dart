@@ -113,12 +113,14 @@ class CharacterListCard extends StatelessWidget {
                         ),
                       ),
                       onPressed: () {
-                        Login.writeChar(personaje.nombre);
+                        Login.writeChar(personaje.nombre, personaje.id);
                         runApp(MainMenu(
                           userData: UserData(
-                              uName: userData.uName,
-                              authToken: userData.authToken,
-                              selectedCharName: personaje.nombre),
+                            uName: userData.uName,
+                            authToken: userData.authToken,
+                            selectedCharName: personaje.nombre,
+                            id: int.parse(personaje.id),
+                          ),
                         ));
                       },
                       child: Container(

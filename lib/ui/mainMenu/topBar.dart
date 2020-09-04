@@ -91,6 +91,7 @@ class TopBar extends StatelessWidget {
                                 Login.deleteChar();
                                 Login.deleteName();
                                 Login.deleteToken();
+                                Login.deleteCharId();
                                 runApp(LoginScreen());
                               },
                               child: Text("Si"),

@@ -55,9 +55,9 @@ class _MyPersonajeMenuState extends State<MyPersonajeMenu> {
     Timer(Duration(seconds: 2), () {
       if (this.mounted) setState(() {});
     });
-    Future<Stats> pStats = Stats.getStats(userData.authToken, 1);
+    Future<Stats> pStats = Stats.getStats(userData.authToken, userData.id);
     Future<Inventory> pInventory =
-        Inventory.getInventory(userData.authToken, 1);
+        Inventory.getInventory(userData.authToken, userData.id);
     return Scaffold(
       resizeToAvoidBottomInset: false,
       body: Container(

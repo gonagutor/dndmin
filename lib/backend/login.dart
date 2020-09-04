@@ -33,8 +33,9 @@ class Login {
     await storage.write(key: 'uname', value: uname.toString());
   }
 
-  static Future<void> writeChar(String char) async {
+  static Future<void> writeChar(String char, String charId) async {
     await storage.write(key: 'selChar', value: char.toString());
+    await storage.write(key: 'charId', value: charId.toString());
   }
 
   static Future<bool> getAndSaveToken(String uname, String pwd) async {
@@ -58,6 +59,10 @@ class Login {
     return await storage.read(key: 'selChar');
   }
 
+  static Future<String> readCharId() async {
+    return await storage.read(key: 'charId');
+  }
+
   static Future<void> deleteToken() async {
     await storage.delete(key: 'jwt');
   }
@@ -68,5 +73,9 @@ class Login {
 
   static Future<void> deleteChar() async {
     await storage.delete(key: 'selChar');
+  }
+
+  static Future<void> deleteCharId() async {
+    await storage.delete(key: 'charId');
   }
 }

@@ -12,9 +12,13 @@ void main() async {
   //Login.deleteChar();
   var uname = await Login.readName();
   var authToken = await Login.readToken();
-  var selectedChar = await Login.readChar(); // await Login.readChar();
+  var selectedChar = await Login.readChar();
+  var selectedCharId = await Login.readCharId();
   if (!(authToken == null || authToken == "")) {
-    if (selectedChar == null || selectedChar == "")
+    if (selectedChar == null ||
+        selectedChar == "" ||
+        selectedCharId == null ||
+        selectedCharId == "")
       runApp(CharSelector(
         userData: UserData(uName: uname, authToken: authToken),
       ));
@@ -24,6 +28,7 @@ void main() async {
           authToken: authToken,
           uName: uname,
           selectedCharName: selectedChar,
+          id: int.parse(selectedCharId),
         ),
       ));
   } else {

@@ -18,7 +18,7 @@ never exit the device, the access token and the hashed password is sent in plain
 I am planning to fix this or at least make this a bit better
 
 ## To Do List
-This todo List
+- Implement adding ```Proficiency Modifier```
 
 ## File tree and purpouse
 ```
@@ -26,6 +26,7 @@ This todo List
   - /backend:                               // This folder contains the backend getters
     - character.dart                        //  - Getter for all the characters of the player
     - dice.dart                             //  - Getter for the dice last state data
+    - inventory.dart                        //  - Getter fir the inventory list
     - login.dart                            //  - Token Getter and login hadler
     - notifications.dart                    //  - Getter for all the notifications shown in MainMenu
     - stats.dart                            //  - Getter for all the player main Stats
@@ -33,7 +34,10 @@ This todo List
   - /config                                 // This folder holds misc. config data for easy reference
     - palette.dart                          //  - Palette object holds the colors & misc. of the whole project
   -/extensions                              // This folder holds extensions to flutter default Framework
+    - all.dart                              //  - Same as other all.dart
     - capitalise.dart                       //  - String extension for word capitalization (Used on TopBar for username)
+    - getModifier.dart                      //  - String extension to return Modifier as int
+    - modToString.dart                      //  - Int extension to return modifier as a String with a plus if it is positive
   -/fonts                                   // This folder contains all the font setups
     - rpgAwesomeIcons.dart                  //  - Contains the icon offset in the font RPG Awesome Icons (https://github.com/nagoshiashumari/Rpg-Awesome)
   -/screens                                 // This folder contains all the individual pages of the app
@@ -50,6 +54,7 @@ This todo List
       - charListCard.dart                   //    - This is the model for the each list item
     -/login                                 //  - This folder contains all the items in the login screen
       - all.dart                            //    - Simple way to import all the items at once while not bloating the top of the file
+      - loginButton.dart                    //    - Handles the logic behind the push of the login button
       - loginForm.dart                      //    - This contains the user input and validation, It also asks the Login() class for the validation and status
       - lostPassword.dart                   //    - (Not Implemented Yet) Sends you a recovery email
       - registerButton.dart                 //    - (Not Implemented Yet) Shows the Registration form
@@ -58,16 +63,20 @@ This todo List
       - bottomBar.dart                      //    - Bottom Bar shown through out the app
       - characterIndicator.dart             //    - Top character display. Able to redirect you to a character change
       - eventList.dart                      //    - Event list populator an item display. Asks Notifications() for data
+      - lastDiceCard.dart                   //    - Displays the last throw in the system
       - topBar.dart                         //    - Username display and sesion ender button
     -/personajeMenu                         //  - Contains all the PersonajeMenu widgets
       -/secondPageWidgets                   //    -Contains all the widgets from secondPage.dart
         - all.dart                          //      - Same as other all.dart
         - coinIndicator.dart                //      - Gold, copper, and silver coin count indicator
+        - inventorySlots.dart               //      - Inventory slots display
         - lifeIndicator.dart                //      - Animated circle life indicator widget
         - roundedSquareCard.dart            //      - Card that shows the label on top and the number on the center
+        - slotsRow.dart                     //      - Single item list Row, each ite is scrollable
         - xpTracker.dart                    //      - Card that shows current player XP
       - all.dart                            //    - Same as previous all.dart
       - editButton.dart                     //    - (Not Implemented Yet) Button to let users edit their data
+      - firstPage.dart                      //    - Contains the first (or left) page in the swipable card menu
       - secondPage.dart                     //    - Contains the second (or center) page in the swipable card menu
       - swipableCard.dart                   //    - Responsive, swipeable & animated container. This is more like a custom TabBar and TabViews
       - swipableCardSelector.dart           //    - TopBar of the container, similar to TabBar

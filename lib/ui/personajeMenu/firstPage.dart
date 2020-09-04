@@ -107,7 +107,7 @@ class FirstPage extends StatelessWidget {
               ),
             ),
             Padding(
-              padding: EdgeInsets.only(top: 5, bottom: 10),
+              padding: EdgeInsets.only(top: 5, bottom: 5),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [

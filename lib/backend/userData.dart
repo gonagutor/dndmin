@@ -4,8 +4,9 @@
 */
 
 class UserData {
-  UserData({this.authToken, this.selectedCharName, this.uName});
+  UserData({this.authToken, this.selectedCharName, this.uName, this.id});
   final String uName;
   final String authToken;
   final String selectedCharName;
+  final int id;
 }

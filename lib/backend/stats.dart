@@ -62,6 +62,12 @@ class PlayerStats {
   String inteligencia;
   String sabiduria;
   String carisma;
+  /*bool profFuerza;
+  bool profDestreza;
+  bool profConstitucion;
+  bool profInteligencia;
+  bool profSabiduria;
+  bool profCarisma;*/
   int profBonus;
 
   PlayerStats(
@@ -85,6 +91,12 @@ class PlayerStats {
       this.inteligencia,
       this.sabiduria,
       this.carisma,
+      /*this.profFuerza,
+      this.profDestreza,
+      this.profConstitucion,
+      this.profInteligencia,
+      this.profSabiduria,
+      this.profCarisma,*/
       this.profBonus});
 
   PlayerStats.fromJson(Map<String, dynamic> json) {
@@ -108,6 +120,12 @@ class PlayerStats {
     inteligencia = json['Inteligencia'];
     sabiduria = json['Sabiduria'];
     carisma = json['Carisma'];
+    /*profFuerza = json['profFuerza'];
+    profDestreza = json['profDestreza'];
+    profConstitucion = json['profConstitucion'];
+    profInteligencia = json['profInteligencia'];
+    profSabiduria = json['profSabiduria'];
+    profCarisma = json['profCarisma'];*/
     profBonus = ((int.parse(json['Nivel']) / 4) + 1).ceil();
   }
 
@@ -133,6 +151,12 @@ class PlayerStats {
     data['Inteligencia'] = this.inteligencia;
     data['Sabiduria'] = this.sabiduria;
     data['Carisma'] = this.carisma;
+    /*data['profFuerza'] = this.profFuerza;
+    data['profDestreza'] = this.profDestreza;
+    data['profConstitucion'] = this.profConstitucion;
+    data['profInteligencia'] = this.profInteligencia;
+    data['profSabiduria'] = this.profSabiduria;
+    data['profCarisma'] = this.profCarisma;*/
     return data;
   }
 }
