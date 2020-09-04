@@ -1,17 +1,18 @@
 import 'dart:async';
 import 'package:dndmin/backend/inventory.dart';
+import 'package:dndmin/backend/skills.dart';
 import 'package:dndmin/backend/stats.dart';
 import 'package:dndmin/backend/userData.dart';
 import 'package:dndmin/config/palette.dart';
 import 'package:dndmin/ui/personajeMenu/all.dart';
 import 'package:dndmin/ui/animatedWidgets/animatedBottomBar.dart';
 import 'package:dndmin/ui/mainMenu/all.dart';
-import 'package:dndmin/ui/personajeMenu/firstPage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 PlayerStats playerStats = PlayerStats(id: '0');
 Inventario playerInventory = Inventario(id: '0');
+PlayerSkills playerSkills = PlayerSkills(id: '0');
 
 class PersonajeMenu extends StatelessWidget {
   final UserData userData;
@@ -178,7 +179,54 @@ class _MyPersonajeMenuState extends State<MyPersonajeMenu> {
                       offView: (selected == 1) ? 0 : (selected == 2) ? -1 : 1),
                   SwipableCard(
                       child: Center(
-                        child: Text('Panel Derecha'),
+                        child: SingleChildScrollView(
+                          child: FutureBuilder(
+                            future: Skills.getStats(
+                                userData.authToken, userData.id),
+                            builder: (BuildContext context,
+                                AsyncSnapshot<Skills> snapshot) {
+                              if (snapshot.connectionState ==
+                                  ConnectionState.done) {
+                                if (snapshot.hasError) return Icon(Icons.error);
+                                playerSkills = snapshot.data.skills[0];
+                                return ThirdPage(
+                                  playerSkills: playerSkills,
+                                );
+                              } else {
+                                if (playerSkills.id == '0') {
+                                  return Container(
+                                    width: MediaQuery.of(context).size.width,
+                                    height: MediaQuery.of(context).size.height -
+                                        300,
+                                    child: Stack(
+                                      children: <Widget>[
+                                        Center(
+                                          child: Container(
+                                            height: 100,
+                                            width: 100,
+                                            child: CircularProgressIndicator(),
+                                          ),
+                                        ),
+                                        Center(
+                                          child: Text(
+                                            'Cargando...',
+                                            style: TextStyle(
+                                              fontWeight: FontWeight.bold,
+                                              fontSize: 16,
+                                            ),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  );
+                                }
+                                return ThirdPage(
+                                  playerSkills: playerSkills,
+                                );
+                              }
+                            },
+                          ),
+                        ),
                       ),
                       offView: (selected == 2) ? 0 : 1),
                   SwipableCard(

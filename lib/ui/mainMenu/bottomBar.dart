@@ -1,4 +1,5 @@
 import 'package:dndmin/backend/userData.dart';
+import 'package:dndmin/fonts/rpgAwesomeIcons.dart';
 import 'package:dndmin/screens/mainMenu.dart';
 import 'package:dndmin/screens/personajeMenu.dart';
 import 'package:flutter/cupertino.dart';
@@ -19,7 +20,10 @@ class BBBState {
 }
 
 class GradientIconMask extends StatelessWidget {
-  GradientIconMask({this.child, this.gradientTop, this.gradientBottom});
+  GradientIconMask(
+      {@required this.child,
+      @required this.gradientTop,
+      @required this.gradientBottom});
   final Widget child;
   final Color gradientTop;
   final Color gradientBottom;
@@ -163,7 +167,7 @@ class BottomBar extends StatelessWidget {
                 },
               ),
               BottomBarButton(
-                state: BBBState(active: iconState[1], icon: Icons.camera_roll),
+                state: BBBState(active: iconState[1], icon: RPGAwesome.player),
                 onPressed: () {
                   if (!iconState[1])
                     runApp(PersonajeMenu(

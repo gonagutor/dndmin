@@ -54,7 +54,7 @@ class SwipableCardSelector extends StatelessWidget {
                 SWCButton(
                   selected: current[2],
                   onPressed: onPressed[2],
-                  child: Text('Botón 3'),
+                  child: Text('Habilidades'),
                 )
               ],
             ),
