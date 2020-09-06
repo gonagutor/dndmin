@@ -26,7 +26,7 @@ class PersonajeMenu extends StatelessWidget {
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
       home: MyPersonajeMenu(
-        title: 'Menú Principal',
+        title: 'Información de tu personaje',
         userData: userData,
       ),
     );

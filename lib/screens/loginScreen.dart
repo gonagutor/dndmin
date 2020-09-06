@@ -11,7 +11,7 @@ class LoginScreen extends StatelessWidget {
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: MyLoginScreen(title: 'Login'),
+      home: MyLoginScreen(title: 'Iniciar Sesión'),
     );
   }
 }

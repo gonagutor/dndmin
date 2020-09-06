@@ -62,7 +62,15 @@ class CaracteristicDisplay extends StatelessWidget {
                       style: TextStyle(
                         fontSize: 25,
                         fontWeight: FontWeight.bold,
-                        color: Colors.black,
+                        color: Colors.white,
+                        shadows: [
+                          BoxShadow(
+                            color: Color(0xFF000000),
+                            offset: Offset(0, -0.5), //(x,y)
+                            spreadRadius: 0.4,
+                            blurRadius: 10,
+                          ),
+                        ],
                       ),
                     ),
                   ),

@@ -14,7 +14,7 @@ class SwipeUpMenu extends StatelessWidget {
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
       home: MySwipeUpMenu(
-        title: 'SwipeUpMenu',
+        title: 'Menú deslizable',
         userData: userData,
       ),
     );

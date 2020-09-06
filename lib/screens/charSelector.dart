@@ -18,7 +18,7 @@ class CharSelector extends StatelessWidget {
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
       home: MyCharSelector(
-        title: 'Menú Principal',
+        title: 'Selección de personaje',
         userData: userData,
       ),
     );
