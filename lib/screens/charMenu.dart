@@ -4,7 +4,7 @@ import 'package:dndmin/backend/skills.dart';
 import 'package:dndmin/backend/stats.dart';
 import 'package:dndmin/backend/userData.dart';
 import 'package:dndmin/config/palette.dart';
-import 'package:dndmin/ui/personajeMenu/all.dart';
+import 'package:dndmin/ui/charMenu/all.dart';
 import 'package:dndmin/ui/animatedWidgets/animatedBottomBar.dart';
 import 'package:dndmin/ui/mainMenu/all.dart';
 import 'package:flutter/material.dart';
@@ -14,9 +14,9 @@ PlayerStats playerStats = PlayerStats(id: '0');
 Inventario playerInventory = Inventario(id: '0');
 PlayerSkills playerSkills = PlayerSkills(id: '0');
 
-class PersonajeMenu extends StatelessWidget {
+class CharMenu extends StatelessWidget {
   final UserData userData;
-  PersonajeMenu({@required this.userData});
+  CharMenu({@required this.userData});
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -25,7 +25,7 @@ class PersonajeMenu extends StatelessWidget {
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: MyPersonajeMenu(
+      home: MyCharMenu(
         title: 'Información de tu personaje',
         userData: userData,
       ),
@@ -33,19 +33,17 @@ class PersonajeMenu extends StatelessWidget {
   }
 }
 
-class MyPersonajeMenu extends StatefulWidget {
-  MyPersonajeMenu({Key key, this.title, @required this.userData})
-      : super(key: key);
+class MyCharMenu extends StatefulWidget {
+  MyCharMenu({Key key, this.title, @required this.userData}) : super(key: key);
   final String title;
   final UserData userData;
   @override
-  _MyPersonajeMenuState createState() =>
-      _MyPersonajeMenuState(userData: userData);
+  _MyCharMenuState createState() => _MyCharMenuState(userData: userData);
 }
 
-class _MyPersonajeMenuState extends State<MyPersonajeMenu> {
+class _MyCharMenuState extends State<MyCharMenu> {
   final UserData userData;
-  _MyPersonajeMenuState({@required this.userData});
+  _MyCharMenuState({@required this.userData});
   int selected = 1;
   @override
   Widget build(BuildContext context) {

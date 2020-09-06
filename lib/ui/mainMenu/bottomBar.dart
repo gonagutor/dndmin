@@ -1,7 +1,10 @@
 import 'package:dndmin/backend/userData.dart';
 import 'package:dndmin/fonts/rpgAwesomeIcons.dart';
 import 'package:dndmin/screens/mainMenu.dart';
-import 'package:dndmin/screens/personajeMenu.dart';
+import 'package:dndmin/screens/charMenu.dart';
+import 'package:dndmin/screens/charAbilities.dart';
+import 'package:dndmin/screens/charHistory.dart';
+import 'package:dndmin/screens/charDescription.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -160,17 +163,20 @@ class BottomBar extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: <Widget>[
               BottomBarButton(
-                state: BBBState(active: iconState[0], icon: Icons.person),
+                state:
+                    BBBState(active: iconState[0], icon: RPGAwesome.quill_ink),
                 onPressed: () {
                   if (!iconState[0])
-                    print('ButtonState: ' + iconState[0].toString());
+                    runApp(CharDescription(
+                      userData: userData,
+                    ));
                 },
               ),
               BottomBarButton(
                 state: BBBState(active: iconState[1], icon: RPGAwesome.player),
                 onPressed: () {
                   if (!iconState[1])
-                    runApp(PersonajeMenu(
+                    runApp(CharMenu(
                       userData: userData,
                     ));
                 },
@@ -185,17 +191,22 @@ class BottomBar extends StatelessWidget {
                 },
               ),
               BottomBarButton(
-                state: BBBState(active: iconState[3], icon: Icons.add),
+                state:
+                    BBBState(active: iconState[3], icon: RPGAwesome.slash_ring),
                 onPressed: () {
                   if (!iconState[3])
-                    print('ButtonState: ' + iconState[3].toString());
+                    runApp(CharAbilities(
+                      userData: userData,
+                    ));
                 },
               ),
               BottomBarButton(
-                state: BBBState(active: iconState[4], icon: Icons.headset),
+                state: BBBState(active: iconState[4], icon: Icons.bookmark),
                 onPressed: () {
                   if (!iconState[4])
-                    print('ButtonState: ' + iconState[4].toString());
+                    runApp(CharHistory(
+                      userData: userData,
+                    ));
                 },
               ),
             ],

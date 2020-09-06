@@ -80,6 +80,5 @@ I am planning to fix this or at least make this a bit better
       - secondPage.dart                     //    - Contains the second (or center) page in the swipable card menu
       - swipableCard.dart                   //    - Responsive, swipeable & animated container. This is more like a custom TabBar and TabViews
       - swipableCardSelector.dart           //    - TopBar of the container, similar to TabBar
-  - info.dart                               // This file
   - main.dart                               // App Entry Point    
 ```
