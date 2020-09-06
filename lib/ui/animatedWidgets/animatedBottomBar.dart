@@ -1,4 +1,5 @@
 import 'package:dndmin/backend/userData.dart';
+import 'package:dndmin/fonts/rpgAwesomeIcons.dart';
 import 'package:dndmin/screens/swipeUpMenu.dart';
 import 'package:dndmin/ui/mainMenu/all.dart';
 import 'package:flutter/material.dart';
@@ -79,28 +80,37 @@ class _AnimatedBottomBarState extends State<AnimatedBottomBar> {
                           children: <Widget>[
                             BottomBarButton(
                               state: BBBState(
-                                  active: buttonState[0], icon: Icons.person),
+                                active: buttonState[0],
+                                icon: RPGAwesome.quill_ink,
+                              ),
                               onPressed: () {},
                             ),
                             BottomBarButton(
                               state: BBBState(
-                                  active: buttonState[1],
-                                  icon: Icons.camera_roll),
+                                active: buttonState[1],
+                                icon: RPGAwesome.player,
+                              ),
                               onPressed: () {},
                             ),
                             BottomBarButton(
                               state: BBBState(
-                                  active: buttonState[2], icon: Icons.home),
+                                active: buttonState[2],
+                                icon: Icons.home,
+                              ),
                               onPressed: () {},
                             ),
                             BottomBarButton(
                               state: BBBState(
-                                  active: buttonState[3], icon: Icons.add),
+                                active: buttonState[3],
+                                icon: RPGAwesome.slash_ring,
+                              ),
                               onPressed: () {},
                             ),
                             BottomBarButton(
                               state: BBBState(
-                                  active: buttonState[4], icon: Icons.headset),
+                                active: buttonState[4],
+                                icon: Icons.bookmark,
+                              ),
                               onPressed: () {},
                             ),
                           ],
