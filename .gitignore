@@ -9,6 +9,8 @@
 .history
 .svn/
 .VSCodeCounter/
+.gradle/
+android/app/keyfolder/
 
 # IntelliJ related
 *.iml

@@ -69,16 +69,32 @@ class _MyCharAbilitiesState extends State<MyCharAbilities> {
               ),
             ),
             Positioned(
-              top: 180,
+              top: 120,
               bottom: 90,
-              right: 0,
-              left: 0,
+              right: 17.5,
+              left: 17.5,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
                   Padding(
-                    padding: EdgeInsets.only(top: 5, bottom: 10),
-                    child: Card(),
+                    padding: EdgeInsets.only(top: 10, bottom: 10),
+                    child: Container(
+                      height: MediaQuery.of(context).size.height,
+                      width: MediaQuery.of(context).size.width - 17.5 * 2,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.all(Radius.circular(20)),
+                        color: Colors.white,
+                        boxShadow: Palette.standartShadow,
+                      ),
+                      child: SingleChildScrollView(
+                        child: Padding(
+                          padding: const EdgeInsets.only(left: 20, right: 20),
+                          child: Column(
+                            children: [],
+                          ),
+                        ),
+                      ),
+                    ),
                   ),
                 ],
               ),
