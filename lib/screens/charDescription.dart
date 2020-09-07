@@ -186,11 +186,22 @@ class _MyCharDescriptionState extends State<MyCharDescription> {
                                       padding: const EdgeInsets.all(8.0),
                                       child: AnimatedCrossFade(
                                         firstChild: Center(
-                                          child:
-                                              Text(descripciones.personalidad),
+                                          child: Text(
+                                            descripciones.personalidad,
+                                            style: TextStyle(
+                                              color: Palette.fontColor,
+                                              fontSize: 16,
+                                            ),
+                                          ),
                                         ),
                                         secondChild: Center(
-                                          child: Text(descripciones.apariencia),
+                                          child: Text(
+                                            descripciones.apariencia,
+                                            style: TextStyle(
+                                              color: Palette.fontColor,
+                                              fontSize: 16,
+                                            ),
+                                          ),
                                         ),
                                         crossFadeState: (activeView[0] == 0)
                                             ? CrossFadeState.showFirst
@@ -233,11 +244,22 @@ class _MyCharDescriptionState extends State<MyCharDescription> {
                                       padding: const EdgeInsets.all(8.0),
                                       child: AnimatedCrossFade(
                                         firstChild: Center(
-                                          child:
-                                              Text(descripciones.personalidad),
+                                          child: Text(
+                                            descripciones.personalidad,
+                                            style: TextStyle(
+                                              color: Palette.fontColor,
+                                              fontSize: 16,
+                                            ),
+                                          ),
                                         ),
                                         secondChild: Center(
-                                          child: Text(descripciones.apariencia),
+                                          child: Text(
+                                            descripciones.apariencia,
+                                            style: TextStyle(
+                                              color: Palette.fontColor,
+                                              fontSize: 16,
+                                            ),
+                                          ),
                                         ),
                                         crossFadeState: (activeView[0] == 0)
                                             ? CrossFadeState.showFirst
@@ -345,17 +367,32 @@ class _MyCharDescriptionState extends State<MyCharDescription> {
                                       padding: const EdgeInsets.all(8.0),
                                       child: AnimatedCrossFade(
                                         firstChild: Center(
-                                          child:
-                                              Text(descripciones.motivaciones),
+                                          child: Text(
+                                            descripciones.motivaciones,
+                                            style: TextStyle(
+                                              color: Palette.fontColor,
+                                              fontSize: 16,
+                                            ),
+                                          ),
                                         ),
                                         secondChild: (activeView[1] == 2)
                                             ? Center(
-                                                child:
-                                                    Text(descripciones.ideales),
+                                                child: Text(
+                                                  descripciones.ideales,
+                                                  style: TextStyle(
+                                                    color: Palette.fontColor,
+                                                    fontSize: 16,
+                                                  ),
+                                                ),
                                               )
                                             : Center(
                                                 child: Text(
-                                                    descripciones.defectos),
+                                                  descripciones.defectos,
+                                                  style: TextStyle(
+                                                    color: Palette.fontColor,
+                                                    fontSize: 16,
+                                                  ),
+                                                ),
                                               ),
                                         crossFadeState: (activeView[1] == 0)
                                             ? CrossFadeState.showFirst
@@ -398,17 +435,32 @@ class _MyCharDescriptionState extends State<MyCharDescription> {
                                       padding: const EdgeInsets.all(8.0),
                                       child: AnimatedCrossFade(
                                         firstChild: Center(
-                                          child:
-                                              Text(descripciones.motivaciones),
+                                          child: Text(
+                                            descripciones.motivaciones,
+                                            style: TextStyle(
+                                              color: Palette.fontColor,
+                                              fontSize: 16,
+                                            ),
+                                          ),
                                         ),
                                         secondChild: (activeView[1] == 2)
                                             ? Center(
-                                                child:
-                                                    Text(descripciones.ideales),
+                                                child: Text(
+                                                  descripciones.ideales,
+                                                  style: TextStyle(
+                                                    color: Palette.fontColor,
+                                                    fontSize: 16,
+                                                  ),
+                                                ),
                                               )
                                             : Center(
                                                 child: Text(
-                                                    descripciones.defectos),
+                                                  descripciones.defectos,
+                                                  style: TextStyle(
+                                                    color: Palette.fontColor,
+                                                    fontSize: 16,
+                                                  ),
+                                                ),
                                               ),
                                         crossFadeState: (activeView[1] == 0)
                                             ? CrossFadeState.showFirst
