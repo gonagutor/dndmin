@@ -44,7 +44,7 @@ I am planning to fix this or at least make this a bit better
     - charSelector.dart                     //  - Contains the character selection view. Can go to MainMenu or to LoginScreen
     - loginScreen.dart                      //  - Does login logistics and handles the results, if the pwd & username is correct it redirects you to the character selection
     - mainMenu.dart                         //  - This is the main menu of the app, shows last events and is the base on the app tree
-    - personajeMenu.dart                    //  - Contains and lets you edit (Not implemented yet) all the character information: Stats, Life info & Hability Stats
+    - charMenu.dart                    //  - Contains and lets you edit (Not implemented yet) all the character information: Stats, Life info & Hability Stats
     - swipeUpMenu.dart                      //  - This menu is shown when you swipe up in the Bottom Bar of the app. Contains more in depth character edits & let's you throw dices from anywhere in the app.
   -/ui                                      // This folder contains individual folders with individual UI elements of the screens by the same name
     -/animatedWidgets                       //  - This folder contains widgets in other folders inside /ui but animated
@@ -65,7 +65,7 @@ I am planning to fix this or at least make this a bit better
       - eventList.dart                      //    - Event list populator an item display. Asks Notifications() for data
       - lastDiceCard.dart                   //    - Displays the last throw in the system
       - topBar.dart                         //    - Username display and sesion ender button
-    -/personajeMenu                         //  - Contains all the PersonajeMenu widgets
+    -/charMenu                         //  - Contains all the charMenu widgets
       -/secondPageWidgets                   //    -Contains all the widgets from secondPage.dart
         - all.dart                          //      - Same as other all.dart
         - coinIndicator.dart                //      - Gold, copper, and silver coin count indicator

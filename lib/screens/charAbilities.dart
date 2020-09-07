@@ -1,4 +1,5 @@
 import 'package:dndmin/backend/userData.dart';
+import 'package:dndmin/config/palette.dart';
 import 'package:dndmin/ui/animatedWidgets/animatedBottomBar.dart';
 import 'package:dndmin/ui/mainMenu/all.dart';
 import 'package:flutter/material.dart';
@@ -52,14 +53,8 @@ class _MyCharAbilitiesState extends State<MyCharAbilities> {
           gradient: LinearGradient(
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
-            colors: [
-              const Color(0xFFFF64E0),
-              const Color(0xFF46DAFF),
-            ],
-            stops: [
-              0.0,
-              1.0,
-            ],
+            colors: [Palette.topGradient, Palette.bottomGradient],
+            stops: [0.0, 1.0],
           ),
         ),
         child: Stack(

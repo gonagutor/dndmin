@@ -66,14 +66,8 @@ class _MyCharMenuState extends State<MyCharMenu> {
           gradient: LinearGradient(
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
-            colors: [
-              Palette.topGradient,
-              Palette.bottomGradient,
-            ],
-            stops: [
-              0.0,
-              1.0,
-            ],
+            colors: [Palette.topGradient, Palette.bottomGradient],
+            stops: [0.0, 1.0],
           ),
         ),
         child: Stack(
