@@ -7,9 +7,7 @@ class CharDescriptions {
   CharDescriptions({this.descripciones});
 
   static Future<CharDescriptions> getDescription(String uToken, int id) async {
-    var url = 'http://dndgonzalo.ddns.net/api-call.php?token=' +
-        uToken.toString() +
-        '&desc=' +
+    var url = 'https://api.dndmin.me/characters/get-character-description/?q=' +
         id.toString();
     var response = await http.get(url);
     if (response.statusCode == 200) {
@@ -24,9 +22,9 @@ class CharDescriptions {
   }
 
   CharDescriptions.fromJson(Map<String, dynamic> json) {
-    if (json['Descripciones'] != null) {
+    if (json['description'] != null) {
       descripciones = new List<Descripciones>();
-      json['Descripciones'].forEach((v) {
+      json['description'].forEach((v) {
         descripciones.add(new Descripciones.fromJson(v));
       });
     }
@@ -35,8 +33,7 @@ class CharDescriptions {
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     if (this.descripciones != null) {
-      data['Descripciones'] =
-          this.descripciones.map((v) => v.toJson()).toList();
+      data['description'] = this.descripciones.map((v) => v.toJson()).toList();
     }
     return data;
   }

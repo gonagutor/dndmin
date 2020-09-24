@@ -6,10 +6,8 @@ class Stats {
 
   Stats({this.stats});
 
-  static Future<Stats> getStats(String uToken, int id /*Remuv*/) async {
-    var url = 'http://dndgonzalo.ddns.net/api-call.php?token=' +
-        uToken.toString() +
-        '&sta=' +
+  static Future<Stats> getStats(String uToken, int id) async {
+    var url = 'https://api.dndmin.me/characters/get-character-stats/?q=' +
         id.toString();
     var response = await http.get(url);
     if (response.statusCode == 200) {
@@ -24,9 +22,9 @@ class Stats {
   }
 
   Stats.fromJson(Map<String, dynamic> json) {
-    if (json['Stats'] != null) {
+    if (json['stats'] != null) {
       stats = new List<PlayerStats>();
-      json['Stats'].forEach((v) {
+      json['stats'].forEach((v) {
         stats.add(new PlayerStats.fromJson(v));
       });
     }
@@ -35,7 +33,7 @@ class Stats {
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     if (this.stats != null) {
-      data['Stats'] = this.stats.map((v) => v.toJson()).toList();
+      data['stats'] = this.stats.map((v) => v.toJson()).toList();
     }
     return data;
   }

@@ -11,8 +11,7 @@ class Login {
   }
 
   static Future<String> requestToken(String uname, String pwd) async {
-    // TODO: URL DE PRUEBA CAMBIAR
-    var url = 'https://dndgonzalo.herokuapp.com/get-token.php?uname=' +
+    var url = 'https://api.dndmin.me/users/get-token/?uname=' +
         uname +
         '&pwd=' +
         hashedPwd(pwd);

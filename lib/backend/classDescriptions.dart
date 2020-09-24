@@ -11,9 +11,7 @@ class ClassDescriptions {
   static Future<ClassDescriptions> getStats(String uToken, int id) async {
     Stats userStats = await Stats.getStats(uToken, id);
     int classId = userStats.getClassId();
-    var url = 'http://dndgonzalo.ddns.net/api-call.php?token=' +
-        uToken.toString() +
-        '&cdesGame=' +
+    var url = 'https://api.dndmin.me/game/get-class-descriptions/?q=' +
         classId.toString();
     var response = await http.get(url);
     if (response.statusCode == 200) {
@@ -28,9 +26,9 @@ class ClassDescriptions {
   }
 
   ClassDescriptions.fromJson(Map<String, dynamic> json) {
-    if (json['DescripcionesClases'] != null) {
+    if (json['classDescriptions'] != null) {
       descripcionesClases = new List<DescripcionesClases>();
-      json['DescripcionesClases'].forEach((v) {
+      json['classDescriptions'].forEach((v) {
         descripcionesClases.add(new DescripcionesClases.fromJson(v));
       });
     }
@@ -39,7 +37,7 @@ class ClassDescriptions {
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     if (this.descripcionesClases != null) {
-      data['DescripcionesClases'] =
+      data['classDescriptions'] =
           this.descripcionesClases.map((v) => v.toJson()).toList();
     }
     return data;

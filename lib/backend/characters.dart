@@ -7,10 +7,8 @@ class CharactersList {
   CharactersList({this.personajes});
 
   static Future<CharactersList> getUserCharList(String uToken) async {
-    // TODO: URL DE PRUEBA CAMBIAR
-    var url =
-        'https://dndgonzalo.herokuapp.com/get-user-characters.php?token=' +
-            uToken.toString();
+    var url = 'https://api.dndmin.me/users/get-user-characters/?token=' +
+        uToken.toString();
     var response = await http.get(url);
     if (response.statusCode == 200) {
       if (response.body == "ExpiredToken.")

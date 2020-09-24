@@ -6,10 +6,7 @@ class Notifications {
   Notifications({this.notificaciones});
 
   static Future<Notifications> getNotifications(String uToken) async {
-    // TODO: URL DE PRUEBA CAMBIAR
-    var url = 'http://dndgonzalo.ddns.net/api-call.php?token=' +
-        uToken.toString() +
-        '&notificaciones=1';
+    var url = 'https://api.dndmin.me/notifications/get-notifications/';
     var response = await http.get(url);
     if (response.statusCode == 200) {
       if (response.body == "UserNotRegistered.")
@@ -23,9 +20,9 @@ class Notifications {
   }
 
   Notifications.fromJson(Map<String, dynamic> json) {
-    if (json['Notificaciones'] != null) {
+    if (json['notifications'] != null) {
       notificaciones = new List<Notificacion>();
-      json['Notificaciones'].forEach((v) {
+      json['notifications'].forEach((v) {
         notificaciones.add(new Notificacion.fromJson(v));
       });
     }
@@ -34,7 +31,7 @@ class Notifications {
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     if (this.notificaciones != null) {
-      data['Notificaciones'] =
+      data['notifications'] =
           this.notificaciones.map((v) => v.toJson()).toList();
     }
     return data;

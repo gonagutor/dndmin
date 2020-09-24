@@ -6,12 +6,8 @@ class Inventory {
 
   Inventory({this.inventario});
 
-  static Future<Inventory> getInventory(
-      String uToken, int id /*Remove this*/) async {
-    // TODO: URL DE PRUEBA CAMBIAR
-    var url = 'http://dndgonzalo.ddns.net/api-call.php?token=' +
-        uToken.toString() +
-        '&inv=' +
+  static Future<Inventory> getInventory(String uToken, int id) async {
+    var url = 'https://api.dndmin.me/characters/get-character-inventory/?q=' +
         id.toString();
     var response = await http.get(url);
     if (response.statusCode == 200) {
@@ -26,9 +22,9 @@ class Inventory {
   }
 
   Inventory.fromJson(Map<String, dynamic> json) {
-    if (json['Inventario'] != null) {
+    if (json['inventario'] != null) {
       inventario = new List<Inventario>();
-      json['Inventario'].forEach((v) {
+      json['inventario'].forEach((v) {
         inventario.add(new Inventario.fromJson(v));
       });
     }
@@ -37,7 +33,7 @@ class Inventory {
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     if (this.inventario != null) {
-      data['Inventario'] = this.inventario.map((v) => v.toJson()).toList();
+      data['inventario'] = this.inventario.map((v) => v.toJson()).toList();
     }
     return data;
   }

@@ -7,10 +7,7 @@ class CharStories {
   CharStories({this.historias});
 
   static Future<CharStories> getStory(String uToken, int id) async {
-    // TODO: URL DE PRUEBA CAMBIAR
-    var url = 'http://dndgonzalo.ddns.net/api-call.php?token=' +
-        uToken.toString() +
-        '&hist=' +
+    var url = 'https://api.dndmin.me/characters/get-character-stories/?q=' +
         id.toString();
     var response = await http.get(url);
     if (response.statusCode == 200) {
@@ -25,9 +22,9 @@ class CharStories {
   }
 
   CharStories.fromJson(Map<String, dynamic> json) {
-    if (json['Historias'] != null) {
+    if (json['stories'] != null) {
       historias = new List<Historia>();
-      json['Historias'].forEach((v) {
+      json['stories'].forEach((v) {
         historias.add(new Historia.fromJson(v));
       });
     }
@@ -36,7 +33,7 @@ class CharStories {
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     if (this.historias != null) {
-      data['Historias'] = this.historias.map((v) => v.toJson()).toList();
+      data['stories'] = this.historias.map((v) => v.toJson()).toList();
     }
     return data;
   }

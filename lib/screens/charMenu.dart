@@ -173,7 +173,7 @@ class _MyCharMenuState extends State<MyCharMenu> {
                       child: Center(
                         child: SingleChildScrollView(
                           child: FutureBuilder(
-                            future: Skills.getStats(
+                            future: Skills.getSkills(
                                 userData.authToken, userData.id),
                             builder: (BuildContext context,
                                 AsyncSnapshot<Skills> snapshot) {

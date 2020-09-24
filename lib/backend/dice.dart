@@ -6,10 +6,7 @@ class Throws {
   Throws({this.dados});
 
   static Future<Throws> getThrows(String uToken) async {
-    // TODO: URL DE PRUEBA CAMBIAR
-    var url = 'http://dndgonzalo.ddns.net/api-call.php?token=' +
-        uToken.toString() +
-        '&dados=1';
+    var url = 'https://api.dndmin.me/throws/get-throws/';
     var response = await http.get(url);
     if (response.statusCode == 200) {
       if (response.body == "UserNotRegistered.")
@@ -23,9 +20,9 @@ class Throws {
   }
 
   Throws.fromJson(Map<String, dynamic> json) {
-    if (json['Dados'] != null) {
+    if (json['die'] != null) {
       dados = new List<Dados>();
-      json['Dados'].forEach((v) {
+      json['die'].forEach((v) {
         dados.add(new Dados.fromJson(v));
       });
     }
@@ -34,7 +31,7 @@ class Throws {
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     if (this.dados != null) {
-      data['Dados'] = this.dados.map((v) => v.toJson()).toList();
+      data['die'] = this.dados.map((v) => v.toJson()).toList();
     }
     return data;
   }
