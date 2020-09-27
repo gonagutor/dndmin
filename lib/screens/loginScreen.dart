@@ -1,3 +1,4 @@
+import 'package:dndmin/config/palette.dart';
 import 'package:dndmin/ui/login/all.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -51,14 +52,15 @@ class _MyLoginScreenState extends State<MyLoginScreen> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                Card(
-                  elevation: 5,
-                  shape: RoundedRectangleBorder(
+                Container(
+                  decoration: BoxDecoration(
+                    color: Colors.white,
                     borderRadius: BorderRadius.circular(15),
+                    boxShadow: Palette.standartShadow,
                   ),
                   child: ClipPath(
                     child: Container(
-                      width: 350,
+                      width: MediaQuery.of(context).size.width - 40,
                       child: Column(
                         children: <Widget>[
                           Padding(

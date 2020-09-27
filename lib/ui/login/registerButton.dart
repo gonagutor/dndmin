@@ -1,4 +1,5 @@
 import 'dart:ui';
+import 'package:dndmin/screens/registerScreen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
@@ -24,7 +25,9 @@ class RegisterButton extends StatelessWidget {
             ),
           ),
           child: FlatButton(
-            onPressed: () {},
+            onPressed: () {
+              runApp(RegisterScreen());
+            },
             color: const Color(0x0091AAF3),
             shape:
                 RoundedRectangleBorder(borderRadius: BorderRadius.circular(45)),
