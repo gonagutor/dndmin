@@ -88,10 +88,7 @@ class TopBar extends StatelessWidget {
                             FlatButton(
                               onPressed: () {
                                 Navigator.of(context).pop();
-                                Login.deleteChar();
-                                Login.deleteName();
-                                Login.deleteToken();
-                                Login.deleteCharId();
+                                Login.logout();
                                 runApp(LoginScreen());
                               },
                               child: Text("Si"),

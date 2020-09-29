@@ -8,8 +8,6 @@ import 'screens/charSelector.dart';
 
 void main() async {
   runApp(Landing());
-  //Login.deleteToken();
-  //Login.deleteChar();
   var uname = await Login.readName();
   var authToken = await Login.readToken();
   var selectedChar = await Login.readChar();

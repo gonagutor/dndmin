@@ -15,13 +15,11 @@ class Login {
         uname +
         '&pwd=' +
         hashedPwd(pwd);
-    var response = await http.get(url);
+    var response = await http.post(url);
     if (response.statusCode == 200) {
-      if (response.body == "UserNotRegistered.")
-        return null;
-      else if (response.body == "ConError.")
-        return null;
-      else if (response.body == "") return null;
+      if (response.body == "UserNotRegistered.") return null;
+      if (response.body == "ConError.") return null;
+      if (response.body == "") return null;
       return response.body;
     }
     return null;
@@ -76,5 +74,12 @@ class Login {
 
   static Future<void> deleteCharId() async {
     await storage.delete(key: 'charId');
+  }
+
+  static Future<void> logout() async {
+    deleteToken();
+    deleteChar();
+    deleteCharId();
+    deleteName();
   }
 }
