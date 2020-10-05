@@ -5,17 +5,14 @@ import 'package:http/http.dart' as http;
 
 class Login {
   static final storage = new FlutterSecureStorage();
-  static String hashedPwd(String input) {
-    String toHash = 't1HsN0tV3rygud' + input;
-    return sha512.convert(utf8.encode(toHash)).toString();
-  }
-
   static Future<String> requestToken(String uname, String pwd) async {
-    var url = 'https://api.dndmin.me/users/get-token/?uname=' +
-        uname +
-        '&pwd=' +
-        hashedPwd(pwd);
-    var response = await http.post(url);
+    var url =
+        'https://api.dndmin.me/users/get-token/?uname=' + uname + '&pwd=' + pwd;
+    var body = {
+      "uname": uname,
+      "pwd": pwd,
+    };
+    var response = await http.post(url, body: body);
     if (response.statusCode == 200) {
       if (response.body == "UserNotRegistered.") return null;
       if (response.body == "ConError.") return null;

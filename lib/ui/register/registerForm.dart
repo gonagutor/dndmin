@@ -1,3 +1,4 @@
+import 'package:dndmin/backend/register.dart';
 import 'package:flutter/material.dart';
 
 class FormItem extends StatelessWidget {
@@ -64,6 +65,14 @@ final TextEditingController _repPwdKey = TextEditingController();
 
 class RegisterForm extends StatelessWidget {
   static final registerForm = GlobalKey<FormState>();
+
+  static Future<String> register() async {
+    String uInput = _usernameKey.text;
+    String pwdInput = _pwdKey.text;
+    String mailInput = _mailKey.text;
+    return await Register.register(uInput, pwdInput, mailInput);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Form(

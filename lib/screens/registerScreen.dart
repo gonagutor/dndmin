@@ -1,5 +1,6 @@
 import 'package:dndmin/config/palette.dart';
 import 'package:dndmin/screens/loginScreen.dart';
+import 'package:dndmin/screens/mainMenu.dart';
 import 'package:dndmin/ui/register/all.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -127,8 +128,77 @@ class RegisterButton extends StatelessWidget {
             ),
           ),
           child: FlatButton(
-            onPressed: () {
-              RegisterForm.registerForm.currentState.validate();
+            onPressed: () async {
+              if (RegisterForm.registerForm.currentState.validate()) {
+                showDialog(
+                  barrierDismissible: false,
+                  context: context,
+                  builder: (_) => AlertDialog(
+                    title:
+                        Text('Registrandose...', textAlign: TextAlign.center),
+                    content: Container(
+                      height: 100,
+                      width: 100,
+                      child: Align(
+                        alignment: Alignment.center,
+                        child: Container(
+                          width: 50,
+                          height: 50,
+                          child: CircularProgressIndicator(),
+                        ),
+                      ),
+                    ),
+                  ),
+                );
+                String keep = await RegisterForm.register();
+                Navigator.of(context).pop();
+                if (keep == null ||
+                    keep == "ConError." ||
+                    keep == "UserError." ||
+                    keep == "MailError." ||
+                    keep == "WrongRequest.") {
+                  print(keep);
+                  showDialog(
+                    context: context,
+                    builder: (_) => AlertDialog(
+                      title: Text('Oops... '),
+                      content: Text((keep == "ConError.")
+                          ? "El servidor está teniendo problemas, intentalo mas tarde"
+                          : (keep == "UserError.")
+                              ? "Este usuario ya está registrado, prueba con otro"
+                              : (keep == "MailError.")
+                                  ? "Ya se está usando este correo"
+                                  : "Se ha producido un problema desconocido"),
+                      actions: [
+                        FlatButton(
+                          onPressed: () {
+                            Navigator.of(context).pop();
+                          },
+                          child: Text("Okay"),
+                        ),
+                      ],
+                    ),
+                  );
+                } else {
+                  showDialog(
+                    barrierDismissible: false,
+                    context: context,
+                    builder: (_) => AlertDialog(
+                      title: Text('¡Todo Correcto!'),
+                      content: Text(
+                          'Revisa tu correo para activar la cuenta o diselo a Gonzalo'),
+                      actions: [
+                        FlatButton(
+                          onPressed: () {
+                            runApp(LoginScreen());
+                          },
+                          child: Text("Okay"),
+                        ),
+                      ],
+                    ),
+                  );
+                }
+              }
             },
             color: const Color(0x0091AAF3),
             shape:
