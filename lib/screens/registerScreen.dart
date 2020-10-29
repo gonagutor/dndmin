@@ -1,6 +1,5 @@
 import 'package:dndmin/config/palette.dart';
 import 'package:dndmin/screens/loginScreen.dart';
-import 'package:dndmin/screens/mainMenu.dart';
 import 'package:dndmin/ui/register/all.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
