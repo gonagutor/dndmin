@@ -1,9 +1,34 @@
+import 'dart:math';
+import 'package:dndmin/backend/userData.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
 class Throws {
   List<Dados> dados;
   Throws({this.dados});
+
+  static Future<int> throwDice(int dice, UserData userData) async {
+    int result = Random().nextInt(dice) + 1;
+    var url = "https://api.dndmin.me/throws/new-throw/?token=" +
+        userData.authToken +
+        "&id=" +
+        userData.id.toString() +
+        "&name=" +
+        userData.selectedCharName +
+        "&diceType=1d" +
+        dice.toString() +
+        "&result=" +
+        result.toString();
+    print(userData.authToken);
+    var response = await http.get(url);
+    if (response.statusCode == 200) {
+      print(response.body);
+      if (response.body == "UserNotRegistered.") result = 0;
+      if (response.body == "ConError.") result = 0;
+      if (response.body == "") result = 0;
+    }
+    return result;
+  }
 
   static Future<Throws> getThrows(String uToken) async {
     var url = 'https://api.dndmin.me/throws/get-throws/';

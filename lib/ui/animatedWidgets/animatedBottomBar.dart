@@ -32,7 +32,7 @@ class _AnimatedBottomBarState extends State<AnimatedBottomBar> {
     return AnimatedPositioned(
       curve: Curves.easeInOut,
       duration: Duration(milliseconds: 500),
-      bottom: 0,
+      bottom: (menuOpen) ? 0 : -MediaQuery.of(context).size.height + 90,
       top: (menuOpen) ? -90 : MediaQuery.of(context).size.height - 90,
       left: 0,
       right: 0,
@@ -48,79 +48,14 @@ class _AnimatedBottomBarState extends State<AnimatedBottomBar> {
               menuOpen = false;
             });
         },
-        child: (menuOpen)
-            ? Stack(
-                children: [
-                  SwipeUpMenu(
-                    userData: userData,
-                  ),
-                  Positioned(
-                    bottom: 0,
-                    top: 0,
-                    left: 0,
-                    right: 0,
-                    child: Column(
-                      children: <Widget>[
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            GradientIconMask(
-                              child: Icon(
-                                FontAwesomeIcons.chevronUp,
-                                color: Colors.white,
-                                size: 15,
-                              ),
-                              gradientTop: Color(0xFFFF64E0),
-                              gradientBottom: Color(0xFFD1EAF0),
-                            )
-                          ],
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: <Widget>[
-                            BottomBarButton(
-                              state: BBBState(
-                                active: buttonState[0],
-                                icon: RPGAwesome.quill_ink,
-                              ),
-                              onPressed: () {},
-                            ),
-                            BottomBarButton(
-                              state: BBBState(
-                                active: buttonState[1],
-                                icon: RPGAwesome.player,
-                              ),
-                              onPressed: () {},
-                            ),
-                            BottomBarButton(
-                              state: BBBState(
-                                active: buttonState[2],
-                                icon: Icons.home,
-                              ),
-                              onPressed: () {},
-                            ),
-                            BottomBarButton(
-                              state: BBBState(
-                                active: buttonState[3],
-                                icon: RPGAwesome.slash_ring,
-                              ),
-                              onPressed: () {},
-                            ),
-                            BottomBarButton(
-                              state: BBBState(
-                                active: buttonState[4],
-                                icon: Icons.bookmark,
-                              ),
-                              onPressed: () {},
-                            ),
-                          ],
-                        ),
-                      ],
-                    ),
-                  ),
-                ],
-              )
-            : BottomBar(userData: userData, iconState: buttonState),
+        child: Stack(
+          children: [
+            SwipeUpMenu(
+              userData: userData,
+              iconState: buttonState,
+            ),
+          ],
+        ),
       ),
     );
   }

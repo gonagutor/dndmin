@@ -134,14 +134,6 @@ class BottomBar extends StatelessWidget {
           topLeft: Radius.circular(20),
           topRight: Radius.circular(20),
         ),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withOpacity(0.5),
-            offset: Offset(0, -0.5), //(x,y)
-            spreadRadius: 0.6,
-            blurRadius: 6,
-          ),
-        ],
       ),
       child: Column(
         children: <Widget>[

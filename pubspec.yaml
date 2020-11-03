@@ -35,3 +35,6 @@ flutter:
     - family: RPGAwesome
       fonts:
         - asset: fonts/RPGAwesome.ttf
+    - family: DiceIcons
+      fonts:
+        - asset: fonts/DiceIcons.ttf

@@ -1,11 +1,22 @@
+import 'package:dndmin/backend/dice.dart';
 import 'package:dndmin/backend/userData.dart';
 import 'package:dndmin/config/palette.dart';
+import 'package:dndmin/fonts/diceIcons.dart';
+import 'package:dndmin/fonts/rpgAwesomeIcons.dart';
+import 'package:dndmin/ui/mainMenu/all.dart';
+import 'package:dndmin/ui/swipeUpMenu/squareButton.dart';
+import 'package:dndmin/ui/swipeUpMenu/throwDiceButton.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class SwipeUpMenu extends StatelessWidget {
   final UserData userData;
-  SwipeUpMenu({@required this.userData});
+  final List<bool> iconState;
+  SwipeUpMenu({
+    @required this.userData,
+    @required this.iconState,
+  });
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -17,23 +28,33 @@ class SwipeUpMenu extends StatelessWidget {
       home: MySwipeUpMenu(
         title: 'Menú deslizable',
         userData: userData,
+        iconState: iconState,
       ),
     );
   }
 }
 
 class MySwipeUpMenu extends StatefulWidget {
-  MySwipeUpMenu({Key key, this.title, @required this.userData})
-      : super(key: key);
+  MySwipeUpMenu({
+    Key key,
+    this.title,
+    @required this.userData,
+    @required this.iconState,
+  }) : super(key: key);
   final String title;
   final UserData userData;
+  final List<bool> iconState;
   @override
-  _MySwipeUpMenuState createState() => _MySwipeUpMenuState(userData: userData);
+  _MySwipeUpMenuState createState() => _MySwipeUpMenuState(
+        userData: userData,
+        iconState: iconState,
+      );
 }
 
 class _MySwipeUpMenuState extends State<MySwipeUpMenu> {
   final UserData userData;
-  _MySwipeUpMenuState({@required this.userData});
+  final List<bool> iconState;
+  _MySwipeUpMenuState({@required this.userData, @required this.iconState});
   @override
   Widget build(BuildContext context) {
     SystemChrome.setPreferredOrientations([
@@ -60,27 +81,82 @@ class _MySwipeUpMenuState extends State<MySwipeUpMenu> {
             ),
           ],
         ),
-        child: Padding(
-          padding: EdgeInsets.only(top: 90),
-          child: SafeArea(
-            child: Column(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: RichText(
-                    text: TextSpan(
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 35,
-                        color: Palette.fontColor,
+        child: Column(
+          children: [
+            BottomBar(userData: userData, iconState: iconState),
+            SafeArea(
+              child: Column(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.only(top: 20),
+                    child: RichText(
+                      text: TextSpan(
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 35,
+                          color: Palette.fontColor,
+                        ),
+                        text: "Tirar un dado",
                       ),
-                      text: "Tirar Dados",
                     ),
                   ),
-                ),
-              ],
+                  Padding(
+                    padding: const EdgeInsets.only(
+                      left: 10,
+                      right: 10,
+                      top: 10,
+                    ),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        ThrowDiceButton(
+                          onPressed: () async =>
+                              print(await Throws.throwDice(4, userData)),
+                          icon: DiceIcons.dice_d4_bold,
+                        ),
+                        ThrowDiceButton(
+                          onPressed: () async =>
+                              print(await Throws.throwDice(6, userData)),
+                          icon: DiceIcons.dice_d6_bold,
+                        ),
+                        ThrowDiceButton(
+                          onPressed: () async =>
+                              print(await Throws.throwDice(8, userData)),
+                          icon: DiceIcons.dice_d8_bold,
+                        ),
+                      ],
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(
+                      left: 10,
+                      right: 10,
+                    ),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        ThrowDiceButton(
+                          onPressed: () async =>
+                              print(await Throws.throwDice(10, userData)),
+                          icon: DiceIcons.dice_d10_bold,
+                        ),
+                        ThrowDiceButton(
+                          onPressed: () async =>
+                              print(await Throws.throwDice(12, userData)),
+                          icon: DiceIcons.dice_d12_bold,
+                        ),
+                        ThrowDiceButton(
+                          onPressed: () async =>
+                              print(await Throws.throwDice(20, userData)),
+                          icon: DiceIcons.dice_d20_bold,
+                        ),
+                      ],
+                    ),
+                  )
+                ],
+              ),
             ),
-          ),
+          ],
         ),
       ),
     );

@@ -4,8 +4,7 @@ import 'package:http/http.dart' as http;
 class Login {
   static final storage = new FlutterSecureStorage();
   static Future<String> requestToken(String uname, String pwd) async {
-    var url =
-        'https://api.dndmin.me/users/get-token/?uname=' + uname + '&pwd=' + pwd;
+    var url = "https://api.dndmin.me/users/get-token/";
     var body = {
       "uname": uname,
       "pwd": pwd,
