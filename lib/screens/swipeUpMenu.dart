@@ -1,4 +1,5 @@
 import 'package:dndmin/backend/userData.dart';
+import 'package:dndmin/config/palette.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -61,13 +62,24 @@ class _MySwipeUpMenuState extends State<MySwipeUpMenu> {
         ),
         child: Padding(
           padding: EdgeInsets.only(top: 90),
-          child: Stack(
-            children: [
-              Center(
-                child: Text(
-                    'Hola! Soy un deslizable que le ha costado mucho a Gonzalo hacer'),
-              ),
-            ],
+          child: SafeArea(
+            child: Column(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: RichText(
+                    text: TextSpan(
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 35,
+                        color: Palette.fontColor,
+                      ),
+                      text: "Tirar Dados",
+                    ),
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
       ),

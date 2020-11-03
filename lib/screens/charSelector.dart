@@ -1,4 +1,6 @@
 import 'package:dndmin/backend/userData.dart';
+import 'package:dndmin/config/palette.dart';
+import 'package:dndmin/screens/charCreator.dart';
 import 'package:dndmin/screens/loginScreen.dart';
 import 'package:dndmin/screens/mainMenu.dart';
 import 'package:dndmin/ui/charSelector/charFutureBuilder.dart';
@@ -75,15 +77,59 @@ class _MyCharSelectorState extends State<MyCharSelector> {
                       width: 350,
                       child: Column(
                         children: <Widget>[
-                          Padding(
-                            padding: const EdgeInsets.only(top: 10, bottom: 10),
-                            child: Text(
-                              'Elige tu personaje',
-                              style: TextStyle(
-                                  fontSize: 30,
-                                  fontWeight: FontWeight.bold,
-                                  color: const Color(0xFF707070)),
-                            ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.only(
+                                    top: 10, bottom: 10, left: 20),
+                                child: Text(
+                                  'Elige tu personaje',
+                                  style: TextStyle(
+                                      fontSize: 30,
+                                      fontWeight: FontWeight.bold,
+                                      color: const Color(0xFF707070)),
+                                ),
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.only(
+                                    top: 10, bottom: 10, right: 20),
+                                child: Container(
+                                  width: 50,
+                                  height: 50,
+                                  decoration: BoxDecoration(
+                                    border: Border.all(
+                                      color: Palette.topGradient,
+                                      width: 1,
+                                    ),
+                                    color: Colors.white,
+                                    borderRadius: BorderRadius.circular(10),
+                                    boxShadow: <BoxShadow>[
+                                      BoxShadow(
+                                        color: Colors.grey,
+                                        offset: Offset(1, 0.5),
+                                        spreadRadius: 0.5,
+                                        blurRadius: 4,
+                                      ),
+                                    ],
+                                  ),
+                                  child: FlatButton(
+                                    onPressed: () {
+                                      runApp(CharCreator());
+                                    },
+                                    child: RichText(
+                                      text: TextSpan(
+                                        text: "+",
+                                        style: TextStyle(
+                                          fontSize: 30,
+                                          color: Palette.fontColor,
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ],
                           ),
                           Container(
                             constraints: BoxConstraints(

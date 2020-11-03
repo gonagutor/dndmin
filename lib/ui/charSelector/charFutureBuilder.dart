@@ -1,3 +1,5 @@
+import 'package:dndmin/config/palette.dart';
+import 'package:dndmin/screens/charCreator.dart';
 import 'package:dndmin/ui/charSelector/charListCard.dart';
 import 'package:dndmin/backend/userData.dart';
 import 'package:flutter/cupertino.dart';
@@ -35,20 +37,25 @@ class CharFutureBuilder extends StatelessWidget {
                 ),
               );
             } else {
-              return Container(
-                height: 100,
+              return ConstrainedBox(
+                constraints: BoxConstraints(minHeight: 0, maxHeight: 0),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text(
-                      "No tienes personajes todavía.",
-                      textAlign: TextAlign.center,
-                    ),
-                    FlatButton(
-                      onPressed: () {
-                        throw UnimplementedError();
-                      },
-                      child: Text('Crear uno'),
+                    Padding(
+                      padding: const EdgeInsets.only(bottom: 20.0),
+                      child: RichText(
+                        text: TextSpan(
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 16,
+                            color: Palette.fontColor,
+                          ),
+                          text:
+                              "No tienes personajes todavía.\n Pulsa \"+\" arriba para crear uno nuevo",
+                        ),
+                        textAlign: TextAlign.center,
+                      ),
                     ),
                   ],
                 ),
