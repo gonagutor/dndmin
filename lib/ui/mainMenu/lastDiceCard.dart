@@ -2,7 +2,6 @@ import 'package:dndmin/backend/dice.dart';
 import 'package:dndmin/backend/userData.dart';
 import 'package:dndmin/config/palette.dart';
 import 'package:dndmin/fonts/diceIcons.dart';
-import 'package:dndmin/ui/mainMenu/all.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';

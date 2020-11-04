@@ -1,5 +1,7 @@
+import 'dart:async';
 import 'package:dndmin/backend/userData.dart';
 import 'package:dndmin/config/palette.dart';
+import 'package:dndmin/ui/charMenu/all.dart';
 import 'package:dndmin/ui/animatedWidgets/animatedBottomBar.dart';
 import 'package:dndmin/ui/mainMenu/all.dart';
 import 'package:flutter/material.dart';
@@ -38,12 +40,16 @@ class _MyCharAbilitiesState extends State<MyCharAbilities> {
   final UserData userData;
   _MyCharAbilitiesState({@required this.userData});
 
+  int selected = 1;
   @override
   Widget build(BuildContext context) {
     SystemChrome.setPreferredOrientations([
       DeviceOrientation.portraitUp,
       DeviceOrientation.portraitDown,
     ]);
+    Timer(Duration(seconds: 2), () {
+      if (this.mounted) setState(() {});
+    });
     return Scaffold(
       resizeToAvoidBottomInset: false,
       body: Container(
@@ -59,6 +65,55 @@ class _MyCharAbilitiesState extends State<MyCharAbilities> {
         ),
         child: Stack(
           children: <Widget>[
+            GestureDetector(
+              onPanEnd: (details) {
+                if (details.velocity.pixelsPerSecond.dx < 1000.0)
+                  setState(() {
+                    if (selected == 0 || selected == 1)
+                      selected++;
+                    else if (selected == 2) selected = 2;
+                  });
+                if (details.velocity.pixelsPerSecond.dx > -1000.0)
+                  setState(() {
+                    if (selected == 2 || selected == 1)
+                      selected--;
+                    else if (selected == 0) selected = 0;
+                  });
+              },
+              child: Stack(
+                children: [
+                  Positioned(
+                    top: 120,
+                    left: 17.5,
+                    right: 17.5,
+                    bottom: MediaQuery.of(context).size.height - 180,
+                    child: SwipableCardSelector(
+                      current: [
+                        (selected == 0),
+                        (selected == 1),
+                        (selected == 2),
+                      ],
+                      onPressed: [
+                        () => setState(() => selected = 0),
+                        () => setState(() => selected = 1),
+                        () => setState(() => selected = 2),
+                      ],
+                    ),
+                  ),
+                  SwipableCard(
+                      child: Container(),
+                      offView: (selected == 1)
+                          ? 0
+                          : (selected == 2)
+                              ? -1
+                              : 1),
+                  SwipableCard(
+                      child: Container(), offView: (selected == 2) ? 0 : 1),
+                  SwipableCard(
+                      child: Container(), offView: (selected == 0) ? 0 : -1),
+                ],
+              ),
+            ),
             Positioned(
               top: 0,
               left: 0,
@@ -66,37 +121,6 @@ class _MyCharAbilitiesState extends State<MyCharAbilities> {
               bottom: MediaQuery.of(context).size.height - 120,
               child: TopBar(
                 userData: userData,
-              ),
-            ),
-            Positioned(
-              top: 120,
-              bottom: 90,
-              right: 17.5,
-              left: 17.5,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  Padding(
-                    padding: EdgeInsets.only(top: 10, bottom: 10),
-                    child: Container(
-                      height: MediaQuery.of(context).size.height,
-                      width: MediaQuery.of(context).size.width - 17.5 * 2,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.all(Radius.circular(20)),
-                        color: Colors.white,
-                        boxShadow: Palette.standartShadow,
-                      ),
-                      child: SingleChildScrollView(
-                        child: Padding(
-                          padding: const EdgeInsets.only(left: 20, right: 20),
-                          child: Column(
-                            children: [],
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
-                ],
               ),
             ),
             AnimatedBottomBar(

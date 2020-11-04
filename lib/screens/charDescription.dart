@@ -210,13 +210,12 @@ class _MyCharDescriptionState extends State<MyCharDescription> {
                                       ),
                                     );
                                   } else {
-                                    if (descripciones.id == '0') {
-                                      return Container(
-                                        width:
-                                            MediaQuery.of(context).size.width,
-                                        height:
-                                            MediaQuery.of(context).size.height -
-                                                300,
+                                    if ((descripciones.id == '0')) {
+                                      return Positioned(
+                                        left: 0,
+                                        right: 0,
+                                        top: 120,
+                                        bottom: 90,
                                         child: Stack(
                                           children: <Widget>[
                                             Center(
@@ -402,12 +401,11 @@ class _MyCharDescriptionState extends State<MyCharDescription> {
                                     );
                                   } else {
                                     if (descripciones.id == '0') {
-                                      return Container(
-                                        width:
-                                            MediaQuery.of(context).size.width,
-                                        height:
-                                            MediaQuery.of(context).size.height -
-                                                300,
+                                      return Positioned(
+                                        left: 0,
+                                        right: 0,
+                                        top: 120,
+                                        bottom: 90,
                                         child: Stack(
                                           children: <Widget>[
                                             Center(

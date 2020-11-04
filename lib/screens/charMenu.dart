@@ -94,27 +94,18 @@ class _MyCharMenuState extends State<MyCharMenu> {
                     left: 17.5,
                     right: 17.5,
                     bottom: MediaQuery.of(context).size.height - 180,
-                    child: SwipableCardSelector(current: [
-                      (selected == 0),
-                      (selected == 1),
-                      (selected == 2)
-                    ], onPressed: [
-                      () {
-                        setState(() {
-                          selected = 0;
-                        });
-                      },
-                      () {
-                        setState(() {
-                          selected = 1;
-                        });
-                      },
-                      () {
-                        setState(() {
-                          selected = 2;
-                        });
-                      },
-                    ]),
+                    child: SwipableCardSelector(
+                      current: [
+                        (selected == 0),
+                        (selected == 1),
+                        (selected == 2)
+                      ],
+                      onPressed: [
+                        () => setState(() => selected = 0),
+                        () => setState(() => selected = 1),
+                        () => setState(() => selected = 2),
+                      ],
+                    ),
                   ),
                   SwipableCard(
                       child: SingleChildScrollView(
@@ -168,7 +159,11 @@ class _MyCharMenuState extends State<MyCharMenu> {
                           },
                         ),
                       ),
-                      offView: (selected == 1) ? 0 : (selected == 2) ? -1 : 1),
+                      offView: (selected == 1)
+                          ? 0
+                          : (selected == 2)
+                              ? -1
+                              : 1),
                   SwipableCard(
                       child: Center(
                         child: SingleChildScrollView(
