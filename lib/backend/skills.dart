@@ -60,7 +60,7 @@ class PlayerSkills {
   String sigilo;
   String supervivencia;
   String tratoAnimales;
-  /*bool profAcrobacia;
+  bool profAcrobacia;
   bool profAtletismo;
   bool profConArcano;
   bool profEngano;
@@ -77,7 +77,7 @@ class PlayerSkills {
   bool profReligion;
   bool profSigilo;
   bool profSupervivencia;
-  bool profTratoAnimales;*/
+  bool profTratoAnimales;
 
   PlayerSkills({
     this.id,
@@ -99,7 +99,7 @@ class PlayerSkills {
     this.sigilo,
     this.supervivencia,
     this.tratoAnimales,
-    /*this.profAcrobacia,
+    this.profAcrobacia,
     this.profAtletismo,
     this.profConArcano,
     this.profEngano,
@@ -116,7 +116,7 @@ class PlayerSkills {
     this.profReligion,
     this.profSigilo,
     this.profSupervivencia,
-    this.profTratoAnimales,*/
+    this.profTratoAnimales,
   });
 
   PlayerSkills.fromJson(Map<String, dynamic> json) {
@@ -139,24 +139,24 @@ class PlayerSkills {
     sigilo = json['Sigilo'];
     supervivencia = json['Supervivencia'];
     tratoAnimales = json['Trato Animales'];
-    /*profAcrobacia = json['profAcrobacia'].toString().toBool();
-    profAtletismo = json['profAtletismo'];
-    profConArcano = json['profConArcano'];
-    profEngano = json['profEngano'];
-    profHistoria = json['profHistoria'];
-    profInterpretacion = json['profInterpretacion'];
-    profIntimidacion = json['profIntimidacion'];
-    profInvestigacion = json['profInvestigacion'];
-    profJuegoManos = json['profJuegoManos'];
-    profMedicina = json['profMedicina'];
-    profNaturaleza = json['profNaturaleza'];
-    profPercepcion = json['profPercepcion'];
-    profPerspicacia = json['profPerspicacia'];
-    profPersuasion = json['profPersuasion'];
-    profReligion = json['profReligion'];
-    profSigilo = json['profSigilo'];
-    profSupervivencia = json['profSupervivencia'];
-    profTratoAnimales = json['profTratoAnimales'];*/
+    profAcrobacia = json['profAcrobacia'].toString().toBool();
+    profAtletismo = json['profAtletismo'].toString().toBool();
+    profConArcano = json['profConArcano'].toString().toBool();
+    profEngano = json['profEngano'].toString().toBool();
+    profHistoria = json['profHistoria'].toString().toBool();
+    profInterpretacion = json['profInterpretacion'].toString().toBool();
+    profIntimidacion = json['profIntimidacion'].toString().toBool();
+    profInvestigacion = json['profInvestigacion'].toString().toBool();
+    profJuegoManos = json['profJuegoManos'].toString().toBool();
+    profMedicina = json['profMedicina'].toString().toBool();
+    profNaturaleza = json['profNaturaleza'].toString().toBool();
+    profPercepcion = json['profPercepcion'].toString().toBool();
+    profPerspicacia = json['profPerspicacia'].toString().toBool();
+    profPersuasion = json['profPersuasion'].toString().toBool();
+    profReligion = json['profReligion'].toString().toBool();
+    profSigilo = json['profSigilo'].toString().toBool();
+    profSupervivencia = json['profSupervivencia'].toString().toBool();
+    profTratoAnimales = json['profTratoAnimales'].toString().toBool();
   }
 
   Map<String, dynamic> toJson() {
@@ -180,7 +180,7 @@ class PlayerSkills {
     data['Sigilo'] = this.sigilo;
     data['Supervivencia'] = this.supervivencia;
     data['Trato Animales'] = this.tratoAnimales;
-    /*data['profAcrobacia'] = this.profAcrobacia;
+    data['profAcrobacia'] = this.profAcrobacia;
     data['profAtletismo'] = this.profAtletismo;
     data['profConArcano'] = this.profConArcano;
     data['profEngano'] = this.profEngano;
@@ -197,7 +197,7 @@ class PlayerSkills {
     data['profReligion'] = this.profReligion;
     data['profSigilo'] = this.profSigilo;
     data['profSupervivencia'] = this.profSupervivencia;
-    data['profTratoAnimales'] = this.profTratoAnimales;*/
+    data['profTratoAnimales'] = this.profTratoAnimales;
     return data;
   }
 }

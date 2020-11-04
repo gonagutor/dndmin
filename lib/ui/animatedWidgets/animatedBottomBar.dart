@@ -1,9 +1,6 @@
 import 'package:dndmin/backend/userData.dart';
-import 'package:dndmin/fonts/rpgAwesomeIcons.dart';
 import 'package:dndmin/screens/swipeUpMenu.dart';
-import 'package:dndmin/ui/mainMenu/all.dart';
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class AnimatedBottomBar extends StatefulWidget {
   final UserData userData;
