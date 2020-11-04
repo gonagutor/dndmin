@@ -8,6 +8,7 @@
 .buildlog/
 .history
 .svn/
+.vscode
 .VSCodeCounter/
 .gradle/
 android/app/keyfolder/
