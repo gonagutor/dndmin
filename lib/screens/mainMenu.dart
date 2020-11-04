@@ -1,4 +1,5 @@
 import 'package:dndmin/backend/userData.dart';
+import 'package:dndmin/screens/throwListScreen.dart';
 import 'package:dndmin/ui/animatedWidgets/animatedBottomBar.dart';
 import 'package:dndmin/ui/mainMenu/all.dart';
 import 'package:flutter/material.dart';
@@ -87,15 +88,18 @@ class _MyMainMenuState extends State<MyMainMenu> {
                 children: <Widget>[
                   Padding(
                     padding: EdgeInsets.only(top: 10, bottom: 5),
-                    child: LastDiceCard(
-                      userData: userData,
+                    child: GestureDetector(
+                      onTap: () => runApp(ThrowListScreen(userData: userData)),
+                      child: LastDiceCard(
+                        userData: userData,
+                      ),
                     ),
                   ),
                 ],
               ),
             ),
             Positioned(
-              top: 405,
+              top: 305,
               bottom: 90,
               right: 0,
               left: 0,

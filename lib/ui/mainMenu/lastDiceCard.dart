@@ -1,5 +1,8 @@
 import 'package:dndmin/backend/dice.dart';
 import 'package:dndmin/backend/userData.dart';
+import 'package:dndmin/config/palette.dart';
+import 'package:dndmin/fonts/diceIcons.dart';
+import 'package:dndmin/ui/mainMenu/all.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
@@ -27,9 +30,8 @@ class _LastDiceCardState extends State<LastDiceCard> {
     Future<Throws> _diceThrows =
         Future<Throws>(() => Throws.getThrows(userData.authToken));
     return Container(
-      constraints: BoxConstraints(minHeight: 210),
       width: MediaQuery.of(context).size.width - 35,
-      height: 210,
+      height: 110,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.all(Radius.circular(20)),
         color: Colors.white,
@@ -84,110 +86,78 @@ class CardData extends StatelessWidget {
   final Dados lastThrow;
   @override
   Widget build(BuildContext context) {
-    Color colorIndicator = Color(0xFF707070);
+    int diceMax = int.parse(lastThrow.tipoDado.replaceFirst('1d', ''));
+    Color colorIndicator = Palette.fontColor;
     if (int.parse(lastThrow.tiradaDado) == 1) {
-      colorIndicator = Color(0xFF86B1F4);
-    } else if (int.parse(lastThrow.tiradaDado) ==
-        int.parse(lastThrow.tipoDado.replaceFirst('1d', ''))) {
-      colorIndicator = Color(0xFF79B9F6);
+      colorIndicator = Palette.topGradient;
+    } else if (int.parse(lastThrow.tiradaDado) == diceMax) {
+      colorIndicator = Palette.bottomGradient;
     }
-
-    return Column(
+    return Row(
       crossAxisAlignment: CrossAxisAlignment.center,
-      mainAxisAlignment: MainAxisAlignment.center,
+      mainAxisAlignment: MainAxisAlignment.start,
       children: <Widget>[
         Padding(
-          padding: EdgeInsets.only(top: 10),
+          padding: const EdgeInsets.only(left: 15, right: 10),
           child: Container(
-            width: 80.0,
-            height: 80.0,
+            height: 80,
+            width: 80,
             decoration: BoxDecoration(
-              color: const Color(0xFFFFFFFF),
-              shape: BoxShape.circle,
-              gradient: LinearGradient(
-                begin: Alignment.topCenter,
-                end: Alignment.bottomCenter,
-                colors: [
-                  Color(0xFF86B1F4),
-                  Color(0xFF79B9F6),
-                ],
-                stops: [
-                  0.0,
-                  1.0,
-                ],
-              ),
+              boxShadow: Palette.standartShadow,
+              gradient: Palette.standardGradient,
+              borderRadius: BorderRadius.circular(90),
             ),
-            child: Align(
-              alignment: Alignment.center,
-              child: Text(
-                lastThrow.tipoDado,
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 30,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
+            child: Icon(
+              (diceMax == 20)
+                  ? DiceIcons.dice_d20_bold
+                  : (diceMax == 12)
+                      ? DiceIcons.dice_d12_bold
+                      : (diceMax == 10)
+                          ? DiceIcons.dice_d10_bold
+                          : (diceMax == 8)
+                              ? DiceIcons.dice_d8_bold
+                              : (diceMax == 6)
+                                  ? DiceIcons.dice_d6_bold
+                                  : DiceIcons.dice_d4_bold,
+              size: 50,
+              color: Colors.white,
             ),
           ),
         ),
-        Align(
-          alignment: Alignment.center,
-          child: Padding(
-            padding: EdgeInsets.only(top: 5),
-            child: RichText(
-              overflow: TextOverflow.ellipsis,
+        Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            RichText(
+              textAlign: TextAlign.left,
               text: TextSpan(
-                text: lastThrow.nombre + ' ha sacado un ',
+                text: lastThrow.nombre + " ha sacado un ",
                 style: TextStyle(
-                  color: Color(0xFF707070),
-                  fontSize: 25,
+                  color: Palette.fontColor,
                   fontWeight: FontWeight.bold,
+                  fontSize: 16,
                 ),
-                children: <TextSpan>[
+                children: [
                   TextSpan(
                     text: lastThrow.tiradaDado,
-                    style: TextStyle(color: colorIndicator),
-                  ),
+                    style: TextStyle(
+                      color: colorIndicator,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  )
                 ],
               ),
             ),
-          ),
-        ),
-        Padding(
-          padding: const EdgeInsets.all(10),
-          child: ButtonTheme(
-            height: 65,
-            minWidth: 300,
-            child: Container(
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(45),
-                gradient: LinearGradient(
-                  begin: Alignment(0, -1),
-                  end: Alignment(0, 1),
-                  colors: <Color>[
-                    const Color(0xFFFF64E0),
-                    const Color(0xFF46DAFF),
-                  ],
-                ),
-              ),
-              child: FlatButton(
-                onPressed: () {}, //Goto Last Throws
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(45)),
-                child: RichText(
-                  text: TextSpan(
-                    text: 'Ver Las Ultimas Tiradas',
-                    style: TextStyle(
-                      fontSize: 25,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ),
+            Padding(
+              padding: EdgeInsets.only(top: 2),
+              child: Text(
+                "En un dado de " + diceMax.toString(),
+                style: TextStyle(color: Palette.fontColor),
+                textAlign: TextAlign.left,
               ),
             ),
-          ),
-        ),
+          ],
+        )
       ],
     );
   }

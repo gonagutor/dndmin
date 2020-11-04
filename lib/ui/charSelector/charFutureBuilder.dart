@@ -1,5 +1,4 @@
 import 'package:dndmin/config/palette.dart';
-import 'package:dndmin/screens/charCreator.dart';
 import 'package:dndmin/ui/charSelector/charListCard.dart';
 import 'package:dndmin/backend/userData.dart';
 import 'package:flutter/cupertino.dart';

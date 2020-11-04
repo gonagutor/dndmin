@@ -2,14 +2,12 @@ import 'package:dndmin/backend/dice.dart';
 import 'package:dndmin/backend/userData.dart';
 import 'package:dndmin/config/palette.dart';
 import 'package:dndmin/fonts/diceIcons.dart';
-import 'package:dndmin/fonts/rpgAwesomeIcons.dart';
 import 'package:dndmin/ui/mainMenu/all.dart';
-import 'package:dndmin/ui/swipeUpMenu/squareButton.dart';
 import 'package:dndmin/ui/swipeUpMenu/throwDiceButton.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
+// PAra hacer un dismisable puedes subirlo a la mitad y que el resto de espacio lo ocupe un GestureDetector que detecte un toque y cambie el estado del tween
 class SwipeUpMenu extends StatelessWidget {
   final UserData userData;
   final List<bool> iconState;
@@ -111,17 +109,17 @@ class _MySwipeUpMenuState extends State<MySwipeUpMenu> {
                       children: [
                         ThrowDiceButton(
                           onPressed: () async =>
-                              print(await Throws.throwDice(4, userData)),
+                              await Throws.throwDice(4, userData),
                           icon: DiceIcons.dice_d4_bold,
                         ),
                         ThrowDiceButton(
                           onPressed: () async =>
-                              print(await Throws.throwDice(6, userData)),
+                              await Throws.throwDice(6, userData),
                           icon: DiceIcons.dice_d6_bold,
                         ),
                         ThrowDiceButton(
                           onPressed: () async =>
-                              print(await Throws.throwDice(8, userData)),
+                              await Throws.throwDice(8, userData),
                           icon: DiceIcons.dice_d8_bold,
                         ),
                       ],
@@ -137,17 +135,17 @@ class _MySwipeUpMenuState extends State<MySwipeUpMenu> {
                       children: [
                         ThrowDiceButton(
                           onPressed: () async =>
-                              print(await Throws.throwDice(10, userData)),
+                              await Throws.throwDice(10, userData),
                           icon: DiceIcons.dice_d10_bold,
                         ),
                         ThrowDiceButton(
                           onPressed: () async =>
-                              print(await Throws.throwDice(12, userData)),
+                              await Throws.throwDice(12, userData),
                           icon: DiceIcons.dice_d12_bold,
                         ),
                         ThrowDiceButton(
                           onPressed: () async =>
-                              print(await Throws.throwDice(20, userData)),
+                              await Throws.throwDice(20, userData),
                           icon: DiceIcons.dice_d20_bold,
                         ),
                       ],
