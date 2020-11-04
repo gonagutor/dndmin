@@ -1,3 +1,5 @@
+[![Codemagic build status](https://api.codemagic.io/apps/5f559c7a9c7311daa2f36867/5f559c7a9c7311daa2f36866/status_badge.svg)](https://codemagic.io/apps/5f559c7a9c7311daa2f36867/5f559c7a9c7311daa2f36866/latest_build)
+
 # DnDmin
 
 ## What is this?
