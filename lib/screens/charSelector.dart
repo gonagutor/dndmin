@@ -114,9 +114,9 @@ class _MyCharSelectorState extends State<MyCharSelector> {
                                     ],
                                   ),
                                   child: FlatButton(
-                                    onPressed: () {
-                                      runApp(CharCreator());
-                                    },
+                                    onPressed: () =>
+                                        runApp(CharCreator(userData: userData)),
+                                    //Navigator.of(context).push(_routeToCreator),
                                     child: RichText(
                                       text: TextSpan(
                                         text: "+",
