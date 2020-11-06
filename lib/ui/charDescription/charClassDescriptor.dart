@@ -1,4 +1,4 @@
-import 'package:dndmin/ui/customLoadingIndicator.dart';
+import 'package:dndmin/ui/utilities/customLoadingIndicator.dart';
 import 'package:flutter/material.dart';
 import 'package:dndmin/backend/classDescriptions.dart';
 import 'package:dndmin/config/palette.dart';

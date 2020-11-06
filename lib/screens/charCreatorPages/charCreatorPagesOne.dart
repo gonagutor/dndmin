@@ -47,7 +47,7 @@ class _MyCharCreatorPagesOneState extends State<MyCharCreatorPagesOne> {
       DeviceOrientation.portraitDown,
     ]);
     return Scaffold(
-      resizeToAvoidBottomInset: true,
+      resizeToAvoidBottomInset: false,
       body: CharCreatorPage(
         nextPage: () => runApp(CharSelector(userData: userData)),
         prevPage: () => runApp(CharCreator(userData: userData)),
@@ -117,7 +117,7 @@ class _MyCharCreatorPagesOneState extends State<MyCharCreatorPagesOne> {
                             if (value.isEmpty) {
                               return 'Introduce el nombre de tu personaje';
                             } else if (value.length > 17) {
-                              return 'Tu personaje debe tener menos de 16 caracteres';
+                              return 'Tu nombre de personaje debe tener menos de 16 caracteres';
                             }
                             return null;
                           },
