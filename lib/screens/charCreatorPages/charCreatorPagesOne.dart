@@ -1,11 +1,11 @@
 import 'package:dndmin/screens/charCreator.dart';
 import 'package:dndmin/ui/charCreatorPages/charCreatorPage.dart';
+import 'package:dndmin/ui/utilities/customDropdown.dart' as CDD;
 import 'package:flutter/material.dart';
 import 'package:dndmin/backend/userData.dart';
 import 'package:dndmin/config/palette.dart';
 import 'package:dndmin/screens/charSelector.dart';
 import 'package:flutter/services.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 TextEditingController charName = TextEditingController();
 int charClass = 1;
@@ -38,6 +38,14 @@ class MyCharCreatorPagesOne extends StatefulWidget {
 
 class _MyCharCreatorPagesOneState extends State<MyCharCreatorPagesOne> {
   final UserData userData;
+  List<bool> isSelected = [false, false, false, false, false];
+  List<String> itemNames = [
+    "Hola, soy el item 1",
+    "Hola, soy el item 2",
+    "Hola, soy el item 3",
+    "Hola, soy el item 4",
+    "Hola, soy el item 5",
+  ];
   _MyCharCreatorPagesOneState({@required this.userData});
   @override
   Widget build(BuildContext context) {
@@ -46,6 +54,35 @@ class _MyCharCreatorPagesOneState extends State<MyCharCreatorPagesOne> {
       DeviceOrientation.portraitUp,
       DeviceOrientation.portraitDown,
     ]);
+    void _flipAll(int pressed) {
+      int x = 0;
+      while (isSelected.length > x) {
+        isSelected[x] = (pressed != x) ? false : true;
+        x++;
+      }
+      setState(() => isSelected = isSelected);
+    }
+
+    int _currentlySelected() {
+      int x = 0;
+      while (isSelected.length > x) {
+        if (isSelected[x] == true) return (x);
+        x++;
+      }
+      return x - 1;
+    }
+
+    bool _allFalse() {
+      int x = 0;
+      int i = 0;
+      while (isSelected.length > x) {
+        if (isSelected[x] == false) i++;
+        x++;
+      }
+      if (isSelected.length == i) return true;
+      return false;
+    }
+
     return Scaffold(
       resizeToAvoidBottomInset: false,
       body: CharCreatorPage(
@@ -147,42 +184,81 @@ class _MyCharCreatorPagesOneState extends State<MyCharCreatorPagesOne> {
                           child: Text(
                             'Clase de tu personaje',
                             style: TextStyle(
-                                fontSize: 20,
-                                fontWeight: FontWeight.w500,
-                                color: const Color(0xFF707070)),
+                              fontSize: 20,
+                              fontWeight: FontWeight.w500,
+                              color: const Color(0xFF707070),
+                            ),
                           ),
                         ),
                       ),
                       Padding(
                         padding: EdgeInsets.only(left: 20, right: 20, top: 10),
-                        child: Container(
-                          height: 60,
-                          width: double.infinity,
-                          decoration: BoxDecoration(
-                            color: const Color(0xFFEFEFEF),
-                            borderRadius: BorderRadius.all(Radius.circular(10)),
-                          ),
-                          padding: EdgeInsets.all(20.0),
-                          child: DropdownButton(
-                              icon: Icon(FontAwesomeIcons.caretDown),
-                              iconSize: 25,
-                              value: charClass,
-                              items: [
-                                DropdownMenuItem(
-                                  child: Text("First Item"),
-                                  value: 1,
-                                ),
-                                DropdownMenuItem(
-                                  child: Text("Second Item"),
-                                  value: 2,
-                                ),
-                                DropdownMenuItem(
-                                    child: Text("Third Item"), value: 3),
-                                DropdownMenuItem(
-                                    child: Text("Fourth Item"), value: 4)
-                              ],
-                              onChanged: (value) =>
-                                  setState(() => charClass = value)),
+                        child: CDD.CustomDropdown(
+                          text: (_allFalse())
+                              ? "Selecciona tu clase"
+                              : itemNames[_currentlySelected()],
+                          items: [
+                            CDD.DropDownItem.first(
+                              text: itemNames[0],
+                              isSelected: isSelected[0],
+                              onPressed: isSelected[0]
+                                  ? null
+                                  : () {
+                                      CDD.isDropdownOpened =
+                                          !CDD.isDropdownOpened;
+                                      CDD.floatingDropdown.remove();
+                                      _flipAll(0);
+                                    },
+                            ),
+                            CDD.DropDownItem(
+                              text: itemNames[1],
+                              isSelected: isSelected[1],
+                              onPressed: isSelected[1]
+                                  ? null
+                                  : () {
+                                      CDD.isDropdownOpened =
+                                          !CDD.isDropdownOpened;
+                                      CDD.floatingDropdown.remove();
+                                      _flipAll(1);
+                                    },
+                            ),
+                            CDD.DropDownItem(
+                              text: itemNames[2],
+                              isSelected: isSelected[2],
+                              onPressed: isSelected[2]
+                                  ? null
+                                  : () {
+                                      CDD.isDropdownOpened =
+                                          !CDD.isDropdownOpened;
+                                      CDD.floatingDropdown.remove();
+                                      _flipAll(2);
+                                    },
+                            ),
+                            CDD.DropDownItem(
+                              text: itemNames[3],
+                              isSelected: isSelected[3],
+                              onPressed: isSelected[3]
+                                  ? null
+                                  : () {
+                                      CDD.isDropdownOpened =
+                                          !CDD.isDropdownOpened;
+                                      CDD.floatingDropdown.remove();
+                                      _flipAll(3);
+                                    },
+                            ),
+                            CDD.DropDownItem.last(
+                              text: itemNames[4],
+                              isSelected: isSelected[4],
+                              onPressed: isSelected[4]
+                                  ? null
+                                  : () {
+                                      CDD.isDropdownOpened =
+                                          !CDD.isDropdownOpened;
+                                      CDD.floatingDropdown.remove();
+                                      _flipAll(4);
+                                    },
+                            )
+                          ],
                         ),
                       ),
                     ],
