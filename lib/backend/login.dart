@@ -1,5 +1,7 @@
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
+import 'package:flutter/foundation.dart' show kIsWeb;
 
 class Login {
   static final storage = new FlutterSecureStorage();
@@ -20,13 +22,25 @@ class Login {
   }
 
   static Future<void> secureWrite(String token, String uname) async {
-    await storage.write(key: 'jwt', value: token.toString());
-    await storage.write(key: 'uname', value: uname.toString());
+    if (!kIsWeb) {
+      await storage.write(key: 'jwt', value: token.toString());
+      await storage.write(key: 'uname', value: uname.toString());
+    } else {
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      prefs.setString('jwt', token.toString());
+      prefs.setString('uname', uname.toString());
+    }
   }
 
   static Future<void> writeChar(String char, String charId) async {
-    await storage.write(key: 'selChar', value: char.toString());
-    await storage.write(key: 'charId', value: charId.toString());
+    if (!kIsWeb) {
+      await storage.write(key: 'selChar', value: char.toString());
+      await storage.write(key: 'charId', value: charId.toString());
+    } else {
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      prefs.setString('selChar', char.toString());
+      prefs.setString('charId', charId.toString());
+    }
   }
 
   static Future<bool> getAndSaveToken(String uname, String pwd) async {
@@ -39,35 +53,75 @@ class Login {
   }
 
   static Future<String> readToken() async {
-    return await storage.read(key: 'jwt');
+    if (!kIsWeb) {
+      return await storage.read(key: 'jwt');
+    } else {
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      return prefs.getString('jwt');
+    }
   }
 
   static Future<String> readName() async {
-    return await storage.read(key: 'uname');
+    if (!kIsWeb) {
+      return await storage.read(key: 'uname');
+    } else {
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      return prefs.getString('uname');
+    }
   }
 
   static Future<String> readChar() async {
-    return await storage.read(key: 'selChar');
+    if (!kIsWeb) {
+      return await storage.read(key: 'selChar');
+    } else {
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      return prefs.getString('selChar');
+    }
   }
 
   static Future<String> readCharId() async {
-    return await storage.read(key: 'charId');
+    if (!kIsWeb) {
+      return await storage.read(key: 'charId');
+    } else {
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      return prefs.getString('charId');
+    }
   }
 
   static Future<void> deleteToken() async {
-    await storage.delete(key: 'jwt');
+    if (!kIsWeb) {
+      await storage.delete(key: 'jwt');
+    } else {
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      prefs.remove('jwt');
+    }
   }
 
   static Future<void> deleteName() async {
-    await storage.delete(key: 'uname');
+    if (!kIsWeb) {
+      await storage.delete(key: 'uname');
+    } else {
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      prefs.remove('uname');
+    }
   }
 
   static Future<void> deleteChar() async {
-    await storage.delete(key: 'selChar');
+    if (!kIsWeb) {
+      await storage.delete(key: 'selChar');
+    } else {
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      prefs.remove('selChar');
+    }
   }
 
   static Future<void> deleteCharId() async {
-    await storage.delete(key: 'charId');
+    if (!kIsWeb) {
+      await storage.delete(key: 'charId');
+    } else {
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      prefs.remove('charId');
+    }
   }
 
   static Future<void> logout() async {
