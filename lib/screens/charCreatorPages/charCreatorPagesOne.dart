@@ -8,7 +8,8 @@ import 'package:dndmin/screens/charSelector.dart';
 import 'package:flutter/services.dart';
 
 TextEditingController charName = TextEditingController();
-int charClass = 1;
+TextEditingController charSubName = TextEditingController();
+int charClass = 0;
 
 class CharCreatorPagesOne extends StatelessWidget {
   final UserData userData;
@@ -54,6 +55,7 @@ class _MyCharCreatorPagesOneState extends State<MyCharCreatorPagesOne> {
       DeviceOrientation.portraitUp,
       DeviceOrientation.portraitDown,
     ]);
+
     void _flipAll(int pressed) {
       int x = 0;
       while (isSelected.length > x) {
@@ -138,50 +140,6 @@ class _MyCharCreatorPagesOneState extends State<MyCharCreatorPagesOne> {
                         child: Align(
                           alignment: Alignment.centerLeft,
                           child: Text(
-                            'Nombre de tu personaje',
-                            style: TextStyle(
-                                fontSize: 20,
-                                fontWeight: FontWeight.w500,
-                                color: const Color(0xFF707070)),
-                          ),
-                        ),
-                      ),
-                      Padding(
-                        padding: EdgeInsets.only(left: 20, right: 20, top: 10),
-                        child: TextFormField(
-                          controller: charName,
-                          validator: (value) {
-                            if (value.isEmpty) {
-                              return 'Introduce el nombre de tu personaje';
-                            } else if (value.length > 17) {
-                              return 'Tu nombre de personaje debe tener menos de 16 caracteres';
-                            }
-                            return null;
-                          },
-                          decoration: InputDecoration(
-                            hintText: 'Contraseña',
-                            filled: true,
-                            fillColor: const Color(0xFFEFEFEF),
-                            hoverColor: const Color(0xFFEFEFEF),
-                            focusColor: const Color(0xFFEFEFEF),
-                            border: OutlineInputBorder(
-                              borderSide: BorderSide.none,
-                              borderRadius: BorderRadius.all(
-                                Radius.circular(10),
-                              ),
-                            ),
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                  Column(
-                    children: [
-                      Padding(
-                        padding: EdgeInsets.only(top: 10, left: 20, right: 20),
-                        child: Align(
-                          alignment: Alignment.centerLeft,
-                          child: Text(
                             'Clase de tu personaje',
                             style: TextStyle(
                               fontSize: 20,
@@ -204,6 +162,7 @@ class _MyCharCreatorPagesOneState extends State<MyCharCreatorPagesOne> {
                               onPressed: isSelected[0]
                                   ? null
                                   : () {
+                                      charClass = 1;
                                       CDD.isDropdownOpened =
                                           !CDD.isDropdownOpened;
                                       CDD.floatingDropdown.remove();
@@ -216,6 +175,7 @@ class _MyCharCreatorPagesOneState extends State<MyCharCreatorPagesOne> {
                               onPressed: isSelected[1]
                                   ? null
                                   : () {
+                                      charClass = 2;
                                       CDD.isDropdownOpened =
                                           !CDD.isDropdownOpened;
                                       CDD.floatingDropdown.remove();
@@ -228,6 +188,7 @@ class _MyCharCreatorPagesOneState extends State<MyCharCreatorPagesOne> {
                               onPressed: isSelected[2]
                                   ? null
                                   : () {
+                                      charClass = 3;
                                       CDD.isDropdownOpened =
                                           !CDD.isDropdownOpened;
                                       CDD.floatingDropdown.remove();
@@ -240,6 +201,7 @@ class _MyCharCreatorPagesOneState extends State<MyCharCreatorPagesOne> {
                               onPressed: isSelected[3]
                                   ? null
                                   : () {
+                                      charClass = 4;
                                       CDD.isDropdownOpened =
                                           !CDD.isDropdownOpened;
                                       CDD.floatingDropdown.remove();
@@ -252,6 +214,7 @@ class _MyCharCreatorPagesOneState extends State<MyCharCreatorPagesOne> {
                               onPressed: isSelected[4]
                                   ? null
                                   : () {
+                                      charClass = 5;
                                       CDD.isDropdownOpened =
                                           !CDD.isDropdownOpened;
                                       CDD.floatingDropdown.remove();
@@ -259,6 +222,92 @@ class _MyCharCreatorPagesOneState extends State<MyCharCreatorPagesOne> {
                                     },
                             )
                           ],
+                        ),
+                      ),
+                    ],
+                  ),
+                  Column(
+                    children: [
+                      Padding(
+                        padding: EdgeInsets.only(top: 10, left: 20, right: 20),
+                        child: Align(
+                          alignment: Alignment.centerLeft,
+                          child: Text(
+                            'Nombre de tu personaje',
+                            style: TextStyle(
+                                fontSize: 20,
+                                fontWeight: FontWeight.w500,
+                                color: const Color(0xFF707070)),
+                          ),
+                        ),
+                      ),
+                      Padding(
+                        padding: EdgeInsets.only(left: 20, right: 20, top: 10),
+                        child: TextFormField(
+                          controller: charName,
+                          validator: (value) {
+                            if (value.isEmpty) {
+                              return 'Introduce el nombre de tu personaje';
+                            } else if (value.length > 17) {
+                              return 'Tu nombre de personaje debe tener menos de 16 caracteres';
+                            }
+                            return null;
+                          },
+                          decoration: InputDecoration(
+                            hintText: 'Introduce el nombre de tu personaje',
+                            filled: true,
+                            fillColor: const Color(0xFFEFEFEF),
+                            hoverColor: const Color(0xFFEFEFEF),
+                            focusColor: const Color(0xFFEFEFEF),
+                            border: OutlineInputBorder(
+                              borderSide: BorderSide.none,
+                              borderRadius: BorderRadius.all(
+                                Radius.circular(10),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                  Column(
+                    children: [
+                      Padding(
+                        padding: EdgeInsets.only(top: 10, left: 20, right: 20),
+                        child: Align(
+                          alignment: Alignment.centerLeft,
+                          child: Text(
+                            'Apellidos o mote',
+                            style: TextStyle(
+                                fontSize: 20,
+                                fontWeight: FontWeight.w500,
+                                color: const Color(0xFF707070)),
+                          ),
+                        ),
+                      ),
+                      Padding(
+                        padding: EdgeInsets.only(left: 20, right: 20, top: 10),
+                        child: TextFormField(
+                          controller: charSubName,
+                          validator: (value) {
+                            if (value.isEmpty) {
+                              return 'Introduce tu mote o apellidos';
+                            }
+                            return null;
+                          },
+                          decoration: InputDecoration(
+                            hintText: 'Introduce tu mote o apellidos',
+                            filled: true,
+                            fillColor: const Color(0xFFEFEFEF),
+                            hoverColor: const Color(0xFFEFEFEF),
+                            focusColor: const Color(0xFFEFEFEF),
+                            border: OutlineInputBorder(
+                              borderSide: BorderSide.none,
+                              borderRadius: BorderRadius.all(
+                                Radius.circular(10),
+                              ),
+                            ),
+                          ),
                         ),
                       ),
                     ],
