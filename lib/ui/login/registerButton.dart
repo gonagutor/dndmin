@@ -35,6 +35,7 @@ class RegisterButton extends StatelessWidget {
               text: TextSpan(
                 text: 'Registrarse',
                 style: TextStyle(
+                  color: Colors.white,
                   fontSize: 28,
                   fontWeight: FontWeight.bold,
                 ),
