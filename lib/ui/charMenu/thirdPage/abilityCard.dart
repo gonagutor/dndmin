@@ -51,12 +51,12 @@ class AbilityCard extends StatelessWidget {
                       ),
                     ],
                   ),
-                  child: GradientIconMask(
-                    gradientTop: Palette.topGradient,
-                    gradientBottom: Palette.bottomGradient,
-                    child: Stack(
-                      children: [
-                        Center(
+                  child: Stack(
+                    children: [
+                      Center(
+                        child: GradientIconMask(
+                          gradientTop: Palette.topGradient,
+                          gradientBottom: Palette.bottomGradient,
                           child: Icon(
                             icon,
                             size: (MediaQuery.of(context).size.width -
@@ -67,23 +67,23 @@ class AbilityCard extends StatelessWidget {
                             color: Colors.white,
                           ),
                         ),
-                        Align(
-                          alignment: Alignment.bottomCenter,
-                          child: Icon(
-                            FontAwesomeIcons.dotCircle,
-                            color: (proficient)
-                                ? Colors.greenAccent
-                                : Colors.transparent,
-                            size: ((MediaQuery.of(context).size.width -
-                                            33.3 * 2 -
-                                            150) /
-                                        3 -
-                                    20) /
-                                4,
-                          ),
+                      ),
+                      Align(
+                        alignment: Alignment.bottomCenter,
+                        child: Icon(
+                          FontAwesomeIcons.dotCircle,
+                          color: (proficient)
+                              ? Colors.greenAccent
+                              : Colors.transparent,
+                          size: ((MediaQuery.of(context).size.width -
+                                          33.3 * 2 -
+                                          150) /
+                                      3 -
+                                  20) /
+                              4,
                         ),
-                      ],
-                    ),
+                      ),
+                    ],
                   ),
                 ),
                 Container(

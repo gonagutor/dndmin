@@ -1,4 +1,3 @@
-import 'package:dndmin/backend/login.dart';
 import 'package:dndmin/backend/userData.dart';
 import 'package:dndmin/screens/mainMenu.dart';
 import 'package:flutter/cupertino.dart';

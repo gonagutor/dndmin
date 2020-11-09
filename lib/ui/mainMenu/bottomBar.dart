@@ -8,6 +8,7 @@ import 'package:dndmin/screens/charDescription.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:flutter/foundation.dart' show kIsWeb;
 
 class BBBState {
   bool active;
@@ -23,27 +24,35 @@ class BBBState {
 }
 
 class GradientIconMask extends StatelessWidget {
-  GradientIconMask(
-      {@required this.child,
-      @required this.gradientTop,
-      @required this.gradientBottom});
-  final Widget child;
+  GradientIconMask({
+    @required this.child,
+    @required this.gradientTop,
+    @required this.gradientBottom,
+  });
+  final Icon child;
   final Color gradientTop;
   final Color gradientBottom;
 
   @override
   Widget build(BuildContext context) {
-    return ShaderMask(
-      shaderCallback: (bounds) => LinearGradient(
-        begin: Alignment(0, -1),
-        end: Alignment(0, 1),
-        colors: <Color>[
-          gradientTop,
-          gradientBottom,
-        ],
-      ).createShader(bounds),
-      child: child,
+    Icon webChild = Icon(
+      child.icon,
+      size: child.size,
+      color: gradientTop,
     );
+    return (kIsWeb)
+        ? webChild
+        : ShaderMask(
+            shaderCallback: (bounds) => LinearGradient(
+              begin: Alignment(0, -1),
+              end: Alignment(0, 1),
+              colors: <Color>[
+                gradientTop,
+                gradientBottom,
+              ],
+            ).createShader(bounds),
+            child: child,
+          );
   }
 }
 
