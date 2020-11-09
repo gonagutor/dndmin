@@ -1,3 +1,4 @@
+import 'package:dndmin/backend/login.dart';
 import 'package:dndmin/backend/userData.dart';
 import 'package:dndmin/screens/mainMenu.dart';
 import 'package:flutter/cupertino.dart';
@@ -112,7 +113,7 @@ class CharacterListCard extends StatelessWidget {
                         ),
                       ),
                       onPressed: () {
-                        //Login.writeChar(personaje.nombre, personaje.id);
+                        Login.writeChar(personaje.nombre, personaje.id);
                         runApp(MainMenu(
                           userData: UserData(
                             uName: userData.uName,
