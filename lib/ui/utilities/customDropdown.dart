@@ -44,7 +44,7 @@ class _CustomDropdownState extends State<CustomDropdown> {
         left: xPosition,
         width: width,
         top: yPosition + height,
-        height: items.length * height + 40,
+        height: 2 * height + 45,
         child: AnimatedContainer(
           duration: Duration(),
           child: DropDown(
@@ -115,9 +115,14 @@ class DropDown extends StatelessWidget {
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.all(Radius.circular(10)),
           ),
-          elevation: 5,
-          child: Column(
-            children: items,
+          elevation: 10,
+          child: Container(
+            height: 2 * height + 40,
+            child: SingleChildScrollView(
+              child: Column(
+                children: items,
+              ),
+            ),
           ),
         ),
       ],
