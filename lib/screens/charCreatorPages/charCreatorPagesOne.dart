@@ -1,4 +1,5 @@
 import 'package:dndmin/screens/charCreator.dart';
+import 'package:dndmin/screens/charCreatorPages/charCreatorPagesTwo.dart';
 import 'package:dndmin/ui/charCreatorPages/charCreatorPage.dart';
 import 'package:dndmin/ui/utilities/customDropdown.dart' as CDD;
 import 'package:dndmin/ui/utilities/customDropdown.dart' as CDD2;
@@ -131,7 +132,7 @@ class _MyCharCreatorPagesOneState extends State<MyCharCreatorPagesOne> {
     return Scaffold(
       resizeToAvoidBottomInset: false,
       body: CharCreatorPage(
-        nextPage: () => runApp(CharSelector(userData: userData)),
+        nextPage: () => runApp(CharCreatorPagesTwo(userData: userData)),
         prevPage: () => runApp(CharCreator(userData: userData)),
         child: Column(
           children: [

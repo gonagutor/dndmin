@@ -95,6 +95,11 @@ class _MyCharMenuState extends State<MyCharMenu> {
                     right: 17.5,
                     bottom: MediaQuery.of(context).size.height - 180,
                     child: SwipableCardSelector(
+                      labels: [
+                        "Atributos",
+                        "Vida",
+                        "Habilidades",
+                      ],
                       current: [
                         (selected == 0),
                         (selected == 1),

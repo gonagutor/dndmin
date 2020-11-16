@@ -1,11 +1,16 @@
 import 'dart:async';
+import 'package:dndmin/backend/abilities.dart';
 import 'package:dndmin/backend/userData.dart';
 import 'package:dndmin/config/palette.dart';
-import 'package:dndmin/ui/charMenu/all.dart';
+import 'package:dndmin/ui/charAbilities/secondPage.dart';
+import 'package:dndmin/ui/charMenu/swipableCard.dart';
+import 'package:dndmin/ui/charMenu/swipableCardSelector.dart';
 import 'package:dndmin/ui/animatedWidgets/animatedBottomBar.dart';
 import 'package:dndmin/ui/mainMenu/all.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+
+RaceAbilities raceAbilities = RaceAbilities(mainAbilities: []);
 
 class CharAbilities extends StatelessWidget {
   final UserData userData;
@@ -47,9 +52,8 @@ class _MyCharAbilitiesState extends State<MyCharAbilities> {
       DeviceOrientation.portraitUp,
       DeviceOrientation.portraitDown,
     ]);
-    Timer(Duration(seconds: 2), () {
-      if (this.mounted) setState(() {});
-    });
+    Future<RaceAbilities> _raceAbilities =
+        RaceAbilities.getRaceAbilities(userData.id);
     return Scaffold(
       resizeToAvoidBottomInset: false,
       body: Container(
@@ -88,6 +92,11 @@ class _MyCharAbilitiesState extends State<MyCharAbilities> {
                     right: 17.5,
                     bottom: MediaQuery.of(context).size.height - 180,
                     child: SwipableCardSelector(
+                      labels: [
+                        "Raza",
+                        "Clase",
+                        "Conjuros",
+                      ],
                       current: [
                         (selected == 0),
                         (selected == 1),
@@ -108,7 +117,56 @@ class _MyCharAbilitiesState extends State<MyCharAbilities> {
                               ? -1
                               : 1),
                   SwipableCard(
-                      child: Container(), offView: (selected == 2) ? 0 : 1),
+                      child: Container(
+                        child: SingleChildScrollView(
+                          child: FutureBuilder(
+                            future: Future.wait([_raceAbilities]),
+                            builder: (BuildContext context,
+                                AsyncSnapshot<List<dynamic>> snapshot) {
+                              if (snapshot.connectionState ==
+                                  ConnectionState.done) {
+                                if (snapshot.hasError) return Icon(Icons.error);
+                                raceAbilities = snapshot.data[0];
+                                return AbilitiesSecondPage(
+                                  raceAbilities: raceAbilities,
+                                );
+                              } else {
+                                if (raceAbilities.mainAbilities.length == 0) {
+                                  return Container(
+                                    width: MediaQuery.of(context).size.width,
+                                    height: MediaQuery.of(context).size.height -
+                                        300,
+                                    child: Stack(
+                                      children: <Widget>[
+                                        Center(
+                                          child: Container(
+                                            height: 100,
+                                            width: 100,
+                                            child: CircularProgressIndicator(),
+                                          ),
+                                        ),
+                                        Center(
+                                          child: Text(
+                                            'Cargando...',
+                                            style: TextStyle(
+                                              fontWeight: FontWeight.bold,
+                                              fontSize: 16,
+                                            ),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  );
+                                }
+                                return AbilitiesSecondPage(
+                                  raceAbilities: raceAbilities,
+                                );
+                              }
+                            },
+                          ),
+                        ),
+                      ),
+                      offView: (selected == 2) ? 0 : 1),
                   SwipableCard(
                       child: Container(), offView: (selected == 0) ? 0 : -1),
                 ],
