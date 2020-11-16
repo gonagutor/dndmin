@@ -2,6 +2,7 @@ import 'dart:async';
 import 'package:dndmin/backend/abilities.dart';
 import 'package:dndmin/backend/userData.dart';
 import 'package:dndmin/config/palette.dart';
+import 'package:dndmin/ui/charAbilities/firstPage.dart';
 import 'package:dndmin/ui/charAbilities/secondPage.dart';
 import 'package:dndmin/ui/charMenu/swipableCard.dart';
 import 'package:dndmin/ui/charMenu/swipableCardSelector.dart';
@@ -128,6 +129,57 @@ class _MyCharAbilitiesState extends State<MyCharAbilities> {
                                 if (snapshot.hasError) return Icon(Icons.error);
                                 raceAbilities = snapshot.data[0];
                                 return AbilitiesSecondPage(
+                                    //raceAbilities: raceAbilities,
+                                    );
+                              } else {
+                                if (raceAbilities.mainAbilities.length == 0) {
+                                  return Container(
+                                    width: MediaQuery.of(context).size.width,
+                                    height: MediaQuery.of(context).size.height -
+                                        300,
+                                    child: Stack(
+                                      children: <Widget>[
+                                        Center(
+                                          child: Container(
+                                            height: 100,
+                                            width: 100,
+                                            child: CircularProgressIndicator(),
+                                          ),
+                                        ),
+                                        Center(
+                                          child: Text(
+                                            'Cargando...',
+                                            style: TextStyle(
+                                              fontWeight: FontWeight.bold,
+                                              fontSize: 16,
+                                            ),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  );
+                                }
+                                return AbilitiesSecondPage(
+                                    //raceAbilities: raceAbilities,
+                                    );
+                              }
+                            },
+                          ),
+                        ),
+                      ),
+                      offView: (selected == 2) ? 0 : 1),
+                  SwipableCard(
+                      child: Container(
+                        child: SingleChildScrollView(
+                          child: FutureBuilder(
+                            future: Future.wait([_raceAbilities]),
+                            builder: (BuildContext context,
+                                AsyncSnapshot<List<dynamic>> snapshot) {
+                              if (snapshot.connectionState ==
+                                  ConnectionState.done) {
+                                if (snapshot.hasError) return Icon(Icons.error);
+                                raceAbilities = snapshot.data[0];
+                                return AbilitiesFirstPage(
                                   raceAbilities: raceAbilities,
                                 );
                               } else {
@@ -158,7 +210,7 @@ class _MyCharAbilitiesState extends State<MyCharAbilities> {
                                     ),
                                   );
                                 }
-                                return AbilitiesSecondPage(
+                                return AbilitiesFirstPage(
                                   raceAbilities: raceAbilities,
                                 );
                               }
@@ -166,9 +218,7 @@ class _MyCharAbilitiesState extends State<MyCharAbilities> {
                           ),
                         ),
                       ),
-                      offView: (selected == 2) ? 0 : 1),
-                  SwipableCard(
-                      child: Container(), offView: (selected == 0) ? 0 : -1),
+                      offView: (selected == 0) ? 0 : -1),
                 ],
               ),
             ),
