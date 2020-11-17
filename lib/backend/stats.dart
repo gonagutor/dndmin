@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:ffi';
 import 'package:http/http.dart' as http;
 
 class Stats {
@@ -96,6 +97,46 @@ class PlayerStats {
       this.profSabiduria,
       this.profCarisma,*/
       this.profBonus});
+
+  Future<bool> increaseLife(String uToken, int id) async {
+    var url = 'https://api.dndmin.me/characters/mod-life/?token=' +
+        uToken +
+        "&id=" +
+        id.toString() +
+        "&gol=" +
+        1.toString();
+    int _pvActuales = int.parse(pvActuales) + 1;
+    if (_pvActuales > int.parse(pv)) return false;
+    pvActuales = _pvActuales.toString();
+    var response = await http.get(url);
+    if (response.statusCode == 200) {
+      if (response.body == "Succesful.")
+        return true;
+      else
+        return false;
+    }
+    return false;
+  }
+
+  Future<bool> decreaseLife(String uToken, int id) async {
+    var url = 'https://api.dndmin.me/characters/mod-life/?token=' +
+        uToken +
+        "&id=" +
+        id.toString() +
+        "&gol=" +
+        0.toString();
+    int _pvActuales = int.parse(pvActuales) - 1;
+    if (_pvActuales < 0) return false;
+    pvActuales = _pvActuales.toString();
+    var response = await http.get(url);
+    if (response.statusCode == 200) {
+      if (response.body == "Succesful.")
+        return true;
+      else
+        return false;
+    }
+    return false;
+  }
 
   PlayerStats.fromJson(Map<String, dynamic> json) {
     id = json['ID'];

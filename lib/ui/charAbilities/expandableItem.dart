@@ -82,7 +82,7 @@ class _ExpandableItemState extends State<ExpandableItem> {
             ),
             AnimatedContainer(
               color: Colors.grey[200],
-              duration: Duration(milliseconds: 200),
+              duration: Duration(milliseconds: 500),
               curve: Curves.easeInOut,
               height: (open) ? height : 0,
               child: Padding(

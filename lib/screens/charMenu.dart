@@ -124,6 +124,10 @@ class _MyCharMenuState extends State<MyCharMenu> {
                               playerStats = snapshot.data[1].stats[0];
                               playerInventory = snapshot.data[0].inventario[0];
                               return SecondPage(
+                                onMinus: () async => (playerStats.decreaseLife(
+                                    userData.authToken, userData.id)),
+                                onPlus: () async => (playerStats.increaseLife(
+                                    userData.authToken, userData.id)),
                                 playerStats: playerStats,
                                 playerInventory: playerInventory,
                               );
@@ -157,6 +161,10 @@ class _MyCharMenuState extends State<MyCharMenu> {
                                 );
                               }
                               return SecondPage(
+                                onMinus: () async => (playerStats.decreaseLife(
+                                    userData.authToken, userData.id)),
+                                onPlus: () async => (playerStats.increaseLife(
+                                    userData.authToken, userData.id)),
                                 playerStats: playerStats,
                                 playerInventory: playerInventory,
                               );
