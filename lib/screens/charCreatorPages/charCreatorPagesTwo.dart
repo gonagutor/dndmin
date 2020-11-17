@@ -1,5 +1,6 @@
 import 'package:dndmin/fonts/rpgAwesomeIcons.dart';
 import 'package:dndmin/screens/charCreator.dart';
+import 'package:dndmin/screens/charCreatorPages/charCreatorPagesOne.dart';
 import 'package:dndmin/ui/charCreatorPages/charCreatorPage.dart';
 import 'package:flutter/material.dart';
 import 'package:dndmin/backend/userData.dart';
@@ -11,6 +12,13 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 TextEditingController _iniciativa = TextEditingController();
 TextEditingController _vida = TextEditingController();
 TextEditingController _ca = TextEditingController();
+TextEditingController _velocidad = TextEditingController();
+TextEditingController _fuerza = TextEditingController();
+TextEditingController _destreza = TextEditingController();
+TextEditingController _constitucion = TextEditingController();
+TextEditingController _inteligencia = TextEditingController();
+TextEditingController _sabiduria = TextEditingController();
+TextEditingController _carisma = TextEditingController();
 
 class CharCreatorPagesTwo extends StatelessWidget {
   final UserData userData;
@@ -41,19 +49,22 @@ class MyCharCreatorPagesTwo extends StatefulWidget {
 class _MyCharCreatorPagesTwoState extends State<MyCharCreatorPagesTwo> {
   final UserData userData;
   _MyCharCreatorPagesTwoState({@required this.userData});
+  final _pageTwoKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
-    GlobalKey _pageTwoKey = GlobalKey<FormState>();
     SystemChrome.setPreferredOrientations([
       DeviceOrientation.portraitUp,
       DeviceOrientation.portraitDown,
     ]);
 
     return Scaffold(
-      resizeToAvoidBottomInset: false,
+      resizeToAvoidBottomInset: true,
       body: CharCreatorPage(
-        nextPage: () => runApp(CharSelector(userData: userData)),
-        prevPage: () => runApp(CharCreator(userData: userData)),
+        nextPage: () {
+          if (_pageTwoKey.currentState.validate())
+            runApp(CharCreator(userData: userData));
+        },
+        prevPage: () => runApp(CharCreatorPagesOne(userData: userData)),
         child: Column(
           children: [
             Align(
@@ -98,11 +109,83 @@ class _MyCharCreatorPagesTwoState extends State<MyCharCreatorPagesTwo> {
               child: Column(
                 children: [
                   Padding(
+                    padding: const EdgeInsets.all(10),
+                    child: Text(
+                      "Caracteristicas",
+                      style: TextStyle(
+                        color: Palette.fontColor,
+                        fontSize: 30,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                  Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 20),
                     child: Row(
                       children: [
                         SquaredTextFormField(
-                          icon: FontAwesomeIcons.shieldVirus,
+                          icon: RPGAwesome.axe_swing,
+                          text: "Fuerza",
+                          controller: _fuerza,
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 5),
+                          child: SquaredTextFormField(
+                            icon: RPGAwesome.feather_wing,
+                            text: "Destreza",
+                            controller: _destreza,
+                          ),
+                        ),
+                        SquaredTextFormField(
+                          icon: RPGAwesome.circular_shield,
+                          text: "Constit.",
+                          controller: _constitucion,
+                        ),
+                      ],
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 20),
+                    child: Row(
+                      children: [
+                        SquaredTextFormField(
+                          icon: RPGAwesome.book,
+                          text: "Intelig.",
+                          controller: _inteligencia,
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 5),
+                          child: SquaredTextFormField(
+                            icon: RPGAwesome.book,
+                            text: "Sabiduría",
+                            controller: _sabiduria,
+                          ),
+                        ),
+                        SquaredTextFormField(
+                          icon: RPGAwesome.mirror,
+                          text: "Carisma",
+                          controller: _carisma,
+                        ),
+                      ],
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(10),
+                    child: Text(
+                      "Estadisticas base",
+                      style: TextStyle(
+                        color: Palette.fontColor,
+                        fontSize: 30,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 20),
+                    child: Row(
+                      children: [
+                        SquaredTextFormField(
+                          icon: RPGAwesome.boot_stomp,
                           text: "Iniciativa",
                           controller: _iniciativa,
                         ),
@@ -115,9 +198,78 @@ class _MyCharCreatorPagesTwoState extends State<MyCharCreatorPagesTwo> {
                           ),
                         ),
                         SquaredTextFormField(
-                          icon: RPGAwesome.boot_stomp,
-                          text: "Iniciativa",
+                          icon: FontAwesomeIcons.shieldVirus,
+                          text: "Clase Arm",
                           controller: _ca,
+                        ),
+                      ],
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 20.0,
+                      vertical: 10,
+                    ),
+                    child: Text(
+                      "Velocidad",
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.w500,
+                          color: const Color(0xFF707070)),
+                    ),
+                  ),
+                  Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 20),
+                    child: Row(
+                      children: [
+                        Container(
+                          width: (MediaQuery.of(context).size.width - 80) / 3,
+                          child: Icon(
+                            RPGAwesome.player_dodge,
+                            size: 80,
+                            color: Palette.fontColor,
+                          ),
+                        ),
+                        Container(
+                          width: ((MediaQuery.of(context).size.width - 80) / 3 -
+                                  10) *
+                              2,
+                          child: TextFormField(
+                            controller: _velocidad,
+                            inputFormatters: [
+                              FilteringTextInputFormatter.allow(
+                                  RegExp(r'^[0-9]+$'))
+                            ],
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                              fontSize: 50,
+                              color: Palette.fontColor,
+                            ),
+                            validator: (value) {
+                              if (value.isEmpty) {
+                                return 'Introduce tu velocidad';
+                              }
+                              return null;
+                            },
+                            decoration: InputDecoration(
+                              counterText: "",
+                              contentPadding:
+                                  EdgeInsets.symmetric(vertical: 20),
+                              hintText: "Velocidad",
+                              hintStyle: TextStyle(fontSize: 30),
+                              filled: true,
+                              fillColor: Color(0xFFEFEFEF),
+                              hoverColor: Color(0xFFEFEFEF),
+                              focusColor: Color(0xFFEFEFEF),
+                              border: OutlineInputBorder(
+                                borderSide: BorderSide.none,
+                                borderRadius: BorderRadius.all(
+                                  Radius.circular(10),
+                                ),
+                              ),
+                            ),
+                          ),
                         ),
                       ],
                     ),
@@ -182,10 +334,9 @@ class SquaredTextFormField extends StatelessWidget {
                   child: TextFormField(
                     controller: controller,
                     inputFormatters: [
-                      FilteringTextInputFormatter.allow(
-                          RegExp(r'^[0-9 ()+-]+$'))
+                      FilteringTextInputFormatter.allow(RegExp(r'^[0-9+-]+$'))
                     ],
-                    maxLength: 3,
+                    maxLength: 2,
                     textAlign: TextAlign.center,
                     validator: (value) {
                       if (value.isEmpty) {

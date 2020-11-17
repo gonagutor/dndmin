@@ -6,7 +6,6 @@ import 'package:dndmin/ui/utilities/customDropdown.dart' as CDD2;
 import 'package:flutter/material.dart';
 import 'package:dndmin/backend/userData.dart';
 import 'package:dndmin/config/palette.dart';
-import 'package:dndmin/screens/charSelector.dart';
 import 'package:flutter/services.dart';
 
 TextEditingController charName = TextEditingController();
@@ -92,14 +91,15 @@ class MyCharCreatorPagesOne extends StatefulWidget {
 class _MyCharCreatorPagesOneState extends State<MyCharCreatorPagesOne> {
   final UserData userData;
   _MyCharCreatorPagesOneState({@required this.userData});
+  final _pageOneKey = GlobalKey<FormState>();
+  bool _verifiedCla = true;
+  bool _verifiedRace = true;
   @override
   Widget build(BuildContext context) {
-    GlobalKey _pageOneKey = GlobalKey<FormState>();
     SystemChrome.setPreferredOrientations([
       DeviceOrientation.portraitUp,
       DeviceOrientation.portraitDown,
     ]);
-
     void _flipAll(List<bool> isSelected, int pressed) {
       int x = 0;
       while (isSelected.length > x) {
@@ -130,9 +130,16 @@ class _MyCharCreatorPagesOneState extends State<MyCharCreatorPagesOne> {
     }
 
     return Scaffold(
-      resizeToAvoidBottomInset: false,
+      resizeToAvoidBottomInset: true,
       body: CharCreatorPage(
-        nextPage: () => runApp(CharCreatorPagesTwo(userData: userData)),
+        nextPage: () {
+          setState(() => _verifiedCla = !_allFalse(isSelectedCla));
+          setState(() => _verifiedRace = !_allFalse(isSelectedRace));
+          if (_pageOneKey.currentState.validate()) {
+            if (_verifiedCla && _verifiedRace)
+              runApp(CharCreatorPagesTwo(userData: userData));
+          }
+        },
         prevPage: () => runApp(CharCreator(userData: userData)),
         child: Column(
           children: [
@@ -184,7 +191,7 @@ class _MyCharCreatorPagesOneState extends State<MyCharCreatorPagesOne> {
                         child: Align(
                           alignment: Alignment.centerLeft,
                           child: Text(
-                            'Raza de tu personaje',
+                            'Clase de tu personaje',
                             style: TextStyle(
                               fontSize: 20,
                               fontWeight: FontWeight.w500,
@@ -346,6 +353,23 @@ class _MyCharCreatorPagesOneState extends State<MyCharCreatorPagesOne> {
                           ],
                         ),
                       ),
+                      Row(
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.symmetric(
+                              vertical: 5,
+                              horizontal: 28,
+                            ),
+                            child: Text(
+                              'Selecciona una clase',
+                              style: TextStyle(
+                                color: Colors.red[400],
+                                fontSize: (_verifiedCla) ? 0 : 13,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
                     ],
                   ),
                   Column(
@@ -478,6 +502,23 @@ class _MyCharCreatorPagesOneState extends State<MyCharCreatorPagesOne> {
                             ),
                           ],
                         ),
+                      ),
+                      Row(
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.symmetric(
+                              vertical: 5,
+                              horizontal: 28,
+                            ),
+                            child: Text(
+                              'Selecciona una raza',
+                              style: TextStyle(
+                                color: Colors.red[400],
+                                fontSize: (_verifiedRace) ? 0 : 13,
+                              ),
+                            ),
+                          ),
+                        ],
                       ),
                     ],
                   ),
