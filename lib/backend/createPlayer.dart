@@ -23,6 +23,7 @@ class PlayerCreator {
   static String ideales;
   static String vinculos;
   static String defectos;
+  static String historia;
 
   static Future<bool> createCharacter(String uToken) async {
     var url = "https://api.dndmin.me/characters/create-charater/";
@@ -109,7 +110,9 @@ class PlayerCreator {
         "&vinculos=" +
         vinculos +
         "&defectos=" +
-        defectos;
+        defectos +
+        "&historia=" +
+        historia;
     var response = await http.get(url + request);
     if (response.statusCode == 200) {
       if (response.body == "Successful.")

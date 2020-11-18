@@ -12,6 +12,7 @@ TextEditingController _personalidad = TextEditingController();
 TextEditingController _ideales = TextEditingController();
 TextEditingController _vinculos = TextEditingController();
 TextEditingController _defectos = TextEditingController();
+TextEditingController _historia = TextEditingController();
 
 class CharCreatorPagesFour extends StatelessWidget {
   final UserData userData;
@@ -59,6 +60,7 @@ class _MyCharCreatorPagesFourState extends State<MyCharCreatorPagesFour> {
             PlayerCreator.ideales = _ideales.text;
             PlayerCreator.vinculos = _vinculos.text;
             PlayerCreator.defectos = _defectos.text;
+            PlayerCreator.historia = _historia.text;
             showDialog(
               barrierDismissible: false,
               context: context,
@@ -135,7 +137,7 @@ class _MyCharCreatorPagesFourState extends State<MyCharCreatorPagesFour> {
             Padding(
               padding: const EdgeInsets.only(left: 20, right: 20, bottom: 10),
               child: Text(
-                "Introduce la descripción de tu personaje: personalidad, apariencia, motivaciones, ideales y defectos",
+                "Introduce la descripción de tu personaje: personalidad, apariencia, motivaciones, ideales, defectos e historia",
                 style: TextStyle(
                   color: Palette.fontColor,
                   fontSize: 16,
@@ -160,9 +162,9 @@ class _MyCharCreatorPagesFourState extends State<MyCharCreatorPagesFour> {
                     controller: _personalidad,
                     minLines: 2,
                     label: "Personalidad",
-                    hintText: "Introduce tu personalidad",
+                    hintText: "Introduce tu Personalidad",
                     validator: (value) {
-                      if (value.isEmpty) return "Introduce tu personalidad";
+                      if (value.isEmpty) return "Introduce tu Personalidad";
                       return null;
                     },
                   ),
@@ -172,7 +174,7 @@ class _MyCharCreatorPagesFourState extends State<MyCharCreatorPagesFour> {
                     label: "Ideales",
                     hintText: "Introduce tus Ideales",
                     validator: (value) {
-                      if (value.isEmpty) return "Introduce tu personalidad";
+                      if (value.isEmpty) return "Introduce tus Ideales";
                       return null;
                     },
                   ),
@@ -182,7 +184,7 @@ class _MyCharCreatorPagesFourState extends State<MyCharCreatorPagesFour> {
                     label: "Vinculos",
                     hintText: "Introduce tus Vinculos",
                     validator: (value) {
-                      if (value.isEmpty) return "Introduce tu personalidad";
+                      if (value.isEmpty) return "Introduce tus Vinculos";
                       return null;
                     },
                   ),
@@ -192,7 +194,17 @@ class _MyCharCreatorPagesFourState extends State<MyCharCreatorPagesFour> {
                     label: "Defectos",
                     hintText: "Introduce tus Defectos",
                     validator: (value) {
-                      if (value.isEmpty) return "Introduce tu personalidad";
+                      if (value.isEmpty) return "Introduce tus Defectos";
+                      return null;
+                    },
+                  ),
+                  LongTextInput(
+                    controller: _historia,
+                    minLines: 2,
+                    label: "Historia",
+                    hintText: "Introduce tu Historia",
+                    validator: (value) {
+                      if (value.isEmpty) return "Introduce tu historia";
                       return null;
                     },
                   ),
