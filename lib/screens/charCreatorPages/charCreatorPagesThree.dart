@@ -1,3 +1,4 @@
+import 'package:dndmin/backend/createPlayer.dart';
 import 'package:dndmin/screens/charCreator.dart';
 import 'package:dndmin/screens/charCreatorPages/charCreatorPagesFour.dart';
 import 'package:dndmin/screens/charCreatorPages/charCreatorPagesTwo.dart';
@@ -7,7 +8,7 @@ import 'package:dndmin/backend/userData.dart';
 import 'package:dndmin/config/palette.dart';
 import 'package:flutter/services.dart';
 
-List<bool> characteristicsSelected = [
+List<bool> _characteristicsSelected = [
   false,
   false,
   false,
@@ -15,7 +16,7 @@ List<bool> characteristicsSelected = [
   false,
   false,
 ];
-List<String> characteristicsNames = [
+List<String> _characteristicsNames = [
   "Fuerza",
   "Destreza",
   "Constitución",
@@ -23,7 +24,7 @@ List<String> characteristicsNames = [
   "Sabiduría",
   "Carisma",
 ];
-List<bool> abiliesSelected = [
+List<bool> _abiliesSelected = [
   false,
   false,
   false,
@@ -43,7 +44,7 @@ List<bool> abiliesSelected = [
   false,
   false,
 ];
-List<String> abiliesNames = [
+List<String> _abiliesNames = [
   "Acrobacias",
   "Conocimiento Arcano",
   "Atletismo",
@@ -102,7 +103,11 @@ class _MyCharCreatorPagesThreeState extends State<MyCharCreatorPagesThree> {
     return Scaffold(
       resizeToAvoidBottomInset: true,
       body: CharCreatorPage(
-        nextPage: () => runApp(CharCreatorPagesFour(userData: userData)),
+        nextPage: () {
+          PlayerCreator.proficienciasHab = _abiliesSelected;
+          PlayerCreator.proficienciasSalv = _characteristicsSelected;
+          runApp(CharCreatorPagesFour(userData: userData));
+        },
         prevPage: () => runApp(CharCreatorPagesTwo(userData: userData)),
         child: Column(
           children: [
@@ -157,12 +162,13 @@ class _MyCharCreatorPagesThreeState extends State<MyCharCreatorPagesThree> {
             Builder(
               builder: (BuildContext context) {
                 List<Widget> tickboxes = [];
-                for (int i = 0; i < characteristicsNames.length; i++)
+                for (int i = 0; i < _characteristicsNames.length; i++)
                   tickboxes.add(TickableSkillCard(
-                    text: characteristicsNames[i],
-                    selected: characteristicsSelected[i],
+                    text: _characteristicsNames[i],
+                    selected: _characteristicsSelected[i],
                     onSelected: () => setState(() {
-                      characteristicsSelected[i] = !characteristicsSelected[i];
+                      _characteristicsSelected[i] =
+                          !_characteristicsSelected[i];
                     }),
                   ));
                 return Column(
@@ -184,12 +190,12 @@ class _MyCharCreatorPagesThreeState extends State<MyCharCreatorPagesThree> {
             Builder(
               builder: (BuildContext context) {
                 List<Widget> tickboxes = [];
-                for (int i = 0; i < abiliesNames.length; i++)
+                for (int i = 0; i < _abiliesNames.length; i++)
                   tickboxes.add(TickableSkillCard(
-                    text: abiliesNames[i],
-                    selected: abiliesSelected[i],
+                    text: _abiliesNames[i],
+                    selected: _abiliesSelected[i],
                     onSelected: () => setState(() {
-                      abiliesSelected[i] = !abiliesSelected[i];
+                      _abiliesSelected[i] = !_abiliesSelected[i];
                     }),
                   ));
                 return Column(

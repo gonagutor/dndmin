@@ -1,3 +1,4 @@
+import 'package:dndmin/backend/createPlayer.dart';
 import 'package:dndmin/screens/charCreator.dart';
 import 'package:dndmin/screens/charCreatorPages/charCreatorPagesTwo.dart';
 import 'package:dndmin/ui/charCreatorPages/charCreatorPage.dart';
@@ -8,9 +9,9 @@ import 'package:dndmin/backend/userData.dart';
 import 'package:dndmin/config/palette.dart';
 import 'package:flutter/services.dart';
 
-TextEditingController charName = TextEditingController();
-TextEditingController charSubName = TextEditingController();
-List<bool> isSelectedCla = [
+TextEditingController _charName = TextEditingController();
+TextEditingController _charSubName = TextEditingController();
+List<bool> _isSelectedCla = [
   false,
   false,
   false,
@@ -23,7 +24,7 @@ List<bool> isSelectedCla = [
   false,
   false,
 ];
-List<bool> isSelectedRace = [
+List<bool> _isSelectedRace = [
   false,
   false,
   false,
@@ -36,7 +37,7 @@ List<bool> isSelectedRace = [
   false,
   false,
 ];
-List<String> itemNamesCla = [
+List<String> _itemNamesCla = [
   "Monje",
   "Explorador",
   "Bardo",
@@ -49,7 +50,7 @@ List<String> itemNamesCla = [
   "Clérigo",
   "Hechicero",
 ];
-List<String> itemNamesRace = [
+List<String> _itemNamesRace = [
   "Enano",
   "Elfo",
   "Mediano",
@@ -59,8 +60,8 @@ List<String> itemNamesRace = [
   "Semiorco",
   "Tiflin",
 ];
-int charClass = 0;
-int charRace = 0;
+int _charClass = 0;
+int _charRace = 0;
 
 class CharCreatorPagesOne extends StatelessWidget {
   final UserData userData;
@@ -133,11 +134,16 @@ class _MyCharCreatorPagesOneState extends State<MyCharCreatorPagesOne> {
       resizeToAvoidBottomInset: true,
       body: CharCreatorPage(
         nextPage: () {
-          setState(() => _verifiedCla = !_allFalse(isSelectedCla));
-          setState(() => _verifiedRace = !_allFalse(isSelectedRace));
+          setState(() => _verifiedCla = !_allFalse(_isSelectedCla));
+          setState(() => _verifiedRace = !_allFalse(_isSelectedRace));
           if (_pageOneKey.currentState.validate()) {
-            if (_verifiedCla && _verifiedRace)
+            if (_verifiedCla && _verifiedRace) {
+              PlayerCreator.clase = _itemNamesCla[_charClass - 1];
+              PlayerCreator.race = _itemNamesRace[_charRace - 1];
+              PlayerCreator.nombre = _charName.text;
+              PlayerCreator.subNombre = _charSubName.text;
               runApp(CharCreatorPagesTwo(userData: userData));
+            }
           }
         },
         prevPage: () => runApp(CharCreator(userData: userData)),
@@ -203,151 +209,152 @@ class _MyCharCreatorPagesOneState extends State<MyCharCreatorPagesOne> {
                       Padding(
                         padding: EdgeInsets.only(left: 20, right: 20, top: 10),
                         child: CDD.CustomDropdown(
-                          text: (_allFalse(isSelectedCla))
+                          text: (_allFalse(_isSelectedCla))
                               ? "Selecciona tu clase"
-                              : itemNamesCla[_currentlySelected(isSelectedCla)],
+                              : _itemNamesCla[
+                                  _currentlySelected(_isSelectedCla)],
                           items: [
                             CDD.DropDownItem.first(
-                              text: itemNamesCla[0],
-                              isSelected: isSelectedCla[0],
-                              onPressed: isSelectedCla[0]
+                              text: _itemNamesCla[0],
+                              isSelected: _isSelectedCla[0],
+                              onPressed: _isSelectedCla[0]
                                   ? null
                                   : () {
-                                      charClass = 1;
+                                      _charClass = 1;
                                       CDD.isDropdownOpened =
                                           !CDD.isDropdownOpened;
                                       CDD.floatingDropdown.remove();
-                                      _flipAll(isSelectedCla, 0);
+                                      _flipAll(_isSelectedCla, 0);
                                     },
                             ),
                             CDD.DropDownItem(
-                              text: itemNamesCla[1],
-                              isSelected: isSelectedCla[1],
-                              onPressed: isSelectedCla[1]
+                              text: _itemNamesCla[1],
+                              isSelected: _isSelectedCla[1],
+                              onPressed: _isSelectedCla[1]
                                   ? null
                                   : () {
-                                      charClass = 2;
+                                      _charClass = 2;
                                       CDD.isDropdownOpened =
                                           !CDD.isDropdownOpened;
                                       CDD.floatingDropdown.remove();
-                                      _flipAll(isSelectedCla, 1);
+                                      _flipAll(_isSelectedCla, 1);
                                     },
                             ),
                             CDD.DropDownItem(
-                              text: itemNamesCla[2],
-                              isSelected: isSelectedCla[2],
-                              onPressed: isSelectedCla[2]
+                              text: _itemNamesCla[2],
+                              isSelected: _isSelectedCla[2],
+                              onPressed: _isSelectedCla[2]
                                   ? null
                                   : () {
-                                      charClass = 3;
+                                      _charClass = 3;
                                       CDD.isDropdownOpened =
                                           !CDD.isDropdownOpened;
                                       CDD.floatingDropdown.remove();
-                                      _flipAll(isSelectedCla, 2);
+                                      _flipAll(_isSelectedCla, 2);
                                     },
                             ),
                             CDD.DropDownItem(
-                              text: itemNamesCla[3],
-                              isSelected: isSelectedCla[3],
-                              onPressed: isSelectedCla[3]
+                              text: _itemNamesCla[3],
+                              isSelected: _isSelectedCla[3],
+                              onPressed: _isSelectedCla[3]
                                   ? null
                                   : () {
-                                      charClass = 4;
+                                      _charClass = 4;
                                       CDD.isDropdownOpened =
                                           !CDD.isDropdownOpened;
                                       CDD.floatingDropdown.remove();
-                                      _flipAll(isSelectedCla, 3);
+                                      _flipAll(_isSelectedCla, 3);
                                     },
                             ),
                             CDD.DropDownItem(
-                              text: itemNamesCla[4],
-                              isSelected: isSelectedCla[4],
-                              onPressed: isSelectedCla[4]
+                              text: _itemNamesCla[4],
+                              isSelected: _isSelectedCla[4],
+                              onPressed: _isSelectedCla[4]
                                   ? null
                                   : () {
-                                      charClass = 5;
+                                      _charClass = 5;
                                       CDD.isDropdownOpened =
                                           !CDD.isDropdownOpened;
                                       CDD.floatingDropdown.remove();
-                                      _flipAll(isSelectedCla, 4);
+                                      _flipAll(_isSelectedCla, 4);
                                     },
                             ),
                             CDD.DropDownItem(
-                              text: itemNamesCla[5],
-                              isSelected: isSelectedCla[5],
-                              onPressed: isSelectedCla[5]
+                              text: _itemNamesCla[5],
+                              isSelected: _isSelectedCla[5],
+                              onPressed: _isSelectedCla[5]
                                   ? null
                                   : () {
-                                      charClass = 6;
+                                      _charClass = 6;
                                       CDD.isDropdownOpened =
                                           !CDD.isDropdownOpened;
                                       CDD.floatingDropdown.remove();
-                                      _flipAll(isSelectedCla, 5);
+                                      _flipAll(_isSelectedCla, 5);
                                     },
                             ),
                             CDD.DropDownItem(
-                              text: itemNamesCla[6],
-                              isSelected: isSelectedCla[6],
-                              onPressed: isSelectedCla[6]
+                              text: _itemNamesCla[6],
+                              isSelected: _isSelectedCla[6],
+                              onPressed: _isSelectedCla[6]
                                   ? null
                                   : () {
-                                      charClass = 7;
+                                      _charClass = 7;
                                       CDD.isDropdownOpened =
                                           !CDD.isDropdownOpened;
                                       CDD.floatingDropdown.remove();
-                                      _flipAll(isSelectedCla, 6);
+                                      _flipAll(_isSelectedCla, 6);
                                     },
                             ),
                             CDD.DropDownItem(
-                              text: itemNamesCla[7],
-                              isSelected: isSelectedCla[7],
-                              onPressed: isSelectedCla[7]
+                              text: _itemNamesCla[7],
+                              isSelected: _isSelectedCla[7],
+                              onPressed: _isSelectedCla[7]
                                   ? null
                                   : () {
-                                      charClass = 8;
+                                      _charClass = 8;
                                       CDD.isDropdownOpened =
                                           !CDD.isDropdownOpened;
                                       CDD.floatingDropdown.remove();
-                                      _flipAll(isSelectedCla, 7);
+                                      _flipAll(_isSelectedCla, 7);
                                     },
                             ),
                             CDD.DropDownItem(
-                              text: itemNamesCla[8],
-                              isSelected: isSelectedCla[8],
-                              onPressed: isSelectedCla[8]
+                              text: _itemNamesCla[8],
+                              isSelected: _isSelectedCla[8],
+                              onPressed: _isSelectedCla[8]
                                   ? null
                                   : () {
-                                      charClass = 9;
+                                      _charClass = 9;
                                       CDD.isDropdownOpened =
                                           !CDD.isDropdownOpened;
                                       CDD.floatingDropdown.remove();
-                                      _flipAll(isSelectedCla, 8);
+                                      _flipAll(_isSelectedCla, 8);
                                     },
                             ),
                             CDD.DropDownItem(
-                              text: itemNamesCla[9],
-                              isSelected: isSelectedCla[9],
-                              onPressed: isSelectedCla[9]
+                              text: _itemNamesCla[9],
+                              isSelected: _isSelectedCla[9],
+                              onPressed: _isSelectedCla[9]
                                   ? null
                                   : () {
-                                      charClass = 10;
+                                      _charClass = 10;
                                       CDD.isDropdownOpened =
                                           !CDD.isDropdownOpened;
                                       CDD.floatingDropdown.remove();
-                                      _flipAll(isSelectedCla, 9);
+                                      _flipAll(_isSelectedCla, 9);
                                     },
                             ),
                             CDD.DropDownItem.last(
-                              text: itemNamesCla[10],
-                              isSelected: isSelectedCla[10],
-                              onPressed: isSelectedCla[10]
+                              text: _itemNamesCla[10],
+                              isSelected: _isSelectedCla[10],
+                              onPressed: _isSelectedCla[10]
                                   ? null
                                   : () {
-                                      charClass = 11;
+                                      _charClass = 11;
                                       CDD.isDropdownOpened =
                                           !CDD.isDropdownOpened;
                                       CDD.floatingDropdown.remove();
-                                      _flipAll(isSelectedCla, 10);
+                                      _flipAll(_isSelectedCla, 10);
                                     },
                             )
                           ],
@@ -391,113 +398,113 @@ class _MyCharCreatorPagesOneState extends State<MyCharCreatorPagesOne> {
                       Padding(
                         padding: EdgeInsets.only(left: 20, right: 20, top: 10),
                         child: CDD2.CustomDropdown(
-                          text: (_allFalse(isSelectedRace))
+                          text: (_allFalse(_isSelectedRace))
                               ? "Selecciona tu Raza"
-                              : itemNamesRace[
-                                  _currentlySelected(isSelectedRace)],
+                              : _itemNamesRace[
+                                  _currentlySelected(_isSelectedRace)],
                           items: [
                             CDD2.DropDownItem.first(
-                              text: itemNamesRace[0],
-                              isSelected: isSelectedRace[0],
-                              onPressed: isSelectedRace[0]
+                              text: _itemNamesRace[0],
+                              isSelected: _isSelectedRace[0],
+                              onPressed: _isSelectedRace[0]
                                   ? null
                                   : () {
-                                      charClass = 1;
+                                      _charClass = 1;
                                       CDD2.isDropdownOpened =
                                           !CDD2.isDropdownOpened;
                                       CDD2.floatingDropdown.remove();
-                                      _flipAll(isSelectedRace, 0);
+                                      _flipAll(_isSelectedRace, 0);
                                     },
                             ),
                             CDD2.DropDownItem(
-                              text: itemNamesRace[1],
-                              isSelected: isSelectedRace[1],
-                              onPressed: isSelectedRace[1]
+                              text: _itemNamesRace[1],
+                              isSelected: _isSelectedRace[1],
+                              onPressed: _isSelectedRace[1]
                                   ? null
                                   : () {
-                                      charRace = 2;
+                                      _charRace = 2;
                                       CDD2.isDropdownOpened =
                                           !CDD2.isDropdownOpened;
                                       CDD2.floatingDropdown.remove();
-                                      _flipAll(isSelectedRace, 1);
+                                      _flipAll(_isSelectedRace, 1);
                                     },
                             ),
                             CDD2.DropDownItem(
-                              text: itemNamesRace[2],
-                              isSelected: isSelectedRace[2],
-                              onPressed: isSelectedRace[2]
+                              text: _itemNamesRace[2],
+                              isSelected: _isSelectedRace[2],
+                              onPressed: _isSelectedRace[2]
                                   ? null
                                   : () {
-                                      charRace = 3;
+                                      _charRace = 3;
                                       CDD2.isDropdownOpened =
                                           !CDD2.isDropdownOpened;
                                       CDD2.floatingDropdown.remove();
-                                      _flipAll(isSelectedRace, 2);
+                                      _flipAll(_isSelectedRace, 2);
                                     },
                             ),
                             CDD2.DropDownItem(
-                              text: itemNamesRace[3],
-                              isSelected: isSelectedRace[3],
-                              onPressed: isSelectedRace[3]
+                              text: _itemNamesRace[3],
+                              isSelected: _isSelectedRace[3],
+                              onPressed: _isSelectedRace[3]
                                   ? null
                                   : () {
-                                      charRace = 4;
+                                      _charRace = 4;
                                       CDD2.isDropdownOpened =
                                           !CDD2.isDropdownOpened;
                                       CDD2.floatingDropdown.remove();
-                                      _flipAll(isSelectedRace, 3);
+                                      _flipAll(_isSelectedRace, 3);
                                     },
                             ),
                             CDD2.DropDownItem(
-                              text: itemNamesRace[4],
-                              isSelected: isSelectedRace[4],
-                              onPressed: isSelectedRace[4]
+                              text: _itemNamesRace[4],
+                              isSelected: _isSelectedRace[4],
+                              onPressed: _isSelectedRace[4]
                                   ? null
                                   : () {
-                                      charRace = 5;
+                                      _charRace = 5;
                                       CDD2.isDropdownOpened =
                                           !CDD2.isDropdownOpened;
                                       CDD2.floatingDropdown.remove();
-                                      _flipAll(isSelectedRace, 4);
+                                      _flipAll(_isSelectedRace, 4);
                                     },
                             ),
                             CDD2.DropDownItem(
-                              text: itemNamesRace[5],
-                              isSelected: isSelectedRace[5],
-                              onPressed: isSelectedRace[5]
+                              text: _itemNamesRace[5],
+                              isSelected: _isSelectedRace[5],
+                              onPressed: _isSelectedRace[5]
                                   ? null
                                   : () {
-                                      charRace = 6;
+                                      _charRace = 6;
                                       CDD2.isDropdownOpened =
                                           !CDD2.isDropdownOpened;
                                       CDD2.floatingDropdown.remove();
-                                      _flipAll(isSelectedRace, 5);
+                                      _flipAll(_isSelectedRace, 5);
                                     },
                             ),
                             CDD2.DropDownItem(
-                              text: itemNamesRace[6],
-                              isSelected: isSelectedRace[6],
-                              onPressed: isSelectedRace[6]
+                              text: _itemNamesRace[6],
+                              isSelected: _isSelectedRace[6],
+                              onPressed: _isSelectedRace[6]
                                   ? null
                                   : () {
-                                      charRace = 7;
+                                      _charRace = 7;
                                       CDD2.isDropdownOpened =
                                           !CDD2.isDropdownOpened;
                                       CDD2.floatingDropdown.remove();
-                                      _flipAll(isSelectedRace, 6);
+                                      _flipAll(_isSelectedRace, 6);
                                     },
                             ),
                             CDD2.DropDownItem.last(
-                              text: itemNamesRace[7],
-                              isSelected: isSelectedRace[7],
-                              onPressed: isSelectedRace[7]
+                              text: _itemNamesRace[7],
+                              isSelected: _isSelectedRace[7],
+                              onPressed: _isSelectedRace[7]
                                   ? null
                                   : () {
-                                      charRace = 8;
+                                      _charRace = 8;
                                       CDD2.isDropdownOpened =
                                           !CDD2.isDropdownOpened;
                                       CDD2.floatingDropdown.remove();
-                                      _flipAll(isSelectedRace, 7);
+                                      _flipAll(_isSelectedRace, 7);
                                     },
                             ),
                           ],
@@ -540,7 +547,7 @@ class _MyCharCreatorPagesOneState extends State<MyCharCreatorPagesOne> {
                       Padding(
                         padding: EdgeInsets.only(left: 20, right: 20, top: 10),
                         child: TextFormField(
-                          controller: charName,
+                          controller: _charName,
                           validator: (value) {
                             if (value.isEmpty) {
                               return 'Introduce el nombre de tu personaje';
@@ -584,7 +591,7 @@ class _MyCharCreatorPagesOneState extends State<MyCharCreatorPagesOne> {
                       Padding(
                         padding: EdgeInsets.only(left: 20, right: 20, top: 10),
                         child: TextFormField(
-                          controller: charSubName,
+                          controller: _charSubName,
                           validator: (value) {
                             if (value.isEmpty) {
                               return 'Introduce tu mote o apellidos';

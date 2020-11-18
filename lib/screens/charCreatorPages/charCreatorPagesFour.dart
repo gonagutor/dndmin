@@ -1,3 +1,4 @@
+import 'package:dndmin/backend/createPlayer.dart';
 import 'package:dndmin/screens/charCreator.dart';
 import 'package:dndmin/screens/charCreatorPages/charCreatorPagesThree.dart';
 import 'package:dndmin/ui/charCreatorPages/charCreatorPage.dart';
@@ -51,9 +52,55 @@ class _MyCharCreatorPagesFourState extends State<MyCharCreatorPagesFour> {
     return Scaffold(
       resizeToAvoidBottomInset: true,
       body: CharCreatorPage(
-        nextPage: () {
-          if (_pageFourKey.currentState.validate())
-            runApp(CharCreator(userData: userData));
+        nextPage: () async {
+          if (_pageFourKey.currentState.validate()) {
+            PlayerCreator.apariencia = _apariencia.text;
+            PlayerCreator.personalidad = _personalidad.text;
+            PlayerCreator.ideales = _ideales.text;
+            PlayerCreator.vinculos = _vinculos.text;
+            PlayerCreator.defectos = _defectos.text;
+            showDialog(
+              barrierDismissible: false,
+              context: context,
+              builder: (_) => AlertDialog(
+                title: Text('Creando Personaje', textAlign: TextAlign.center),
+                content: Container(
+                  height: 100,
+                  width: 100,
+                  child: Align(
+                    alignment: Alignment.center,
+                    child: Container(
+                      width: 50,
+                      height: 50,
+                      child: CircularProgressIndicator(),
+                    ),
+                  ),
+                ),
+              ),
+            );
+            bool keep = await PlayerCreator.createCharacter(userData.authToken);
+            Navigator.of(context).pop();
+            if (!keep) {
+              showDialog(
+                context: context,
+                builder: (_) => AlertDialog(
+                  title: Text('Oops... '),
+                  content:
+                      Text('Se ha producido un error al crear el personaje'),
+                  actions: [
+                    FlatButton(
+                      onPressed: () {
+                        Navigator.of(context).pop();
+                      },
+                      child: Text("Okay"),
+                    ),
+                  ],
+                ),
+              );
+            } else {
+              runApp(CharCreator(userData: userData));
+            }
+          }
         },
         prevPage: () => runApp(CharCreatorPagesThree(userData: userData)),
         child: Column(

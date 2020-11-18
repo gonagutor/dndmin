@@ -1,3 +1,4 @@
+import 'package:dndmin/backend/createPlayer.dart';
 import 'package:dndmin/fonts/rpgAwesomeIcons.dart';
 import 'package:dndmin/screens/charCreatorPages/charCreatorPagesOne.dart';
 import 'package:dndmin/screens/charCreatorPages/charCreatorPagesThree.dart';
@@ -61,8 +62,20 @@ class _MyCharCreatorPagesTwoState extends State<MyCharCreatorPagesTwo> {
       resizeToAvoidBottomInset: true,
       body: CharCreatorPage(
         nextPage: () {
-          if (_pageTwoKey.currentState.validate())
+          if (_pageTwoKey.currentState.validate()) {
+            PlayerCreator.iniciativa = int.parse(_iniciativa.text);
+            PlayerCreator.vida = int.parse(_vida.text);
+            PlayerCreator.ca = int.parse(_ca.text);
+            PlayerCreator.velocidad = int.parse(_velocidad.text);
+            PlayerCreator.fuerza = int.parse(_fuerza.text);
+            PlayerCreator.destreza = int.parse(_destreza.text);
+            PlayerCreator.constitucion = int.parse(_constitucion.text);
+            PlayerCreator.inteligencia = int.parse(_inteligencia.text);
+            PlayerCreator.sabiduria = int.parse(_sabiduria.text);
+            PlayerCreator.carisma = int.parse(_carisma.text);
+            PlayerCreator.proficiencias = _oproficiencias.text;
             runApp(CharCreatorPagesThree(userData: userData));
+          }
         },
         prevPage: () => runApp(CharCreatorPagesOne(userData: userData)),
         child: Column(
