@@ -1,10 +1,12 @@
 import 'package:dndmin/config/palette.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class RoundedSquareCard extends StatelessWidget {
-  RoundedSquareCard({this.topText, this.centerText});
+  RoundedSquareCard({this.topText, this.centerText, this.proficient});
   final String topText;
   final String centerText;
+  final bool proficient;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -44,6 +46,23 @@ class RoundedSquareCard extends StatelessWidget {
                 ),
               ),
             ),
+            (proficient != null)
+                ? Align(
+                    alignment: Alignment.bottomCenter,
+                    child: Icon(
+                      FontAwesomeIcons.dotCircle,
+                      color: (proficient)
+                          ? Colors.greenAccent
+                          : Colors.transparent,
+                      size: ((MediaQuery.of(context).size.width -
+                                      33.3 * 2 -
+                                      150) /
+                                  3 -
+                              20) /
+                          3,
+                    ),
+                  )
+                : Container(),
           ],
         ),
       ),

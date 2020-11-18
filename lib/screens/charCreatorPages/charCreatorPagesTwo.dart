@@ -18,6 +18,7 @@ TextEditingController _constitucion = TextEditingController();
 TextEditingController _inteligencia = TextEditingController();
 TextEditingController _sabiduria = TextEditingController();
 TextEditingController _carisma = TextEditingController();
+TextEditingController _oproficiencias = TextEditingController();
 
 class CharCreatorPagesTwo extends StatelessWidget {
   final UserData userData;
@@ -236,6 +237,7 @@ class _MyCharCreatorPagesTwoState extends State<MyCharCreatorPagesTwo> {
                               2,
                           child: TextFormField(
                             controller: _velocidad,
+                            keyboardType: TextInputType.phone,
                             inputFormatters: [
                               FilteringTextInputFormatter.allow(
                                   RegExp(r'^[0-9]+$'))
@@ -257,6 +259,58 @@ class _MyCharCreatorPagesTwoState extends State<MyCharCreatorPagesTwo> {
                                   EdgeInsets.symmetric(vertical: 20),
                               hintText: "Velocidad",
                               hintStyle: TextStyle(fontSize: 30),
+                              filled: true,
+                              fillColor: Color(0xFFEFEFEF),
+                              hoverColor: Color(0xFFEFEFEF),
+                              focusColor: Color(0xFFEFEFEF),
+                              border: OutlineInputBorder(
+                                borderSide: BorderSide.none,
+                                borderRadius: BorderRadius.all(
+                                  Radius.circular(10),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(10),
+                    child: Text(
+                      "Otras proficiencias",
+                      style: TextStyle(
+                        color: Palette.fontColor,
+                        fontSize: 30,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                  Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 20),
+                    child: Row(
+                      children: [
+                        Container(
+                          width: MediaQuery.of(context).size.width - 100,
+                          child: TextFormField(
+                            controller: _oproficiencias,
+                            keyboardType: TextInputType.multiline,
+                            minLines: 2,
+                            maxLines: null,
+                            textAlign: TextAlign.left,
+                            style: TextStyle(
+                              fontSize: 18,
+                              color: Palette.fontColor,
+                            ),
+                            decoration: InputDecoration(
+                              counterText: "",
+                              contentPadding: EdgeInsets.symmetric(
+                                vertical: 20,
+                                horizontal: 10,
+                              ),
+                              hintText:
+                                  "Escribe el resto de proficiencias\nen armadura, armas,\nherramientas...",
+                              hintStyle: TextStyle(fontSize: 18),
                               filled: true,
                               fillColor: Color(0xFFEFEFEF),
                               hoverColor: Color(0xFFEFEFEF),
@@ -332,6 +386,7 @@ class SquaredTextFormField extends StatelessWidget {
                 Center(
                   child: TextFormField(
                     controller: controller,
+                    keyboardType: TextInputType.phone,
                     inputFormatters: [
                       FilteringTextInputFormatter.allow(RegExp(r'^[0-9+-]+$'))
                     ],

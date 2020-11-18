@@ -1,72 +1,14 @@
 import 'package:dndmin/screens/charCreator.dart';
-import 'package:dndmin/screens/charCreatorPages/charCreatorPagesFour.dart';
-import 'package:dndmin/screens/charCreatorPages/charCreatorPagesTwo.dart';
+import 'package:dndmin/screens/charCreatorPages/charCreatorPagesThree.dart';
 import 'package:dndmin/ui/charCreatorPages/charCreatorPage.dart';
 import 'package:flutter/material.dart';
 import 'package:dndmin/backend/userData.dart';
 import 'package:dndmin/config/palette.dart';
 import 'package:flutter/services.dart';
 
-List<bool> characteristicsSelected = [
-  false,
-  false,
-  false,
-  false,
-  false,
-  false,
-];
-List<String> characteristicsNames = [
-  "Fuerza",
-  "Destreza",
-  "Constitución",
-  "Inteligencia",
-  "Sabiduría",
-  "Carisma",
-];
-List<bool> abiliesSelected = [
-  false,
-  false,
-  false,
-  false,
-  false,
-  false,
-  false,
-  false,
-  false,
-  false,
-  false,
-  false,
-  false,
-  false,
-  false,
-  false,
-  false,
-  false,
-];
-List<String> abiliesNames = [
-  "Acrobacias",
-  "Conocimiento Arcano",
-  "Atletismo",
-  "Engaño",
-  "Historia",
-  "Interpretación",
-  "Intimidación",
-  "Investigación",
-  "Juego de Manos",
-  "Medicina",
-  "Naturaleza",
-  "Percepción",
-  "Perspicacia",
-  "Persuasión",
-  "Religión",
-  "Sigilo",
-  "Supervivencia",
-  "Trato con Animales",
-];
-
-class CharCreatorPagesThree extends StatelessWidget {
+class CharCreatorPagesFour extends StatelessWidget {
   final UserData userData;
-  CharCreatorPagesThree({@required this.userData});
+  CharCreatorPagesFour({@required this.userData});
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -75,24 +17,24 @@ class CharCreatorPagesThree extends StatelessWidget {
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: MyCharCreatorPagesThree(
+      home: MyCharCreatorPagesFour(
         userData: userData,
       ),
     );
   }
 }
 
-class MyCharCreatorPagesThree extends StatefulWidget {
+class MyCharCreatorPagesFour extends StatefulWidget {
   final UserData userData;
-  MyCharCreatorPagesThree({@required this.userData});
+  MyCharCreatorPagesFour({@required this.userData});
   @override
-  _MyCharCreatorPagesThreeState createState() =>
-      _MyCharCreatorPagesThreeState(userData: userData);
+  _MyCharCreatorPagesFourState createState() =>
+      _MyCharCreatorPagesFourState(userData: userData);
 }
 
-class _MyCharCreatorPagesThreeState extends State<MyCharCreatorPagesThree> {
+class _MyCharCreatorPagesFourState extends State<MyCharCreatorPagesFour> {
   final UserData userData;
-  _MyCharCreatorPagesThreeState({@required this.userData});
+  _MyCharCreatorPagesFourState({@required this.userData});
   @override
   Widget build(BuildContext context) {
     SystemChrome.setPreferredOrientations([
@@ -102,8 +44,8 @@ class _MyCharCreatorPagesThreeState extends State<MyCharCreatorPagesThree> {
     return Scaffold(
       resizeToAvoidBottomInset: true,
       body: CharCreatorPage(
-        nextPage: () => runApp(CharCreatorPagesFour(userData: userData)),
-        prevPage: () => runApp(CharCreatorPagesTwo(userData: userData)),
+        nextPage: () => runApp(CharCreator(userData: userData)),
+        prevPage: () => runApp(CharCreatorPagesThree(userData: userData)),
         child: Column(
           children: [
             Align(
@@ -115,7 +57,7 @@ class _MyCharCreatorPagesThreeState extends State<MyCharCreatorPagesThree> {
                   right: 20,
                 ),
                 child: Text(
-                  "Proficiencias",
+                  "Descripción",
                   style: TextStyle(
                     color: Palette.fontColor,
                     fontSize: 35,
@@ -136,66 +78,12 @@ class _MyCharCreatorPagesThreeState extends State<MyCharCreatorPagesThree> {
             Padding(
               padding: const EdgeInsets.only(left: 20, right: 20, bottom: 10),
               child: Text(
-                "Selecciona las habilidades y caracteristicas de salvación en las que tienes proficiencia.",
+                "Introduce la descripción de tu personaje: personalidad, apariencia, motivaciones, ideales y defectos",
                 style: TextStyle(
                   color: Palette.fontColor,
                   fontSize: 16,
                 ),
               ),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(10),
-              child: Text(
-                "Tiradas de salvación",
-                style: TextStyle(
-                  color: Palette.fontColor,
-                  fontSize: 30,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-            ),
-            Builder(
-              builder: (BuildContext context) {
-                List<Widget> tickboxes = [];
-                for (int i = 0; i < characteristicsNames.length; i++)
-                  tickboxes.add(TickableSkillCard(
-                    text: characteristicsNames[i],
-                    selected: characteristicsSelected[i],
-                    onSelected: () => setState(() {
-                      characteristicsSelected[i] = !characteristicsSelected[i];
-                    }),
-                  ));
-                return Column(
-                  children: tickboxes,
-                );
-              },
-            ),
-            Padding(
-              padding: const EdgeInsets.all(10),
-              child: Text(
-                "Habilidades",
-                style: TextStyle(
-                  color: Palette.fontColor,
-                  fontSize: 30,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-            ),
-            Builder(
-              builder: (BuildContext context) {
-                List<Widget> tickboxes = [];
-                for (int i = 0; i < abiliesNames.length; i++)
-                  tickboxes.add(TickableSkillCard(
-                    text: abiliesNames[i],
-                    selected: abiliesSelected[i],
-                    onSelected: () => setState(() {
-                      abiliesSelected[i] = !abiliesSelected[i];
-                    }),
-                  ));
-                return Column(
-                  children: tickboxes,
-                );
-              },
             ),
           ],
         ),

@@ -1,5 +1,5 @@
 import 'dart:convert';
-import 'dart:ffi';
+import 'package:dndmin/extensions/toBool.dart';
 import 'package:http/http.dart' as http;
 
 class Stats {
@@ -61,12 +61,12 @@ class PlayerStats {
   String inteligencia;
   String sabiduria;
   String carisma;
-  /*bool profFuerza;
+  bool profFuerza;
   bool profDestreza;
   bool profConstitucion;
   bool profInteligencia;
   bool profSabiduria;
-  bool profCarisma;*/
+  bool profCarisma;
   int profBonus;
 
   PlayerStats(
@@ -90,12 +90,12 @@ class PlayerStats {
       this.inteligencia,
       this.sabiduria,
       this.carisma,
-      /*this.profFuerza,
+      this.profFuerza,
       this.profDestreza,
       this.profConstitucion,
       this.profInteligencia,
       this.profSabiduria,
-      this.profCarisma,*/
+      this.profCarisma,
       this.profBonus});
 
   Future<bool> increaseLife(String uToken, int id) async {
@@ -159,12 +159,12 @@ class PlayerStats {
     inteligencia = json['Inteligencia'];
     sabiduria = json['Sabiduria'];
     carisma = json['Carisma'];
-    /*profFuerza = json['profFuerza'];
-    profDestreza = json['profDestreza'];
-    profConstitucion = json['profConstitucion'];
-    profInteligencia = json['profInteligencia'];
-    profSabiduria = json['profSabiduria'];
-    profCarisma = json['profCarisma'];*/
+    profFuerza = json['profFuerza'].toString().toBool();
+    profDestreza = json['profDestreza'].toString().toBool();
+    profConstitucion = json['profConstitucion'].toString().toBool();
+    profInteligencia = json['profInteligencia'].toString().toBool();
+    profSabiduria = json['profSabiduria'].toString().toBool();
+    profCarisma = json['profCarisma'].toString().toBool();
     profBonus = ((int.parse(json['Nivel']) / 4) + 1).ceil();
   }
 
@@ -190,12 +190,12 @@ class PlayerStats {
     data['Inteligencia'] = this.inteligencia;
     data['Sabiduria'] = this.sabiduria;
     data['Carisma'] = this.carisma;
-    /*data['profFuerza'] = this.profFuerza;
+    data['profFuerza'] = this.profFuerza;
     data['profDestreza'] = this.profDestreza;
     data['profConstitucion'] = this.profConstitucion;
     data['profInteligencia'] = this.profInteligencia;
     data['profSabiduria'] = this.profSabiduria;
-    data['profCarisma'] = this.profCarisma;*/
+    data['profCarisma'] = this.profCarisma;
     return data;
   }
 }

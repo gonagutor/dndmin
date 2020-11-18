@@ -89,15 +89,18 @@ class FirstPage extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
                   RoundedSquareCard(
+                    proficient: playerStats.profFuerza,
                     topText: 'Fuerza',
                     centerText: playerStats.fuerza.getModifier().modToString(),
                   ),
                   RoundedSquareCard(
+                    proficient: playerStats.profDestreza,
                     topText: 'Destreza',
                     centerText:
                         playerStats.destreza.getModifier().modToString(),
                   ),
                   RoundedSquareCard(
+                    proficient: playerStats.profConstitucion,
                     topText: 'Constitución',
                     centerText:
                         playerStats.constitucion.getModifier().modToString(),
@@ -111,16 +114,19 @@ class FirstPage extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
                   RoundedSquareCard(
+                    proficient: playerStats.profInteligencia,
                     topText: 'Inteligencia',
                     centerText:
                         playerStats.inteligencia.getModifier().modToString(),
                   ),
                   RoundedSquareCard(
+                    proficient: playerStats.profSabiduria,
                     topText: 'Sabiduría',
                     centerText:
                         playerStats.sabiduria.getModifier().modToString(),
                   ),
                   RoundedSquareCard(
+                    proficient: playerStats.profCarisma,
                     topText: 'Carisma',
                     centerText: playerStats.carisma.getModifier().modToString(),
                   ),
