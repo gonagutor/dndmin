@@ -50,7 +50,7 @@ List<String> itemNamesCla = [
   "Hechicero",
 ];
 List<String> itemNamesRace = [
-  "EnanoM",
+  "Enano",
   "Elfo",
   "Mediano",
   "Dracónido",

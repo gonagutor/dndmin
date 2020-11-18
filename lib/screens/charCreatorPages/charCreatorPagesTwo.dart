@@ -1,11 +1,10 @@
 import 'package:dndmin/fonts/rpgAwesomeIcons.dart';
-import 'package:dndmin/screens/charCreator.dart';
 import 'package:dndmin/screens/charCreatorPages/charCreatorPagesOne.dart';
+import 'package:dndmin/screens/charCreatorPages/charCreatorPagesThree.dart';
 import 'package:dndmin/ui/charCreatorPages/charCreatorPage.dart';
 import 'package:flutter/material.dart';
 import 'package:dndmin/backend/userData.dart';
 import 'package:dndmin/config/palette.dart';
-import 'package:dndmin/screens/charSelector.dart';
 import 'package:flutter/services.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
@@ -62,7 +61,7 @@ class _MyCharCreatorPagesTwoState extends State<MyCharCreatorPagesTwo> {
       body: CharCreatorPage(
         nextPage: () {
           if (_pageTwoKey.currentState.validate())
-            runApp(CharCreator(userData: userData));
+            runApp(CharCreatorPagesThree(userData: userData));
         },
         prevPage: () => runApp(CharCreatorPagesOne(userData: userData)),
         child: Column(
