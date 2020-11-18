@@ -6,6 +6,12 @@ import 'package:dndmin/backend/userData.dart';
 import 'package:dndmin/config/palette.dart';
 import 'package:flutter/services.dart';
 
+TextEditingController _apariencia = TextEditingController();
+TextEditingController _personalidad = TextEditingController();
+TextEditingController _ideales = TextEditingController();
+TextEditingController _vinculos = TextEditingController();
+TextEditingController _defectos = TextEditingController();
+
 class CharCreatorPagesFour extends StatelessWidget {
   final UserData userData;
   CharCreatorPagesFour({@required this.userData});
@@ -35,6 +41,7 @@ class MyCharCreatorPagesFour extends StatefulWidget {
 class _MyCharCreatorPagesFourState extends State<MyCharCreatorPagesFour> {
   final UserData userData;
   _MyCharCreatorPagesFourState({@required this.userData});
+  final _pageFourKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
     SystemChrome.setPreferredOrientations([
@@ -44,7 +51,10 @@ class _MyCharCreatorPagesFourState extends State<MyCharCreatorPagesFour> {
     return Scaffold(
       resizeToAvoidBottomInset: true,
       body: CharCreatorPage(
-        nextPage: () => runApp(CharCreator(userData: userData)),
+        nextPage: () {
+          if (_pageFourKey.currentState.validate())
+            runApp(CharCreator(userData: userData));
+        },
         prevPage: () => runApp(CharCreatorPagesThree(userData: userData)),
         child: Column(
           children: [
@@ -85,6 +95,63 @@ class _MyCharCreatorPagesFourState extends State<MyCharCreatorPagesFour> {
                 ),
               ),
             ),
+            Form(
+              key: _pageFourKey,
+              child: Column(
+                children: [
+                  LongTextInput(
+                    controller: _apariencia,
+                    minLines: 2,
+                    label: "Apariencia",
+                    hintText: "Introduce tu apariencia",
+                    validator: (value) {
+                      if (value.isEmpty) return "Introduce tu aparaiencia";
+                      return null;
+                    },
+                  ),
+                  LongTextInput(
+                    controller: _personalidad,
+                    minLines: 2,
+                    label: "Personalidad",
+                    hintText: "Introduce tu personalidad",
+                    validator: (value) {
+                      if (value.isEmpty) return "Introduce tu personalidad";
+                      return null;
+                    },
+                  ),
+                  LongTextInput(
+                    controller: _ideales,
+                    minLines: 2,
+                    label: "Ideales",
+                    hintText: "Introduce tus Ideales",
+                    validator: (value) {
+                      if (value.isEmpty) return "Introduce tu personalidad";
+                      return null;
+                    },
+                  ),
+                  LongTextInput(
+                    controller: _vinculos,
+                    minLines: 2,
+                    label: "Vinculos",
+                    hintText: "Introduce tus Vinculos",
+                    validator: (value) {
+                      if (value.isEmpty) return "Introduce tu personalidad";
+                      return null;
+                    },
+                  ),
+                  LongTextInput(
+                    controller: _defectos,
+                    minLines: 2,
+                    label: "Defectos",
+                    hintText: "Introduce tus Defectos",
+                    validator: (value) {
+                      if (value.isEmpty) return "Introduce tu personalidad";
+                      return null;
+                    },
+                  ),
+                ],
+              ),
+            ),
           ],
         ),
       ),
@@ -92,116 +159,76 @@ class _MyCharCreatorPagesFourState extends State<MyCharCreatorPagesFour> {
   }
 }
 
-class TickableSkillCard extends StatelessWidget {
-  final bool selected;
-  final Function onSelected;
-  final String text;
-  const TickableSkillCard({
-    @required this.selected,
-    @required this.onSelected,
-    @required this.text,
+class LongTextInput extends StatelessWidget {
+  final String label;
+  final String hintText;
+  final int minLines;
+  final String Function(String) validator;
+  final TextEditingController controller;
+  LongTextInput({
+    this.minLines = 1,
+    this.validator,
+    @required this.label,
+    @required this.hintText,
+    this.controller,
   });
-
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 20),
-      child: Container(
-        height: 70,
-        decoration: BoxDecoration(
-          color: Palette.bottomGradient,
-          borderRadius: BorderRadius.all(Palette.standardRadius),
-          gradient: LinearGradient(
-            begin: Alignment.topRight,
-            end: Alignment.bottomLeft,
-            colors: [
-              Palette.topGradient,
-              Palette.bottomGradient,
-            ],
-            stops: [
-              0.0,
-              1.0,
-            ],
+    return Column(
+      children: [
+        Padding(
+          padding: const EdgeInsets.all(10),
+          child: Text(
+            label,
+            style: TextStyle(
+              color: Palette.fontColor,
+              fontSize: 30,
+              fontWeight: FontWeight.bold,
+            ),
           ),
-          boxShadow: <BoxShadow>[
-            BoxShadow(
-              color: Color(0xFF000000).withOpacity(0.5),
-              offset: Offset(0, -0.5), //(x,y)
-              spreadRadius: 0.1,
-              blurRadius: 5,
-            ),
-          ],
         ),
-        child: Row(
-          children: [
-            Container(
-              width: 70,
-              height: 70,
-              decoration: BoxDecoration(
-                color: Palette.secondaryColor,
-                borderRadius: BorderRadius.all(Palette.standardRadius),
-              ),
-              child: Center(
-                child: CustomCheckBox(
-                  selected: selected,
-                  onSelected: onSelected,
-                ),
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Center(
-                child: Container(
-                  width: (MediaQuery.of(context).size.width - 100) * 2 / 3,
-                  child: SingleChildScrollView(
-                    scrollDirection: Axis.horizontal,
-                    child: Text(
-                      text,
-                      style: TextStyle(fontSize: 30, color: Colors.white),
+        Padding(
+          padding: EdgeInsets.symmetric(horizontal: 20),
+          child: Row(
+            children: [
+              Container(
+                width: MediaQuery.of(context).size.width - 100,
+                child: TextFormField(
+                  controller: controller,
+                  validator: validator,
+                  keyboardType: TextInputType.multiline,
+                  minLines: minLines,
+                  maxLines: null,
+                  textAlign: TextAlign.left,
+                  style: TextStyle(
+                    fontSize: 18,
+                    color: Palette.fontColor,
+                  ),
+                  decoration: InputDecoration(
+                    counterText: "",
+                    contentPadding: EdgeInsets.symmetric(
+                      vertical: 20,
+                      horizontal: 10,
+                    ),
+                    hintText: hintText,
+                    hintStyle: TextStyle(fontSize: 18),
+                    filled: true,
+                    fillColor: Color(0xFFEFEFEF),
+                    hoverColor: Color(0xFFEFEFEF),
+                    focusColor: Color(0xFFEFEFEF),
+                    border: OutlineInputBorder(
+                      borderSide: BorderSide.none,
+                      borderRadius: BorderRadius.all(
+                        Radius.circular(10),
+                      ),
                     ),
                   ),
                 ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
-      ),
-    );
-  }
-}
-
-class CustomCheckBox extends StatelessWidget {
-  final double height;
-  final double width;
-  final bool selected;
-  final Function onSelected;
-  CustomCheckBox({
-    this.height = 48,
-    this.width = 48,
-    @required this.selected,
-    @required this.onSelected,
-  });
-  @override
-  Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: onSelected,
-      child: AnimatedContainer(
-        duration: Duration(milliseconds: 200),
-        curve: Curves.easeInOut,
-        height: height,
-        width: width,
-        decoration: BoxDecoration(
-          gradient: (selected) ? Palette.standardGradient : null,
-          borderRadius: BorderRadius.all(Radius.circular(10)),
-          border: Border.all(color: Colors.white, width: 4),
-        ),
-        child: (selected)
-            ? Icon(
-                Icons.done,
-                color: Colors.white,
-              )
-            : null,
-      ),
+      ],
     );
   }
 }
