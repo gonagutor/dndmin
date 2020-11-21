@@ -1,6 +1,7 @@
 import 'package:dndmin/backend/classDescriptions.dart';
 import 'package:dndmin/backend/descriptions.dart';
 import 'package:dndmin/ui/charDescription/charClassDescriptor.dart';
+import 'package:dndmin/ui/utilities/customLoadingIndicator.dart';
 import 'package:flutter/material.dart';
 import 'package:dndmin/config/palette.dart';
 import 'package:dndmin/backend/userData.dart';
@@ -210,11 +211,9 @@ class _MyCharDescriptionState extends State<MyCharDescription> {
                                     );
                                   } else {
                                     if ((descripciones.id == '0')) {
-                                      return Positioned(
-                                        left: 0,
-                                        right: 0,
-                                        top: 120,
-                                        bottom: 90,
+                                      return Container(
+                                        width: 100,
+                                        height: 100,
                                         child: Stack(
                                           children: <Widget>[
                                             Center(
@@ -400,11 +399,9 @@ class _MyCharDescriptionState extends State<MyCharDescription> {
                                     );
                                   } else {
                                     if (descripciones.id == '0') {
-                                      return Positioned(
-                                        left: 0,
-                                        right: 0,
-                                        top: 120,
-                                        bottom: 90,
+                                      return Container(
+                                        width: 100,
+                                        height: 100,
                                         child: Stack(
                                           children: <Widget>[
                                             Center(
@@ -468,7 +465,11 @@ class _MyCharDescriptionState extends State<MyCharDescription> {
                                   }
                                 },
                               ),
-                              CharClassDescriptor(userData: userData),
+                              Padding(
+                                padding:
+                                    const EdgeInsets.symmetric(vertical: 8),
+                                child: CharClassDescriptor(userData: userData),
+                              ),
                             ],
                           ),
                         ),

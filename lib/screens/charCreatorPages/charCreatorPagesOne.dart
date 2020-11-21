@@ -140,8 +140,12 @@ class _MyCharCreatorPagesOneState extends State<MyCharCreatorPagesOne> {
             if (_verifiedCla && _verifiedRace) {
               PlayerCreator.clase = _itemNamesCla[_charClass - 1];
               PlayerCreator.race = _itemNamesRace[_charRace - 1];
-              PlayerCreator.nombre = _charName.text;
-              PlayerCreator.subNombre = _charSubName.text;
+              PlayerCreator.nombre = _charName.text
+                  .replaceAll('\'', '\\\'')
+                  .replaceAll("\"", "\\\"");
+              PlayerCreator.subNombre = _charSubName.text
+                  .replaceAll('\'', '\\\'')
+                  .replaceAll("\"", "\\\"");
               runApp(CharCreatorPagesTwo(userData: userData));
             }
           }

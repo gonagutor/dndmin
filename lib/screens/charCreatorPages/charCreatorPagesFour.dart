@@ -70,12 +70,24 @@ class _MyCharCreatorPagesFourState extends State<MyCharCreatorPagesFour> {
                 child: Text("Adelante, crea mi personaje."),
                 onPressed: () async {
                   if (_pageFourKey.currentState.validate()) {
-                    PlayerCreator.apariencia = _apariencia.text;
-                    PlayerCreator.personalidad = _personalidad.text;
-                    PlayerCreator.ideales = _ideales.text;
-                    PlayerCreator.vinculos = _vinculos.text;
-                    PlayerCreator.defectos = _defectos.text;
-                    PlayerCreator.historia = _historia.text;
+                    PlayerCreator.apariencia = _apariencia.text
+                        .replaceAll('\'', '\\\'')
+                        .replaceAll("\"", "\\\"");
+                    PlayerCreator.personalidad = _personalidad.text
+                        .replaceAll('\'', '\\\'')
+                        .replaceAll("\"", "\\\"");
+                    PlayerCreator.ideales = _ideales.text
+                        .replaceAll('\'', '\\\'')
+                        .replaceAll("\"", "\\\"");
+                    PlayerCreator.vinculos = _vinculos.text
+                        .replaceAll('\'', '\\\'')
+                        .replaceAll("\"", "\\\"");
+                    PlayerCreator.defectos = _defectos.text
+                        .replaceAll('\'', '\\\'')
+                        .replaceAll("\"", "\\\"");
+                    PlayerCreator.historia = _historia.text
+                        .replaceAll('\'', '\\\'')
+                        .replaceAll("\"", "\\\"");
                     showDialog(
                       barrierDismissible: false,
                       context: context,
@@ -277,6 +289,7 @@ class LongTextInput extends StatelessWidget {
                   controller: controller,
                   validator: validator,
                   keyboardType: TextInputType.multiline,
+                  textInputAction: TextInputAction.newline,
                   minLines: minLines,
                   maxLines: null,
                   textAlign: TextAlign.left,

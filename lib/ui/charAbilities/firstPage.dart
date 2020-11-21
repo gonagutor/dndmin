@@ -15,24 +15,26 @@ class AbilitiesFirstPage extends StatelessWidget {
         builder: (BuildContext context) {
           List<Widget> abList = [];
           List<Widget> abListSub = [];
-          abListSub.add(
-            Padding(
-              padding: EdgeInsets.all(20),
-              child: Text(
-                'Habilidades Sub Raza',
-                style: TextStyle(
-                  fontSize: 30,
-                  color: Palette.fontColor,
-                  fontWeight: FontWeight.bold,
+          if (raceAbilities.subRaceAbilities != null) {
+            abListSub.add(
+              Padding(
+                padding: EdgeInsets.all(20),
+                child: Text(
+                  'Habilidades Sub Raza',
+                  style: TextStyle(
+                    fontSize: 30,
+                    color: Palette.fontColor,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
               ),
-            ),
-          );
-          for (int i = 0; i < raceAbilities.subRaceAbilities.length; i++)
-            abListSub.add(ExpandableItem(
-              description: raceAbilities.subRaceAbilities[i].description,
-              name: raceAbilities.subRaceAbilities[i].name,
-            ));
+            );
+            for (int i = 0; i < raceAbilities.subRaceAbilities.length; i++)
+              abListSub.add(ExpandableItem(
+                description: raceAbilities.subRaceAbilities[i].description,
+                name: raceAbilities.subRaceAbilities[i].name,
+              ));
+          }
           abList.add(
             Padding(
               padding: EdgeInsets.only(bottom: 20, left: 20, right: 20),

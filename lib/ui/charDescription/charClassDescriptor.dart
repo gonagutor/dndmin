@@ -55,7 +55,30 @@ class CharClassDescriptor extends StatelessWidget {
           );
         } else {
           if (descripcionesClases.id == '0') {
-            return CustomLoadingIndicator();
+            return Container(
+              width: 100,
+              height: 100,
+              child: Stack(
+                children: <Widget>[
+                  Center(
+                    child: Container(
+                      height: 100,
+                      width: 100,
+                      child: CircularProgressIndicator(),
+                    ),
+                  ),
+                  Center(
+                    child: Text(
+                      'Cargando...',
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 16,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            );
           }
           return Column(
             children: [

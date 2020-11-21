@@ -73,7 +73,9 @@ class _MyCharCreatorPagesTwoState extends State<MyCharCreatorPagesTwo> {
             PlayerCreator.inteligencia = int.parse(_inteligencia.text);
             PlayerCreator.sabiduria = int.parse(_sabiduria.text);
             PlayerCreator.carisma = int.parse(_carisma.text);
-            PlayerCreator.proficiencias = _oproficiencias.text;
+            PlayerCreator.proficiencias = _oproficiencias.text
+                .replaceAll('\'', '\\\'')
+                .replaceAll("\"", "\\\"");
             runApp(CharCreatorPagesThree(userData: userData));
           }
         },
@@ -308,6 +310,7 @@ class _MyCharCreatorPagesTwoState extends State<MyCharCreatorPagesTwo> {
                           child: TextFormField(
                             controller: _oproficiencias,
                             keyboardType: TextInputType.multiline,
+                            textInputAction: TextInputAction.newline,
                             minLines: 2,
                             maxLines: null,
                             textAlign: TextAlign.left,
