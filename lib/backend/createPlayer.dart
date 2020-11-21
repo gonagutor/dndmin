@@ -1,3 +1,4 @@
+import 'dart:developer';
 import "package:http/http.dart" as http;
 
 class PlayerCreator {
@@ -26,7 +27,7 @@ class PlayerCreator {
   static String historia;
 
   static Future<bool> createCharacter(String uToken) async {
-    var url = "https://api.dndmin.me/characters/create-charater/";
+    var url = "https://api.dndmin.me/characters/create-new-character/";
     var request = "?token=" +
         uToken +
         "&clase=" +
@@ -47,7 +48,7 @@ class PlayerCreator {
         inteligencia.toString() +
         "&sabiduria=" +
         sabiduria.toString() +
-        "&carisma" +
+        "&carisma=" +
         carisma.toString() +
         "&iniciativa=" +
         iniciativa.toString() +
@@ -63,11 +64,11 @@ class PlayerCreator {
         proficienciasSalv[2].toString() +
         "&salvModInteligencia=" +
         proficienciasSalv[3].toString() +
-        "&profSalvSabiduria=" +
+        "&salvModSabiduria=" +
         proficienciasSalv[4].toString() +
-        "&profSalvCarisma" +
+        "&salvModCarisma=" +
         proficienciasSalv[5].toString() +
-        "&profAcrobacia=" +
+        "&profAcrobacias=" +
         proficienciasHab[0].toString() +
         "&profConArcano=" +
         proficienciasHab[1].toString() +
@@ -115,7 +116,8 @@ class PlayerCreator {
         defectos +
         "&historia=" +
         historia;
-    var response = await http.get(url + request);
+    var completeUrl = url + request;
+    var response = await http.get(completeUrl);
     if (response.statusCode == 200) {
       if (response.body == "Successful.")
         return true;
