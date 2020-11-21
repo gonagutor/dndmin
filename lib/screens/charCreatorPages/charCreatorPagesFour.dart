@@ -69,62 +69,57 @@ class _MyCharCreatorPagesFourState extends State<MyCharCreatorPagesFour> {
               FlatButton(
                 child: Text("Adelante, crea mi personaje."),
                 onPressed: () async {
-                  FlatButton(
-                    child: Text("Adelante, crea mi personaje."),
-                    onPressed: () async {
-                      if (_pageFourKey.currentState.validate()) {
-                        PlayerCreator.apariencia = _apariencia.text;
-                        PlayerCreator.personalidad = _personalidad.text;
-                        PlayerCreator.ideales = _ideales.text;
-                        PlayerCreator.vinculos = _vinculos.text;
-                        PlayerCreator.defectos = _defectos.text;
-                        PlayerCreator.historia = _historia.text;
-                        showDialog(
-                          barrierDismissible: false,
-                          context: context,
-                          builder: (_) => AlertDialog(
-                            title: Text('Creando Personaje',
-                                textAlign: TextAlign.center),
-                            content: Container(
-                              height: 100,
-                              width: 100,
-                              child: Align(
-                                alignment: Alignment.center,
-                                child: Container(
-                                  width: 50,
-                                  height: 50,
-                                  child: CircularProgressIndicator(),
-                                ),
-                              ),
+                  if (_pageFourKey.currentState.validate()) {
+                    PlayerCreator.apariencia = _apariencia.text;
+                    PlayerCreator.personalidad = _personalidad.text;
+                    PlayerCreator.ideales = _ideales.text;
+                    PlayerCreator.vinculos = _vinculos.text;
+                    PlayerCreator.defectos = _defectos.text;
+                    PlayerCreator.historia = _historia.text;
+                    showDialog(
+                      barrierDismissible: false,
+                      context: context,
+                      builder: (_) => AlertDialog(
+                        title: Text('Creando Personaje',
+                            textAlign: TextAlign.center),
+                        content: Container(
+                          height: 100,
+                          width: 100,
+                          child: Align(
+                            alignment: Alignment.center,
+                            child: Container(
+                              width: 50,
+                              height: 50,
+                              child: CircularProgressIndicator(),
                             ),
                           ),
-                        );
-                        bool keep = await PlayerCreator.createCharacter(
-                            userData.authToken);
-                        Navigator.of(context).pop();
-                        if (!keep) {
-                          showDialog(
-                            context: context,
-                            builder: (_) => AlertDialog(
-                              title: Text('Oops... '),
-                              content: Text(
-                                  'Se ha producido un error al crear el personaje'),
-                              actions: [
-                                FlatButton(
-                                  onPressed: () {
-                                    Navigator.of(context).pop();
-                                  },
-                                  child: Text("Okay"),
-                                ),
-                              ],
+                        ),
+                      ),
+                    );
+                    bool keep =
+                        await PlayerCreator.createCharacter(userData.authToken);
+                    Navigator.of(context).pop();
+                    if (!keep) {
+                      showDialog(
+                        context: context,
+                        builder: (_) => AlertDialog(
+                          title: Text('Oops... '),
+                          content: Text(
+                              'Se ha producido un error al crear el personaje'),
+                          actions: [
+                            FlatButton(
+                              onPressed: () {
+                                Navigator.of(context).pop();
+                              },
+                              child: Text("Okay"),
                             ),
-                          );
-                        } else {
-                          runApp(CharCreator(userData: userData));
-                        }
-                      }
-                    },
-                  );
+                          ],
+                        ),
+                      );
+                    } else {
+                      runApp(CharCreator(userData: userData));
+                    }
+                  }
                 },
               ),
             ],
