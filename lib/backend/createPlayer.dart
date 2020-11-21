@@ -47,6 +47,8 @@ class PlayerCreator {
         inteligencia.toString() +
         "&sabiduria=" +
         sabiduria.toString() +
+        "&carisma" +
+        carisma.toString() +
         "&iniciativa=" +
         iniciativa.toString() +
         "&CA=" +
