@@ -1,6 +1,6 @@
 import 'package:dndmin/backend/createPlayer.dart';
 import 'package:dndmin/screens/charCreator.dart';
-import 'package:dndmin/screens/charCreatorPages/charCreatorPagesThree.dart';
+import 'package:dndmin/screens/charSelector.dart';
 import 'package:dndmin/ui/charCreatorPages/charCreatorPage.dart';
 import 'package:flutter/material.dart';
 import 'package:dndmin/backend/userData.dart';
@@ -53,58 +53,84 @@ class _MyCharCreatorPagesFourState extends State<MyCharCreatorPagesFour> {
     return Scaffold(
       resizeToAvoidBottomInset: true,
       body: CharCreatorPage(
-        nextPage: () async {
-          if (_pageFourKey.currentState.validate()) {
-            PlayerCreator.apariencia = _apariencia.text;
-            PlayerCreator.personalidad = _personalidad.text;
-            PlayerCreator.ideales = _ideales.text;
-            PlayerCreator.vinculos = _vinculos.text;
-            PlayerCreator.defectos = _defectos.text;
-            PlayerCreator.historia = _historia.text;
-            showDialog(
-              barrierDismissible: false,
-              context: context,
-              builder: (_) => AlertDialog(
-                title: Text('Creando Personaje', textAlign: TextAlign.center),
-                content: Container(
-                  height: 100,
-                  width: 100,
-                  child: Align(
-                    alignment: Alignment.center,
-                    child: Container(
-                      width: 50,
-                      height: 50,
-                      child: CircularProgressIndicator(),
-                    ),
-                  ),
-                ),
+        nextPage: () => showDialog(
+          context: context,
+          builder: (_) => AlertDialog(
+            title: Text('Atención'),
+            content: Text(
+                'Estás apunto de crear tu personaje, puedes revisar la información si pulsas no ¿Estas Listo?'),
+            actions: [
+              FlatButton(
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+                child: Text("No"),
               ),
-            );
-            bool keep = await PlayerCreator.createCharacter(userData.authToken);
-            Navigator.of(context).pop();
-            if (!keep) {
-              showDialog(
-                context: context,
-                builder: (_) => AlertDialog(
-                  title: Text('Oops... '),
-                  content:
-                      Text('Se ha producido un error al crear el personaje'),
-                  actions: [
-                    FlatButton(
-                      onPressed: () {
+              FlatButton(
+                child: Text("Adelante, crea mi personaje."),
+                onPressed: () async {
+                  FlatButton(
+                    child: Text("Adelante, crea mi personaje."),
+                    onPressed: () async {
+                      if (_pageFourKey.currentState.validate()) {
+                        PlayerCreator.apariencia = _apariencia.text;
+                        PlayerCreator.personalidad = _personalidad.text;
+                        PlayerCreator.ideales = _ideales.text;
+                        PlayerCreator.vinculos = _vinculos.text;
+                        PlayerCreator.defectos = _defectos.text;
+                        PlayerCreator.historia = _historia.text;
+                        showDialog(
+                          barrierDismissible: false,
+                          context: context,
+                          builder: (_) => AlertDialog(
+                            title: Text('Creando Personaje',
+                                textAlign: TextAlign.center),
+                            content: Container(
+                              height: 100,
+                              width: 100,
+                              child: Align(
+                                alignment: Alignment.center,
+                                child: Container(
+                                  width: 50,
+                                  height: 50,
+                                  child: CircularProgressIndicator(),
+                                ),
+                              ),
+                            ),
+                          ),
+                        );
+                        bool keep = await PlayerCreator.createCharacter(
+                            userData.authToken);
                         Navigator.of(context).pop();
-                      },
-                      child: Text("Okay"),
-                    ),
-                  ],
-                ),
-              );
-            } else {
-              runApp(CharCreator(userData: userData));
-            }
-          }
-        },
-        prevPage: () => runApp(CharCreatorPagesThree(userData: userData)),
+                        if (!keep) {
+                          showDialog(
+                            context: context,
+                            builder: (_) => AlertDialog(
+                              title: Text('Oops... '),
+                              content: Text(
+                                  'Se ha producido un error al crear el personaje'),
+                              actions: [
+                                FlatButton(
+                                  onPressed: () {
+                                    Navigator.of(context).pop();
+                                  },
+                                  child: Text("Okay"),
+                                ),
+                              ],
+                            ),
+                          );
+                        } else {
+                          runApp(CharCreator(userData: userData));
+                        }
+                      }
+                    },
+                  );
+                },
+              ),
+            ],
+          ),
+        ),
+        prevPage: () => runApp(CharSelector(userData: userData)),
         child: Column(
           children: [
             Align(
