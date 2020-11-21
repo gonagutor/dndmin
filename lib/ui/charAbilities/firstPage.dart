@@ -1,4 +1,4 @@
-import 'package:dndmin/backend/abilities.dart';
+import 'package:dndmin/backend/raceAbilities.dart';
 import 'package:dndmin/config/palette.dart';
 import 'package:dndmin/ui/charAbilities/expandableItem.dart';
 import 'package:flutter/material.dart';

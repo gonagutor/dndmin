@@ -1,5 +1,5 @@
 import 'dart:async';
-import 'package:dndmin/backend/abilities.dart';
+import 'package:dndmin/backend/raceAbilities.dart';
 import 'package:dndmin/backend/userData.dart';
 import 'package:dndmin/config/palette.dart';
 import 'package:dndmin/ui/charAbilities/firstPage.dart';
