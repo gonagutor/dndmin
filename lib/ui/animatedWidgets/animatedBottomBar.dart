@@ -35,7 +35,6 @@ class _AnimatedBottomBarState extends State<AnimatedBottomBar> {
       right: 0,
       child: GestureDetector(
         onPanEnd: (details) {
-          print(details.velocity.pixelsPerSecond.dy);
           if (details.velocity.pixelsPerSecond.dy < -sensitivity)
             setState(() {
               menuOpen = true;

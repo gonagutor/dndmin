@@ -107,7 +107,6 @@ class RegisterForm extends StatelessWidget {
             insideTag: 'Introduce tu contraseña',
             obscured: true,
             validator: (value) {
-              print(value.toString().length);
               if (value.toString().length < 8)
                 return 'Tu contraseña tiene que tener 8 caracteres o mas';
               if (value != _repPwdKey.value.text)

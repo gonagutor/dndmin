@@ -156,7 +156,6 @@ class RegisterButton extends StatelessWidget {
                     keep == "UserError." ||
                     keep == "MailError." ||
                     keep == "WrongRequest.") {
-                  print(keep);
                   showDialog(
                     context: context,
                     builder: (_) => AlertDialog(

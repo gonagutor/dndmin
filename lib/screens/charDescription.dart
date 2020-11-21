@@ -109,7 +109,6 @@ class _MyCharDescriptionState extends State<MyCharDescription> {
                                 ),
                               ),
                               Divider(height: 0, thickness: 3),
-                              CharClassDescriptor(userData: userData),
                               Padding(
                                 padding: const EdgeInsets.only(top: 8),
                                 child: Text(
@@ -303,7 +302,7 @@ class _MyCharDescriptionState extends State<MyCharDescription> {
                                             });
                                           },
                                           child:
-                                              Center(child: Text('Motivación')),
+                                              Center(child: Text('Vinculos')),
                                         ),
                                       ),
                                     ),
@@ -444,7 +443,7 @@ class _MyCharDescriptionState extends State<MyCharDescription> {
                                         secondChild: (activeView[1] == 2)
                                             ? Center(
                                                 child: Text(
-                                                  descripciones.ideales,
+                                                  descripciones.defectos,
                                                   style: TextStyle(
                                                     color: Palette.fontColor,
                                                     fontSize: 16,
@@ -469,6 +468,7 @@ class _MyCharDescriptionState extends State<MyCharDescription> {
                                   }
                                 },
                               ),
+                              CharClassDescriptor(userData: userData),
                             ],
                           ),
                         ),

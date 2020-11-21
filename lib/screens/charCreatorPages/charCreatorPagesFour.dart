@@ -117,7 +117,7 @@ class _MyCharCreatorPagesFourState extends State<MyCharCreatorPagesFour> {
                         ),
                       );
                     } else {
-                      runApp(CharCreator(userData: userData));
+                      runApp(CharSelector(userData: userData));
                     }
                   }
                 },

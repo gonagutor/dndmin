@@ -19,10 +19,8 @@ class Throws {
         dice.toString() +
         "&result=" +
         result.toString();
-    print(userData.authToken);
     var response = await http.get(url);
     if (response.statusCode == 200) {
-      print(response.body);
       if (response.body == "UserNotRegistered.") result = 0;
       if (response.body == "ConError.") result = 0;
       if (response.body == "") result = 0;

@@ -47,7 +47,6 @@ class _EventListState extends State<EventList> {
           if (snapshot.connectionState == ConnectionState.done) {
             if (snapshot.hasError) return Icon(Icons.error);
             lastCheck = snapshot.data;
-            if (lastCheck == null) print('hola');
             return NotificationCard(notificationList: lastCheck);
           } else {
             if (lastCheck == null)

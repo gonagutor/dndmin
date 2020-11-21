@@ -32,10 +32,6 @@ class _CustomDropdownState extends State<CustomDropdown> {
     Offset offset = renderBox.localToGlobal(Offset.zero);
     xPosition = offset.dx;
     yPosition = offset.dy;
-    print(height);
-    print(width);
-    print(xPosition);
-    print(yPosition);
   }
 
   OverlayEntry _createFloatingDropdown() {

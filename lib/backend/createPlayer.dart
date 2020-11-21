@@ -122,7 +122,6 @@ class PlayerCreator {
     var completeUrl = url + request;
     var response = await http.get(completeUrl);
     if (response.statusCode == 200) {
-      print(response.body);
       if (response.body == "Successful.")
         return true;
       else
