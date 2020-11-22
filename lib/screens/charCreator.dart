@@ -64,77 +64,83 @@ class _MyCharCreatorState extends State<MyCharCreator> {
               ),
               child: Stack(
                 children: [
-                  PrevButton(
-                    prevPage: () => runApp(CharSelector(userData: userData)),
-                  ),
-                  Column(
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.only(top: 20),
-                        child: Container(
-                          width: 150,
-                          height: 150,
-                          child: Image(
-                            image: AssetImage('images/appIcon.png'),
-                          ),
-                        ),
-                      ),
-                      Align(
-                        alignment: Alignment.topLeft,
-                        child: Padding(
-                          padding: const EdgeInsets.only(
-                              top: 20, left: 20, right: 20, bottom: 10),
-                          child: Text(
-                            "Bienvenido a la creación de personajes",
-                            style: TextStyle(
-                                color: Palette.fontColor, fontSize: 40),
-                          ),
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(
-                            left: 20, right: 20, bottom: 10),
-                        child: Divider(
-                          thickness: 2,
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(left: 20, right: 20),
-                        child: Text(
-                          "¿Listo para crear tu personaje? \n\nPrepara tu hoja de personaje y rellena el siguiente formulario para crear el personaje",
-                          style:
-                              TextStyle(color: Palette.fontColor, fontSize: 16),
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(
-                            top: 40, bottom: 20, left: 20, right: 20),
-                        child: Container(
-                          decoration: BoxDecoration(
-                            boxShadow: Palette.standartShadow,
-                            gradient: Palette.standardGradient,
-                            borderRadius: BorderRadius.all(Radius.circular(90)),
-                          ),
-                          width: double.infinity,
-                          height: 70,
-                          child: FlatButton(
-                            shape: RoundedRectangleBorder(
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(90))),
-                            onPressed: () =>
-                                runApp(CharCreatorPagesOne(userData: userData)),
-                            //Navigator.of(context).push(_routeToNextPage),
-                            child: Text(
-                              "Comenzar",
-                              style: TextStyle(
-                                fontSize: 30,
-                                color: Colors.white,
+                  SingleChildScrollView(
+                    child: Padding(
+                      padding: const EdgeInsets.only(bottom: 90),
+                      child: Column(
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.only(top: 20),
+                            child: Container(
+                              width: 150,
+                              height: 150,
+                              child: Image(
+                                image: AssetImage('images/appIcon.png'),
                               ),
                             ),
                           ),
-                        ),
+                          Align(
+                            alignment: Alignment.topLeft,
+                            child: Padding(
+                              padding: const EdgeInsets.only(
+                                  top: 20, left: 20, right: 20, bottom: 10),
+                              child: Text(
+                                "Bienvenido a la creación de personajes",
+                                style: TextStyle(
+                                    color: Palette.fontColor, fontSize: 40),
+                              ),
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(
+                                left: 20, right: 20, bottom: 10),
+                            child: Divider(
+                              thickness: 2,
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(left: 20, right: 20),
+                            child: Text(
+                              "¿Listo para crear tu personaje? \n\nPrepara tu hoja de personaje y rellena el siguiente formulario para crear el personaje",
+                              style: TextStyle(
+                                  color: Palette.fontColor, fontSize: 16),
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(
+                                top: 40, bottom: 20, left: 20, right: 20),
+                            child: Container(
+                              decoration: BoxDecoration(
+                                boxShadow: Palette.standartShadow,
+                                gradient: Palette.standardGradient,
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(90)),
+                              ),
+                              width: double.infinity,
+                              height: 70,
+                              child: FlatButton(
+                                shape: RoundedRectangleBorder(
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(90))),
+                                onPressed: () => runApp(
+                                    CharCreatorPagesOne(userData: userData)),
+                                //Navigator.of(context).push(_routeToNextPage),
+                                child: Text(
+                                  "Comenzar",
+                                  style: TextStyle(
+                                    fontSize: 30,
+                                    color: Colors.white,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
                       ),
-                    ],
+                    ),
+                  ),
+                  PrevButton(
+                    prevPage: () => runApp(CharSelector(userData: userData)),
                   ),
                 ],
               ),
