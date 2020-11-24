@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:dndmin/backend/classAbilities.dart';
 import 'package:dndmin/backend/raceAbilities.dart';
 import 'package:dndmin/backend/userData.dart';
 import 'package:dndmin/config/palette.dart';
@@ -12,6 +13,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 RaceAbilities raceAbilities = RaceAbilities(mainAbilities: []);
+ClassAbilities classAbilities = ClassAbilities(habilidadesDeClase: []);
 
 class CharAbilities extends StatelessWidget {
   final UserData userData;
@@ -55,6 +57,8 @@ class _MyCharAbilitiesState extends State<MyCharAbilities> {
     ]);
     Future<RaceAbilities> _raceAbilities =
         RaceAbilities.getRaceAbilities(userData.id);
+    Future<ClassAbilities> _classAbilities =
+        ClassAbilities.getClassAbilities(userData.id);
     return Scaffold(
       resizeToAvoidBottomInset: false,
       body: Container(
@@ -111,28 +115,22 @@ class _MyCharAbilitiesState extends State<MyCharAbilities> {
                     ),
                   ),
                   SwipableCard(
-                      child: Container(),
-                      offView: (selected == 1)
-                          ? 0
-                          : (selected == 2)
-                              ? -1
-                              : 1),
-                  SwipableCard(
                       child: Container(
                         child: SingleChildScrollView(
                           child: FutureBuilder(
-                            future: Future.wait([_raceAbilities]),
+                            future: Future.wait([_classAbilities]),
                             builder: (BuildContext context,
                                 AsyncSnapshot<List<dynamic>> snapshot) {
                               if (snapshot.connectionState ==
                                   ConnectionState.done) {
                                 if (snapshot.hasError) return Icon(Icons.error);
-                                raceAbilities = snapshot.data[0];
+                                classAbilities = snapshot.data[0];
                                 return AbilitiesSecondPage(
-                                    //raceAbilities: raceAbilities,
-                                    );
+                                  classAbilities: classAbilities,
+                                );
                               } else {
-                                if (raceAbilities.mainAbilities.length == 0) {
+                                if (classAbilities.habilidadesDeClase.length ==
+                                    0) {
                                   return Container(
                                     width: MediaQuery.of(context).size.width,
                                     height: MediaQuery.of(context).size.height -
@@ -160,14 +158,20 @@ class _MyCharAbilitiesState extends State<MyCharAbilities> {
                                   );
                                 }
                                 return AbilitiesSecondPage(
-                                    //raceAbilities: raceAbilities,
-                                    );
+                                  classAbilities: classAbilities,
+                                );
                               }
                             },
                           ),
                         ),
                       ),
-                      offView: (selected == 2) ? 0 : 1),
+                      offView: (selected == 1)
+                          ? 0
+                          : (selected == 2)
+                              ? -1
+                              : 1),
+                  SwipableCard(
+                      child: Container(), offView: (selected == 2) ? 0 : 1),
                   SwipableCard(
                       child: Container(
                         child: SingleChildScrollView(
